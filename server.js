@@ -12,6 +12,7 @@ const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
 const profileRoutes = require('./routes/profile');
 const feedRoutes = require('./routes/feed');
+const playersRoutes = require('./routes/players');
 const { application } = require("express");
 const jsdom = require('jsdom');
 
@@ -62,6 +63,7 @@ app.use("/", mainRoutes);
 app.use("/post", postRoutes);
 app.use("/profile", profileRoutes);
 app.use("/feed", feedRoutes);
+app.use('/players', playersRoutes);
 
 //Server Running
 app.listen(process.env.PORT, () => {
