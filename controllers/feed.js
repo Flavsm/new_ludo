@@ -4,18 +4,18 @@ const User = require('../models/User');
 
 
 module.exports = {
-  getPlayers: async (req, res) => {
+  /* getPlayers: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      /* const userPosts = await Post.find(req.user) */
+      const userPosts = await Post.find(req.user)
       const post = await Post.findById(req.params.id);
       const url = await req.originalUrl;
-      /* console.log(userPosts) */
-      res.render("partial-feed.ejs", { posts: posts, user: req.user, post: post, /* userPosts: userPosts, */ url: url });
+      console.log(userPosts)
+      res.render("partial-feed.ejs", { posts: posts, user: req.user, post: post, userPosts: userPosts, url: url });
     } catch (err) {
       console.log(err);
     }
-  },
+  }, */
   getTeams: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
@@ -66,3 +66,4 @@ module.exports = {
     }
   },
 }
+

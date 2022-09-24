@@ -19,6 +19,11 @@
                       <%= post.team %>
                     </h2>
                   </section>
+                  <section class="section-each-extra-post">
+                    <h2>
+                      #17
+                    </h2>
+                  </section>
                 </section>
                 <section class="section-icons-post">
                   <form class="col-1" action="/post/editPost/<%= post.id %>?_method=PUT" method="POST">
@@ -43,13 +48,23 @@
                 </section>
               </section>
               <section class="section-person-post">
-                <section class="section-person-post-extra">
+                <section class="section-person-post-extra-one">
+                  <section class="section-each-extra-post">
+                    <h2>
+                      <%= post.win %>-<%= post.loss%> | <%=
+                            `.${(Number(post.win)/(Number(post.win)+Number(post.loss))).toFixed(3).toString().split('.')[1]}`
+                            %>%
+                    </h2>
+                    <span>w/l</span>
+                  </section>
                   <section class="section-each-extra-post">
                     <h2>
                       <%= post.position %>
                     </h2>
                     <span>position</span>
                   </section>
+                </section>
+                <section class="section-person-post-extra-two">
                   <section class="section-each-extra-post">
                     <h2>
                       <%= %>
@@ -76,161 +91,19 @@
       </section>
       <section class="section-table-post">
 
-
-
-        <form action="/post/createTable/<%= post.id %>?_method=PUT" class="col-1" enctype="multipart/form-data"
+        <!-- <form action="/post/createTable/<%= post.id %>?_method=PUT" class="col-1" enctype="multipart/form-data"
           method="POST">
           <button class="btn table-add" type="submit">
             <i class="fa-solid fa-circle-plus"></i>
           </button>
-          <%- include('partials/table') -%>
-        </form>
-        <!--  <table>
-          <thead>
-            <tr>
-              <th>Header 1</th>
-              <th>Header 2</th>
-              <th>Header 3</th>
-              <th>Header 4</th>
-              <th>Header 5</th>
-              <th>Header 6</th>
-              <th>Header 7</th>
-              <th>Header 8</th>
-              <th>Header 9</th>
-              <th>Header 10</th>
-              <th>Header 11</th>
-              <th>Header 12</th>
-              <th>Header 13</th>
-              <th>Header 14</th>
-              <th>Header 15</th>
-              <th>Header 16</th>
-              <th>Header 17</th>
-              <th>Header 18</th>
-              <th>Header 19</th>
-              <th>Header 20</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-            </tr>
-            </table>
-          </tbody> -->
+         
+        </form> -->
+        <%- include('partials/bootstrap-table') -%>
 
       </section>
       <%}%>
         </div>
-        <!-- <div class="col-6 mt-5">
-      <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/feed">Return to Feed</a>
-    </div> -->
+        </div>
     </section>
     </section>
   </main>

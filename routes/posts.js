@@ -11,8 +11,9 @@ router.post("/createPost", upload.single("file"), postsController.createPost);
 
 router.put("/pinPost/:id", postsController.pinPost);
 
+router.put("/createTable/:id", postsController.createTable);
+
 router.delete("/deletePost/:id", postsController.deletePost);
 
-router.put("/createTable/:id", postsController.createTable);
 
 module.exports = router;

@@ -519,7 +519,8 @@ body {
     height: 8rem;
     margin-right: 1rem;
     border: 1px solid #E1A750;
-    font-size: 2rem;
+    font-size: 1.6rem;
+    text-align: center;
 }
 
 .item-modal {
@@ -710,7 +711,7 @@ body {
     font-family: 'Jaldi', sans-serif;
     font-weight: bold;
     /* border: 1px solid fuchsia; */
-    border: 1px solid #E1A750;
+    border: 2px solid #E1A750;
     overflow: hidden;
 }
 
@@ -753,6 +754,7 @@ body {
 .feed-delete-form {
     /* border: 1px solid greenyellow; */
     margin-top: 0.2rem;
+    margin-right: -0.7rem;
 }
 
 
@@ -814,6 +816,7 @@ body {
 .profile-list-item {
     display: flex;
     flex-wrap: wrap;
+    /* border: 1px solid red; */
     gap: 0.2rem;
 }
 
@@ -823,7 +826,7 @@ body {
 
 .profile-item-form-button {
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
     gap: 0.5rem;
 }
 
@@ -846,15 +849,14 @@ body {
     display: flex;
     align-items: center;
     gap: 0.3rem;
-    color: #E1A750;
-    border: 1px solid #E1A750;
+    color: white;
+    border: 1px solid white;
     font-family: 'Jaldi', sans-serif;
 }
 
 .profile-delete-btns:hover {
     color: #302f2d;
     background: #E1A750;
-    ;
 }
 
 /* POST ///////////////////////////*/
@@ -872,20 +874,21 @@ body {
 }
 
 .section-profile-post {
-    /*  border: 1px solid #E1A750; */
+    /* border: 1px solid #E1A750; */
     display: flex;
     flex-direction: column;
     height: 32%;
     align-items: center;
     gap: 3rem;
+    margin-bottom: 2rem;
 }
 
 .nav-profile-post {
     display: flex;
     justify-content: center;
     align-content: space-between;
-    /*  border: 1px solid greenyellow; */
-    gap: 0.5rem;
+    /* border: 1px solid greenyellow; */
+    gap: 1rem;
     align-items: center;
     height: 110%;
     width: 85%;
@@ -894,6 +897,8 @@ body {
 .section-column-post {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 85%;
     height: 100%;
     /* border: 1px solid greenyellow; */
@@ -901,9 +906,9 @@ body {
 
 .section-row-post {
     display: flex;
-    width: 95%;
-    height: 70%;
-
+    width: 100%;
+    height: 30%;
+    justify-content: space-between;
     /* border: 1px solid blue; */
 }
 
@@ -911,11 +916,11 @@ body {
     display: flex;
     flex-direction: column;
     /* justify-content: flex-start; */
-    width: 80%;
+    width: 60%;
     height: 100%;
-    /* border: 1px solid red; */
+    /* border: 1px solid fuchsia; */
     /* margin-bottom: 2rem; */
-    padding-left: 2.9rem;
+    padding-left: 1rem;
     /* margin-bottom: 0.5rem; */
 }
 
@@ -927,7 +932,7 @@ body {
     color: #FFFFFF;
     /* border: 1px solid blanchedalmond; */
     text-align: left;
-    width: 60%;
+    width: 70%;
 }
 
 .section-second-column-post .section-each-extra-post h1 {
@@ -962,14 +967,25 @@ body {
     font-family: 'Jaldi', sans-serif;
     color: #FFFFFF;
     /* border: 1px solid red; */
-    height: 40%;
+    height: 65%;
     width: 100%;
 
 }
 
-.section-person-post-extra {
+.section-person-post-extra-one {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-end;
+    font-family: 'Jaldi', sans-serif;
+    color: #FFFFFF;
+    width: 90%;
+    height: 85%;
+    gap: 1rem;
+}
+
+
+.section-person-post-extra-two {
+    display: flex;
+    justify-content: flex-end;
     font-family: 'Jaldi', sans-serif;
     color: #FFFFFF;
     width: 90%;
@@ -991,18 +1007,18 @@ body {
     justify-content: center;
     align-items: center;
     font-size: 1.6rem;
-    border: 1px dashed #E1A750;
+    border: 2px dashed #E1A750;
     width: 100%;
-    height: 80%;
+    height: 40%;
     text-transform: uppercase;
     padding: 0.3rem;
 }
 
 .section-each-extra-post span {
     font-size: 1rem;
-    border-bottom: 1px dashed #E1A750;
-    border-left: 1px dashed #E1A750;
-    border-right: 1px dashed #E1A750;
+    border-bottom: 2px dashed #E1A750;
+    border-left: 2px dashed #E1A750;
+    border-right: 2px dashed #E1A750;
     width: 100%;
     font-weight: lighter;
     text-transform: lowercase;
@@ -1012,11 +1028,12 @@ body {
 
 .section-icons-post {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-end;
     align-items: flex-start;
+    padding-right: 3.2rem;
     /* border: 1px solid red; */
-    width: 20%;
-    gap: 0.2rem;
+    width: 40%;
+    gap: 1rem;
 }
 
 .post-btn {
@@ -1032,35 +1049,31 @@ body {
 }
 
 .section-table-post {
-    border: 1px dashed #E1A750;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 2px dashed #E1A750;
     width: 100%;
+    min-height: 15vh;
     margin-top: 2rem;
-    color: white;
+
 }
 
-
-table {
-    border: 1px solid #b3adad;
-    border-collapse: collapse;
-    padding: 5px;
+#table {
+    padding: 0.5rem;
+    width: 90%;
 }
 
-table th {
-    border: 1px solid #b3adad;
-    padding: 5px;
-    background: #f0f0f0;
-    color: #313030;
+.table tr th,
+.table tr td {
+    background: white;
+    border: 1px solid black;
 }
 
-table td {
-    border: 1px solid #b3adad;
-    text-align: center;
-    padding: 5px;
-    background: #ffffff;
-    color: #313030;
-}
-
-
+/* .table tr th:active,
+.table tr td:active {
+    border: 1px solid #E1A750;
+} */
 
 /* DIAGONAL LINE ATTEMPT */
 
@@ -1097,59 +1110,3 @@ table td {
     text-align: center;
     }
 */
-
-
-@import "compass/css3";
-
-.table {
-    background: white !important;
-}
-
-.th {
-    color: white;
-}
-
-.table-editable {
-    position: relative;
-}
-
-.table-editable .glyphicon {
-    font-size: 20px;
-}
-
-/* .table-add {
-    color: green !important;
-} */
-
-.table-remove {
-    color: #700;
-    cursor: pointer;
-}
-
-.table-remove:hover {
-    color: #f00;
-}
-
-
-.table-up,
-.table-down {
-    color: #007;
-    cursor: pointer;
-}
-
-.table-up :hover,
-.table-down :hover {
-    color: #00f;
-}
-
-
-.table-add {
-    color: #070;
-    cursor: pointer;
-    top: 8px;
-    right: 0;
-}
-
-.table-add:hover {
-    color: #0b0;
-}
