@@ -5,18 +5,17 @@ const postsController = require("../controllers/posts"); //changed from posts to
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 //Post Routes - simplified for now
-router.get("/:id", ensureAuth, postsController.getPost);
 
-router.post("/createPlayer", upload.single("file"), postsController.createPlayer);
+// router.post("/createPlayer", upload.single("file"), postsController.createPlayer);
 
-router.post("/createTeam", postsController.createTeam);
+// router.post("/createTeam", postsController.createTeam);
 // router.post("/createLeague", postsController.createLeague);
 
-router.put("/pinPost/:id", postsController.pinPost);
+// router.put("/pinPost/:id", postsController.pinPost);
 
 router.put("/createTable/:id", postsController.createTable);
 
-router.delete("/deletePost/:id", postsController.deletePost);
+// router.delete("/deletePost/:id", postsController.deletePost);
 
 
 module.exports = router;

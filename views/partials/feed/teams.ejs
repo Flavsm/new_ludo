@@ -58,6 +58,38 @@
                             </section>
                         </section>
                     </li>
+
+                    <!-- BEGINNIG EDIT MODAL -->
+                    <div class="modal fade" id="<%= el._id%>" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Create Something</h5>
+                                    <i class="fa-solid fa-square-xmark close" data-dismiss="modal"></i>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/profile/updateTeam/<%= user.id%>?_method=PUT"
+                                        enctype="application/x-www-form-urlencoded" method="POST">
+                                        <div class="mb-3">
+                                            <label for="team" class="form-label">Team</label>
+                                            <input type="text" class="form-control form-control-sm" id="team"
+                                                name="team" value="<%= el.team%>" placeholder="team">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="sport" class="form-label">Sport</label>
+                                            <input type="text" class="form-control form-control-sm" id="sport"
+                                                name="sport" value="<%= el.sport%>" placeholder="sport">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary submit"
+                                                value="Upload">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <% }}) %>
         </ul>
     </section>

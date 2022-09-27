@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 //const { url } = require("../middleware/cloudinary"); prob deleted it
 
-const PostSchema = new mongoose.Schema({
+const PlayerSchema = new mongoose.Schema({
   team: {
     type: String,
     required: false,
@@ -57,4 +57,4 @@ const PostSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model("Post", PostSchema);
+module.exports = mongoose.model("Player", PlayerSchema);

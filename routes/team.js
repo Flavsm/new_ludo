@@ -4,19 +4,25 @@ const router = express.Router();
 const teamController = require("../controllers/teams"); //changed from posts to original
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
-//Post Routes - simplified for now
+//get the feed of all teams
 router.get("/", ensureAuth, teamController.getTeams);
 
+//get the profile of a specific team
 router.get("/:id", ensureAuth, teamController.getTeam);
 
-// router.post("/createPost", teamController.createPost);
+//create new team from the teams feed
+router.post("/createTeam", teamController.createTeam);
 
+//edit a team from the teams feed
+router.put('/editTeams/:id', teamController.editTeams)
+
+//edit a team from the team profile
 router.put('/editTeam/:id', teamController.editTeam)
 
+//pin a team from the team profile
 router.put("/pinTeam/:id", teamController.pinTeam);
 
 // router.put("/createTable/:id", teamController.createTable);
-
 router.delete("/deleteTeam/:id", teamController.deleteTeam);
 
 

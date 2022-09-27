@@ -756,6 +756,7 @@ body {
     align-items: center;
     border-top: 1px solid #E1A750;
     gap: 1rem;
+    height: 50%;
 }
 
 .card-body-btns i {
