@@ -10,7 +10,7 @@
         <!--  </button> -->
       </div>
       <div class="modal-body">
-        <form action="/players/editPlayer/<%= user.id%>?_method=PUT" enctype="application/x-www-form-urlencoded"
+        <form action="/players/editPlayer/<%= el._id%>?_method=PUT" enctype="application/x-www-form-urlencoded"
           method="POST">
           <div class="mb-3">
             <label for="player" class="form-label">Player</label>
@@ -22,8 +22,8 @@
           </div>
           <div class="mb-3">
             <label for="position" class="form-label">Position</label>
-            <select class="form-select form-select-sm" id="position" name="position">
-              <option selected>Select</option>
+            <select class="form-select form-select-sm" id="position" name="position" autocomplete="off">
+              <option value='' selected disabled hidden>Select</option>
               <option>PG</option>
               <option>SG</option>
               <option>SF</option>

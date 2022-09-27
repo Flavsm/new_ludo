@@ -22,7 +22,7 @@ router.get("/home", ensureAuth, postsController.getHome);
 
 //Players / Teams / Leagues
 // router.get("/players", ensureAuth, feedController.getPlayers);
-router.get("/teams", ensureAuth, feedController.getTeams);
+// router.get("/teams", ensureAuth, feedController.getTeams);
 router.get("/leagues", ensureAuth, feedController.getLeagues);
 
 

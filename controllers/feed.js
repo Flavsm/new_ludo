@@ -1,7 +1,7 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
 const User = require('../models/User');
-
+const Team = require('../models/Team');
 
 module.exports = {
   /* getPlayers: async (req, res) => {
@@ -16,18 +16,19 @@ module.exports = {
       console.log(err);
     }
   }, */
-  getTeams: async (req, res) => {
-    try {
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      /* const userPosts = await Post.find(req.user) */
-      const post = await Post.findById(req.params.id);
-      const url = await req.originalUrl;
-      /* console.log(userPosts) */
-      res.render("partial-feed.ejs", { posts: posts, user: req.user, post: post, /* userPosts: userPosts, */ url: url });
-    } catch (err) {
-      console.log(err);
-    }
-  },
+  // getTeams: async (req, res) => {
+  //   try {
+  //     const posts = await Post.find().sort({ createdAt: "desc" }).lean();
+  //     const teams = await Team.find().sort({ createdAt: "desc" }).lean();
+  //     /* const userPosts = await Post.find(req.user) */
+  //     const post = await Post.findById(req.params.id);
+  //     const url = await req.originalUrl;
+  //     /* console.log(userPosts) */
+  //     res.render("partial-feed.ejs", { posts: posts, user: req.user, post: post, teams: teams, url: url });
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // },
   getLeagues: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();

@@ -9,26 +9,33 @@
 <section class="section-feed">
     <section class="section-list-feed">
         <ul class="list-feed">
-            <% posts.forEach(el=> { %>
-                <% if(el.user==user.id) { %>
+            <% teams.forEach(el=> { %>
+                <% if(el.user==user.id || user.teams.includes(el.team)) { %>
                     <li class="item-list-feed">
                         <section class="card">
-                            <img src="<%= el.image.feed%>" class="card-img-top" alt="...">
+                            <img src="https://img.favpng.com/14/2/16/logo-football-team-png-favpng-tzdASz0r6s1juSpCZVyq4VZJm.jpg"
+                                class="card-img-top" alt="...">
                             <ul class="list-group list-group-flush list-card-feed">
-                                <li class="list-group-item item-list-card">
-                                    <%= el.player%>
-                                </li>
                                 <li class="list-group-item item-list-card">
                                     <%= el.team%>
                                 </li>
                                 <li class="list-group-item item-list-card">
-                                    <%= el.position%>
+                                    <%= el.sport%>
                                 </li>
                                 <li class="list-group-item item-list-card">
-                                    <%= el.win %>-<%= el.loss%> | <%=
-                                                `.${(Number(el.win)/(Number(el.win)+Number(el.loss))).toFixed(3).toString().split('.')[1]}`
-                                                %>%
+                                    <%= el.numberofplayers%>
                                 </li>
+                                <% if (el.win==='' || el.loss==='' ) {%>
+                                    <li class="list-group-item item-list-card">
+                                        0-0
+                                    </li>
+                                    <% } else { %>
+                                        <li class="list-group-item item-list-card">
+                                            <%= el.win %>-<%= el.loss%> | <%=
+                                                        `.${(Number(el.win)/(Number(el.win)+Number(el.loss))).toFixed(3).toString().split('.')[1]}`
+                                                        %>%
+                                                        <% } %>
+                                        </li>
                             </ul>
                             <section class="card-body-notes">
                                 <p class="card-text">
@@ -36,13 +43,18 @@
                                 </p>
                             </section>
                             <section class="card-body-btns">
-                                <a href="/post/<%= el._id%>"> <i class="fa-regular fa-pen-to-square fa-lg"></i></a>
-                                <form action="/feed/deletePost/<%= user.entries[0] %>?_method=DELETE" method="POST"
+                                <form action="/teams/deleteTeam/<%= el._id %>?_method=DELETE" method="POST"
                                     class="feed-delete-form">
                                     <button class="btn feed-delete-btn" type="submit">
                                         <i class="fa-regular fa-trash-can fa-lg"></i>
                                     </button>
                                 </form>
+
+                                <a href="#" data-toggle="modal" data-target="#<%= el._id%>" id="editBtn">
+                                    <i class="fa-regular fa-pen-to-square fa-lg"></i></a>
+
+
+                                <a href="/teams/<%= el._id%>"> <i class="fa-solid fa-eye fa-lg"></i></a>
                             </section>
                         </section>
                     </li>

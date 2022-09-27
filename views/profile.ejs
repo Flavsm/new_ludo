@@ -49,7 +49,7 @@
                 <% user.teams.forEach(el=> { %>
                   <form class="" action="/profile/deleteTeam/<%= user.id %>?_method=DELETE" method="POST">
                     <button class="btn  profile-delete-btns" type="submit" name="team" value="<%= el.team%>">
-                      <%= el.team %>
+                      <%= el %>
                         <i class="fa-solid fa-circle-xmark"></i>
                     </button>
                   </form>
