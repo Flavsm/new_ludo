@@ -5,12 +5,13 @@ const User = require('../models/User');
 
 module.exports = {
     getPlayers: async (req, res) => {
+
         try {
             const posts = await Post.find().sort({ createdAt: "desc" }).lean();
             /* const userPosts = await Post.find(req.user) */
             const post = await Post.findById(req.params.id);
             const url = await req.originalUrl;
-            console.log(posts)
+
             res.render("partial-feed.ejs", { posts: posts, user: req.user, post: post, /* userPosts: userPosts, */ url: url });
         } catch (err) {
             console.log(err);
@@ -69,17 +70,18 @@ module.exports = {
             await Post.findOneAndUpdate(
                 { _id: req.params.id },
                 [{
-                    "$set": { "team": req.body.team }
+                    "$set": {
+                        'player': req.body.player,
+                        "team": req.body.team,
+                        'position': req.body.position,
+                        'win': req.body.win,
+                        'loss': req.body.loss,
+                        'notes': req.body.notes
+                    }
                 }]
             );
-            const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-            /* const userPosts = await Post.find(req.user) */
-            const post = await Post.findById(req.params.id);
-            const url = await req.originalUrl;
 
-            console.log("Edited player");
-            // res.redirect("/players");
-            res.render("partial-feed.ejs", { posts: posts, user: req.user, post: post, /* userPosts: userPosts, */ url: url });
+            res.redirect("/players");
         } catch (err) {
             console.log(err);
         }
@@ -104,9 +106,9 @@ module.exports = {
             )
             console.log(req.body)
             console.log("Deleted Player");
-            res.redirect("/players"); //changed from profile to feed
+            res.redirect("/players");
         } catch (err) {
-            res.redirect("/players"); //changed from profile to home
+            res.redirect("/players");
         }
     },
 }

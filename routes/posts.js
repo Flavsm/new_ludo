@@ -7,7 +7,10 @@ const { ensureAuth, ensureGuest } = require("../middleware/auth");
 //Post Routes - simplified for now
 router.get("/:id", ensureAuth, postsController.getPost);
 
-router.post("/createPost", upload.single("file"), postsController.createPost);
+router.post("/createPlayer", upload.single("file"), postsController.createPlayer);
+
+router.post("/createTeam", postsController.createTeam);
+// router.post("/createLeague", postsController.createLeague);
 
 router.put("/pinPost/:id", postsController.pinPost);
 

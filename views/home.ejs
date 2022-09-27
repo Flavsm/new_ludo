@@ -15,13 +15,22 @@
               <section class="recently-added-container">
                 <ul class="list-my-leagues recently-added-list">
                   <!-- limits the length of the recently added array to 4 and finds only the posts entried by the user -->
-                  <% let obj=posts.filter(el=> user.entries.map(em=> em==el.id)).reverse().slice(0,4) %>
+                  <% let obj=posts.concat(teams).filter(el=> user.entries.map(em=> em==el.id)).reverse().slice(0,4) %>
                     <% obj.forEach(el=> { %>
                       <li class="item-my-leagues add-league">
-                        <a href="/post/<%= el.id%>">
-                          <%= el.player %>
-                        </a>
-                        <% }) %>
+                        <% if (el.player) { %>
+                          <a href="/post/<%= el.id%>">
+                            <%= el.player %>
+                          </a>
+                          <% } else if (el.numberofplayers) { %>
+                            <a href="/teams/<%= el.id%>">
+                              <%= el.team %>
+                            </a>
+                            <% } else { %>
+                              <a href="/league/<%= el.id%>">
+                                <%= el.league %>
+                              </a>
+                              <% }}) %>
                       </li>
                 </ul>
               </section>
@@ -31,13 +40,22 @@
         <section class="section-my-home section-my-leagues">
           <h2>pinned</h2>
           <ul class="list-my-leagues list-pinned">
-            <% posts.filter(el=> el.pinned).forEach(em => { %>
+            <% posts.concat(teams).filter(el=> el.pinned).forEach(em => { %>
               <li class="item-my-leagues add-league">
-                <a href="/post/<%= em.id%>">
-                  <%= em.player %>
-                </a>
+                <% if (em.player) { %>
+                  <a href="/post/<%= em.id%>">
+                    <%= em.player %>
+                  </a>
+                  <% } else if (em.numberofplayers) { %>
+                    <a href="/teams/<%= em.id%>">
+                      <%= em.team %>
+                    </a>
+                    <% } else { %>
+                      <a href="/league/<%= em.id%>">
+                        <%= em.league %>
+                      </a>
+                      <% }}) %>
               </li>
-              <% }) %>
           </ul>
         </section>
       </section>

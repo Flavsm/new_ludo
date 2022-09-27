@@ -585,6 +585,17 @@ body {
     font-family: 'Jaldi', sans-serif;
 }
 
+#form-player {
+    display: none;
+}
+
+#form-team {
+    display: none;
+}
+
+#form-league {
+    display: none;
+}
 
 /* MODAL ///////////////////////////*/
 
@@ -892,6 +903,11 @@ body {
     align-items: center;
     height: 110%;
     width: 85%;
+}
+
+.post-img-top {
+    /* border: 1px solid red; */
+    max-width: 30%;
 }
 
 .section-column-post {

@@ -13,8 +13,10 @@ const postRoutes = require("./routes/posts");
 const profileRoutes = require('./routes/profile');
 const feedRoutes = require('./routes/feed');
 const playersRoutes = require('./routes/players');
+const teamRoutes = require('./routes/team');
 const { application } = require("express");
 const jsdom = require('jsdom');
+
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
@@ -64,6 +66,8 @@ app.use("/post", postRoutes);
 app.use("/profile", profileRoutes);
 app.use("/feed", feedRoutes);
 app.use('/players', playersRoutes);
+app.use('/teams', teamRoutes)
+
 
 //Server Running
 app.listen(process.env.PORT, () => {
