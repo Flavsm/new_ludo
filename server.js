@@ -14,6 +14,7 @@ const profileRoutes = require('./routes/profile');
 const feedRoutes = require('./routes/feed');
 const playersRoutes = require('./routes/players');
 const teamRoutes = require('./routes/team');
+const homeRoutes = require('./routes/home');
 const { application } = require("express");
 const jsdom = require('jsdom');
 
@@ -67,7 +68,7 @@ app.use("/profile", profileRoutes);
 app.use("/feed", feedRoutes);
 app.use('/players', playersRoutes);
 app.use('/teams', teamRoutes)
-
+app.use('/home', homeRoutes)
 
 //Server Running
 app.listen(process.env.PORT, () => {

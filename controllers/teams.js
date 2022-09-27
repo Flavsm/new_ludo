@@ -1,29 +1,95 @@
 const cloudinary = require("../middleware/cloudinary");
-const Post = require("../models/Post");
+const Player = require("../models/Player");
 const User = require('../models/User');
 const Team = require('../models/Team');
 
 module.exports = {
     getTeams: async (req, res) => {
         try {
-            const posts = await Post.find().sort({ createdAt: "desc" }).lean();
+            const players = await Player.find().sort({ createdAt: "desc" }).lean();
             const teams = await Team.find().sort({ createdAt: "desc" }).lean();
             /* const userPosts = await Post.find(req.user) */
-            const post = await Post.findById(req.params.id);
+            const player = await Player.findById(req.params.id);
             const url = await req.originalUrl;
             /* console.log(userPosts) */
-            res.render("partial-feed.ejs", { posts: posts, user: req.user, post: post, teams: teams, url: url });
+            res.render("partial-feed.ejs", { players: players, user: req.user, player: player, teams: teams, url: url });
         } catch (err) {
             console.log(err);
         }
     },
     getTeam: async (req, res) => {
         try {
-            const post = await Post.findById(req.params.id);
+            const player = await Player.findById(req.params.id);
             const team = await Team.findById(req.params.id);
             const url = await req.originalUrl;
             /* console.log(post) */
-            res.render("post-team.ejs", { post: post, user: req.user, team: team, url: url }); //changes req.user to req.email
+            res.render("post-team.ejs", { player: player, user: req.user, team: team, url: url }); //changes req.user to req.email
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    createTeam: async (req, res) => {
+        try {
+            // Upload image to cloudinary
+
+            /* const result = await cloudinary.uploader.upload(req.file.path); */
+
+
+            // const pattern = await cloudinary.uploader
+            //   .upload(req.file.path,
+            //     {
+            //       eager: [
+            //         { width: 400, height: 300, crop: "pad" },
+            //         { width: 220, height: 220, crop: "pad" },]
+            //     })
+
+            /* let img = cloudinary.image("LUDO/prof_dhezb9.jpg", {height: 300, width: 400, crop: "pad"}) */
+            /* let img_default = "https://res.cloudinary.com/dprkasf7b/image/upload/c_pad,h_300,w_400/v1663434846/LUDO/prof_dhezb9.jpg" */
+
+            let newTeam = await Team.create({
+                team: req.body.team.toLowerCase(),
+                sport: req.body.sport,
+                numberofplayers: req.body.numberofplayers,
+                win: req.body.win,
+                loss: req.body.loss,
+                notes: req.body.notes,
+                user: req.user.id,
+            });
+
+            /* req.user.entries.push(newPost.id) */
+            // console.log(req.body)
+
+            const addIdToUser = await User.findOneAndUpdate(
+                { _id: req.user.id },
+                {
+                    $push: { teams: newTeam.team, entries: newTeam.id, teamEntries: newTeam.id },
+                }
+            )
+
+            console.log("Team has been added!");
+            res.redirect("/teams"); //changed from profile to home
+
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    editTeams: async (req, res) => {
+        try {
+            await Team.findOneAndUpdate(
+                { _id: req.params.id },
+                [{
+                    "$set": {
+                        'team': req.body.team,
+                        "sport": req.body.sport,
+                        'numberofplayers': req.body.numberofplayers,
+                        'win': req.body.win,
+                        'loss': req.body.loss,
+                        'notes': req.body.notes
+                    }
+                }]
+            );
+
+            res.render("partial-feed.ejs", { players: players, user: req.user, player: player, teams: teams, url: url });
         } catch (err) {
             console.log(err);
         }
@@ -79,7 +145,7 @@ module.exports = {
             const deleteIdFromUser = await User.updateOne(
                 { _id: req.user.id },
                 {
-                    $pull: { teamEntries: post.id }
+                    $pull: { teams: { 'team': team.team }, entries: team.id, teamEntries: team.id },
                 }
             )
 

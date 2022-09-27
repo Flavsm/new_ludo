@@ -3,45 +3,47 @@
   <main class="container container-post">
     <section class="container-section-post">
       <section class="section-profile-post">
-        <%if(post.user==user.id){ %>
+        <%if(team.user==user.id || user.league.map(em=> em.league).includes(el.team)){ %>
           <section class="nav-profile-post">
-            <img class="img-fluid post-img-top" src="<%= post.image.profile %>" />
+            <img
+              src="https://res.cloudinary.com/dprkasf7b/image/upload/c_thumb,w_200,g_face/v1664241356/soccer_t6mqfe.jpg"
+              class="post-img-top img-fluid"" alt=" ...">
             <section class="section-column-post">
               <section class="section-row-post">
                 <section class="section-second-column-post">
                   <section class="section-each-extra-post">
                     <h1>
-                      <%= post.player %>
+                      <%= team.team%>
                     </h1>
                   </section>
                   <section class="section-each-extra-post">
                     <h2>
-                      <%= post.team %>
+                      <%= team.sport %>
                     </h2>
                   </section>
                   <section class="section-each-extra-post">
                     <h2>
-                      #17
+                      #<%= team.numberofplayers %>
                     </h2>
                   </section>
                 </section>
                 <section class="section-icons-post">
-                  <form class="col-1" action="/post/editPost/<%= post.id %>?_method=PUT" method="POST">
+                  <form class="col-1" action="/teams/editTeam/<%= team.id %>?_method=PUT" method="POST">
                     <button class="btn" type="submit">
                       <i class="fa-regular fa-pen-to-square fa-xl post-btn"></i>
                     </button>
                   </form>
-                  <form class="col-1" action="/post/pinPost/<%= post.id %>?_method=PUT" method="POST">
+                  <form class="col-1" action="/teams/pinTeam/<%= team.id %>?_method=PUT" method="POST">
                     <button class="btn" type="submit" data-bs-toggle="tooltip" data-bs-placement="top"
                       data-bs-title="Pin it">
-                      <% if (post.pinned==true ) { %>
+                      <% if (team.pinned==true ) { %>
                         <i class="fa-solid fa-thumbtack fa-xl pinned-btn"></i>
                         <% } else { %>
                           <i class="fa-solid fa-thumbtack fa-xl unpinned-btn"></i>
                           <% } %>
                     </button>
                   </form>
-                  <form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST" class="col-1">
+                  <form action="/teams/deleteTeam/<%= team.id %>?_method=DELETE" method="POST" class="col-1">
                     <button class="btn" type="submit">
                       <i class="fa-regular fa-trash-can fa-xl post-btn"></i>
                     </button>
@@ -50,23 +52,7 @@
               </section>
               <section class="section-person-post">
                 <section class="section-person-post-extra-one">
-                  <section class="section-each-extra-post">
-                    <h2>
-                      <%= post.win %>-<%= post.loss%> | <%=
-                            `.${(Number(post.win)/(Number(post.win)+Number(post.loss))).toFixed(3).toString().split('.')[1]}`
-                            %>%
-                    </h2>
-                    <span>w-l | pct </span>
-                  </section>
-                  <section class="section-each-extra-post">
-                    <h2>
-                      <%= post.position %>
-                    </h2>
-                    <span>position</span>
-                  </section>
-                </section>
-                <section class="section-person-post-extra-two">
-                  <section class="section-each-extra-post">
+                  <!-- <section class="section-each-extra-post">
                     <h2>
                       <%= %>
                     </h2>
@@ -77,12 +63,30 @@
                       <%= %>
                     </h2>
                     <span>weight</span>
+                  </section> -->
+                </section>
+                <section class="section-person-post-extra-two">
+                  <section class="section-each-extra-post">
+                    <h2>
+                      <%= team.win %>-<%= team.loss%> | <%=
+                            `.${(Number(team.win)/(Number(team.win)+Number(team.loss))).toFixed(3).toString().split('.')[1]}`
+                            %>%
+                    </h2>
+                    <span>w-l | pct </span>
+
+                  </section>
+                  <section class="section-each-extra-post">
+
+                    <h2>
+                      <%= team.sport %>
+                    </h2>
+                    <span>sport</span>
                   </section>
                   <section class="section-each-extra-post">
                     <h2>
-                      <%= %>
+                      <%= team.numberofplayers %>
                     </h2>
-                    <span>age</span>
+                    <span># of players</span>
                   </section>
                 </section>
               </section>
@@ -92,7 +96,7 @@
       </section>
       <section class="section-table-post">
 
-        <!-- <form action="/post/createTable/<%= post.id %>?_method=PUT" class="col-1" enctype="multipart/form-data"
+        <!-- <form action="/post/createTable/<%= team.id %>?_method=PUT" class="col-1" enctype="multipart/form-data"
           method="POST">
           <button class="btn table-add" type="submit">
             <i class="fa-solid fa-circle-plus"></i>
@@ -110,27 +114,3 @@
   </main>
 
   <%- include('partials/footer') -%>
-
-    <!-- ATTEMPT DIAGONAL LINE -->
-
-    <!-- <section class="section-person-post-extra">
-  <div class="post">
-    <h3 class=""><%= post.player %></h3>
-  </div>
-  
-  <div class="div-post">
-    <h2 class="" >player</h2>
-   
-  </div>
-</section>
-<section class="section-person-post-extra">
-  
-  <div class="post">
-    <h3 class=""><%= post.team %></h3>
-  </div>
-  <div class="div-post">
-    <h2 class="" >team</h2>
-   
-  </div>
-  
-</section> -->

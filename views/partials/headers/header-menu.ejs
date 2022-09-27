@@ -76,7 +76,7 @@
                 <% } %>
           </li> -->
           <li>
-            <% if (url==='/players' ) { %>
+            <% if (url.includes('players') ) { %>
               <a href="/players" class="underline-menu">players</a>
 
               <% } else { %>
@@ -84,7 +84,7 @@
                 <% } %>
           </li>
           <li>
-            <% if (url==='/teams' ) { %>
+            <% if (url.includes('teams') ) { %>
               <a href="/teams" class="underline-menu">teams</a>
 
               <% } else { %>
@@ -92,7 +92,7 @@
                 <% } %>
           </li>
           <li>
-            <% if (url==='/leagues' ) { %>
+            <% if (url.includes('leagues') ) { %>
               <a href="/leagues" class="underline-menu">leagues</a>
 
               <% } else { %>
