@@ -32,3 +32,5 @@ function changeForm(e) {
         type.style.opacity = '0.5'
     }
 }
+
+////////KEN BURNS/////
