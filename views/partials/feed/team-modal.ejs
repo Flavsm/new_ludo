@@ -1,41 +1,42 @@
-<div class="modal fade" id="add-player" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+<div class="modal fade" id="add-team" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Add Player</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Create Team</h5>
         <i class="fa-solid fa-square-xmark close" data-dismiss="modal"></i>
       </div>
       <div class="modal-body">
-        <form action="/players/createPlayer" enctype="multipart/form-data" method="POST">
-          <div class="mb-3">
-            <label for="player" class="form-label">Player</label>
-            <input type="text" class="form-control form-control-sm" id="player" name="player" placeholder="Player">
-          </div>
+        <form action="/teams/createTeam" enctype="application/x-www-form-urlencoded" method="POST">
           <div class="mb-3">
             <label for="team" class="form-label">Team</label>
             <input type="text" class="form-control form-control-sm" id="team" name="team" placeholder="Team">
           </div>
           <div class="mb-3">
-            <label for="position" class="form-label">Position</label>
-            <select class="form-select form-select-sm" id="position" name="position">
+            <label for="numberofplayers" class="form-label">Number of Players</label>
+            <input type="text" class="form-control form-control-sm" id="numberofplayers" name="numberofplayers"
+              placeholder="#">
+          </div>
+          <div class="mb-3">
+            <label for="sport" class="form-label">Sport</label>
+            <select class="form-select form-select-sm" id="sport" name="sport" autocomplete="off">
               <option selected>Select</option>
-              <option>PG</option>
-              <option>SG</option>
-              <option>SF</option>
-              <option>PF</option>
-              <option>C</option>
+              <option>Football</option>
+              <option>Basketball</option>
+              <option>Baseball</option>
+              <option>Hockey</option>
+              <option>Soccer</option>
             </select>
           </div>
           <div class="mb-3">
             <div class="row">
               <div class="col">
                 <label for="win" class="form-label">Win</label>
-                <input type="text" class="form-control win-loss-input" id="win" name="win" placeholder="">
+                <input type="text" class="form-control win-loss-input" id="win" name="win" placeholder="#">
               </div>
               <div class="col">
                 <label for="loss" class="form-label">Loss</label>
-                <input type="text" class="form-control win-loss-input" id="loss" name="loss" placeholder="">
+                <input type="text" class="form-control win-loss-input" id="loss" name="loss" placeholder="#">
               </div>
             </div>
           </div>

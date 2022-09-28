@@ -1,15 +1,15 @@
 <%- include('partials/headers/header-menu') -%>
   <main class="container">
     <section class="container-feed">
-      <% if ( url==='/players' ) { %>
+      <% if ( url.includes('players') ) { %>
         <%- include('partials/feed/players') -%>
-          <%- include('partials/feed/feed-modal') -%>
-            <% } else if (url==='/teams' ) { %>
+          <%- include('partials/feed/player-modal') -%>
+            <% } else if (url.includes('teams') ) { %>
               <%- include('partials/feed/teams') -%>
-                <%- include('partials/feed/feed-modal') -%>
+                <%- include('partials/feed/team-modal') -%>
                   <% } else { %>
                     <%- include('partials/feed/leagues') -%>
-                      <%- include('partials/modal') -%>
+                      <%- include('partials/feed/league-modal') -%>
                         <% } %>
     </section>
   </main>

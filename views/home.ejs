@@ -15,25 +15,24 @@
               <section class="recently-added-container">
                 <ul class="list-my-leagues recently-added-list">
                   <!-- limits the length of the recently added array to 4 and finds only the posts entried by the user -->
-                  <% let obj=players.concat(teams).filter(el=> user.entries.map(em=> em==el.id)).reverse().slice(0,4)
-                    %>
 
-                    <% obj.forEach(el=> { %>
-                      <li class="item-my-leagues add-league">
-                        <% if (el.player) { %>
-                          <a href="/players/<%= el.id%>">
-                            <%= el.player %>
+                  <% user.entries.reverse().slice(0,4).forEach(el=> { %>
+                    <li class="item-my-leagues add-league">
+                      <% let obj=players.concat(teams).find(em=> em._id == el);
+                        if(obj.player) { %>
+                        <a href="players/<%= obj._id%>">
+                          <%= obj.player %>
+                        </a>
+                        <% } else if(obj.numberofplayers){ %>
+                          <a href="teams/<%= obj._id%>">
+                            <%= obj.team %>
                           </a>
-                          <% } else if (el.numberofplayers) { %>
-                            <a href="/teams/<%= el.id%>">
-                              <%= el.team %>
+                          <% } else { %>
+                            <a href="leagues/<%= obj._id%>">
+                              <%= obj.league %>
                             </a>
-                            <% } else { %>
-                              <a href="/league/<%= el.id%>">
-                                <%= el.league %>
-                              </a>
-                              <% }}) %>
-                      </li>
+                            <% }}) %>
+                    </li>
                 </ul>
               </section>
             </li>
