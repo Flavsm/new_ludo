@@ -1116,6 +1116,12 @@ body {
     border: 1px solid black;
 }
 
+
+.table-form {
+    display: flex;
+    border: 1px solid red;
+}
+
 /* .table tr th:active,
 .table tr td:active {
     border: 1px solid #E1A750;
