@@ -28,6 +28,11 @@
                   </section> -->
                 </section>
                 <section class="section-icons-post">
+                  <form class="col-1" action="teams/createRow/<%= team.id %>" method="POST">
+                    <button class="btn add-row">
+                      <i class="fa-solid fa-circle-plus fa-xl add-row-btn"></i>
+                    </button>
+                  </form>
                   <form class="col-1" action="/teams/editTeam/<%= team.id %>?_method=PUT" method="POST">
                     <button class="btn" type="submit">
                       <i class="fa-regular fa-pen-to-square fa-xl post-btn"></i>

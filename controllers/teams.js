@@ -47,12 +47,12 @@ module.exports = {
             /* let img_default = "https://res.cloudinary.com/dprkasf7b/image/upload/c_pad,h_300,w_400/v1663434846/LUDO/prof_dhezb9.jpg" */
 
             let newTeam = await Team.create({
-                team: req.body.team.toLowerCase(),
-                sport: req.body.sport,
+                team: req.body.team.toUpperCase(),
+                sport: req.body.sport.toUpperCase(),
                 numberofplayers: req.body.numberofplayers,
                 win: req.body.win,
                 loss: req.body.loss,
-                notes: req.body.notes,
+                notes: req.body.notes.toUpperCase(),
                 user: req.user.id,
             });
 
@@ -62,7 +62,7 @@ module.exports = {
             const addIdToUser = await User.findOneAndUpdate(
                 { _id: req.user.id },
                 {
-                    $push: { teams: newTeam.team, entries: newTeam.id, teamEntries: newTeam.id },
+                    $push: { teams: { 'team': newTeam.team }, entries: newTeam.id, teamEntries: newTeam.id },
                 }
             )
 
@@ -89,7 +89,7 @@ module.exports = {
                 }]
             );
 
-            res.render("partial-feed.ejs", { players: players, user: req.user, player: player, teams: teams, url: url });
+            res.redirect("/teams");
         } catch (err) {
             console.log(err);
         }

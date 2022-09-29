@@ -1,10 +1,8 @@
 <section class="feed-section-add">
-    <form class="" action="" method="POST">
-        <button class="btn profile-btns" type="submit">
-            add teams
-            <i class="fa-solid fa-circle-plus fa-lg"></i>
-        </button>
-    </form>
+    <button class="btn profile-btns" type="submit" data-toggle="modal" data-target="#add-team">
+        add team
+        <i class="fa-solid fa-circle-plus fa-lg"></i>
+    </button>
 </section>
 <section class="section-feed">
     <section class="section-list-feed">
@@ -65,21 +63,51 @@
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Create Something</h5>
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Edit Team</h5>
                                     <i class="fa-solid fa-square-xmark close" data-dismiss="modal"></i>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="/profile/updateTeam/<%= user.id%>?_method=PUT"
+                                    <form action="/teams/editTeams/<%= el._id%>?_method=PUT"
                                         enctype="application/x-www-form-urlencoded" method="POST">
                                         <div class="mb-3">
                                             <label for="team" class="form-label">Team</label>
                                             <input type="text" class="form-control form-control-sm" id="team"
-                                                name="team" value="<%= el.team%>" placeholder="team">
+                                                name="team" value="<%= el.team%>" placeholder="Team">
                                         </div>
                                         <div class="mb-3">
                                             <label for="sport" class="form-label">Sport</label>
                                             <input type="text" class="form-control form-control-sm" id="sport"
-                                                name="sport" value="<%= el.sport%>" placeholder="sport">
+                                                name="sport" value="<%= el.sport%>" placeholder="Sport">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="numberofplayers" class="form-label"># of Players</label>
+                                            <input type="text" class="form-control form-control-sm" id="numberofplayers"
+                                                name="numberofplayers" value="<%= el.numberofplayers%>"
+                                                placeholder="# of Players">
+                                        </div>
+                                        <div class="mb-3">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <label for="win" class="form-label">Win</label>
+                                                    <input type="text" class="form-control win-loss-input" id="win"
+                                                        name="win" value="<%= el.win%>" placeholder="">
+                                                </div>
+                                                <div class="col">
+                                                    <label for="loss" class="form-label">Loss</label>
+                                                    <input type="text" class="form-control win-loss-input" id="loss"
+                                                        name="loss" value="<%= el.loss%>" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="mb-3">
+                                            <label for="imgUpload" class="form-label">Image</label>
+                                            <input type="file" class="form-control form-control-sm" id="imageUpload"
+                                                name="file">
+                                        </div> -->
+                                        <div class="mb-3">
+                                            <label for="notes" class="form-label">Notes</label>
+                                            <textarea class="form-control form-label-sm" id="notes"
+                                                name="notes"><%= el.notes%></textarea>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-primary submit"
@@ -90,6 +118,7 @@
                             </div>
                         </div>
                     </div>
+
                     <% }}) %>
         </ul>
     </section>

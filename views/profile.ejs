@@ -20,6 +20,30 @@
         <li class="profile-item">
           <ul class="profile-third-list">
             <li class="profile-list-item">
+              <% if (user.teams.length> 0) { %>
+                <% user.teams.forEach(el=> { %>
+                  <form class="" action="/profile/deleteTeam/<%= user.id %>?_method=DELETE" method="POST">
+                    <button class="btn  profile-delete-btns" type="submit" name="team" value="<%= el.team%>">
+                      <%= el.team %>
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </button>
+                  </form>
+                  <% })} else { %>
+                    <h2 class="profile-headings"> N/A </h2>
+            </li>
+            <% } %>
+              <li class="profile-item-form-button">
+                <span class="profile-tags"> my teams</span>
+                <button class="btn  profile-btns" type="submit" data-toggle="modal" data-target="#profile-add-team">
+                  add team
+                  <i class="fa-solid fa-circle-plus fa-lg"></i>
+                </button>
+              </li>
+          </ul>
+        </li>
+        <li class="profile-item">
+          <ul class="profile-third-list">
+            <li class="profile-list-item">
               <% if (user.leagues.length> 0) { %>
                 <% user.leagues.forEach(el=> { %>
                   <form class="" action="/profile/deleteLeague/<%= user.id %>?_method=DELETE" method="POST">
@@ -35,32 +59,8 @@
             <% } %>
               <li class="profile-item-form-button">
                 <span class="profile-tags"> my leagues</span>
-                <button class="btn  profile-btns" type="submit" data-toggle="modal" data-target="#add-league">
+                <button class="btn  profile-btns" type="submit" data-toggle="modal" data-target="#profile-add-league">
                   add league
-                  <i class="fa-solid fa-circle-plus fa-lg"></i>
-                </button>
-              </li>
-          </ul>
-        </li>
-        <li class="profile-item">
-          <ul class="profile-third-list">
-            <li class="profile-list-item">
-              <% if (user.teams.length> 0) { %>
-                <% user.teams.forEach(el=> { %>
-                  <form class="" action="/profile/deleteTeam/<%= user.id %>?_method=DELETE" method="POST">
-                    <button class="btn  profile-delete-btns" type="submit" name="team" value="<%= el.team%>">
-                      <%= el.team %>
-                        <i class="fa-solid fa-circle-xmark"></i>
-                    </button>
-                  </form>
-                  <% })} else { %>
-                    <h2 class="profile-headings"> N/A </h2>
-            </li>
-            <% } %>
-              <li class="profile-item-form-button">
-                <span class="profile-tags"> my teams</span>
-                <button class="btn  profile-btns" type="submit" data-toggle="modal" data-target="#add-team">
-                  add team
                   <i class="fa-solid fa-circle-plus fa-lg"></i>
                 </button>
               </li>
@@ -69,6 +69,6 @@
       </ul>
     </section>
   </main>
-  <%- include('partials/league-modal') -%>
-    <%- include('partials/team-modal') -%>
+  <%- include('partials/profile-league-modal') -%>
+    <%- include('partials/profile-team-modal') -%>
       <%- include('partials/footer') -%>

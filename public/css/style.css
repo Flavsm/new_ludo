@@ -195,6 +195,7 @@ body {
 
 }
 
+
 /* BUTTONS */
 
 .buttons-section {
@@ -273,10 +274,32 @@ body {
 
 .container-about {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     min-height: 95vh;
     min-width: 98vw;
-    border: 1px solid #E1A750;
+    /* border: 1px solid #E1A750; */
 }
+
+
+.tag-line-text {
+    font-family: 'Abel', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 60px;
+    color: #E1A750;
+}
+
+.container-about p {
+    font-family: 'Jaldi', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 25px;
+    color: white;
+}
+
 
 
 /* LOGIN AND SIGN UP PAGE ///////////////////////////*/
@@ -361,7 +384,7 @@ body {
     font-size: 1rem;
     text-transform: lowercase;
     color: white;
-    border: 1px solid purple;
+    /* border: 1px solid purple; */
     height: fit-content;
     width: fit-content;
     /* padding-top: 0.2rem; */
@@ -1091,6 +1114,12 @@ body {
 .table tr td {
     background: white;
     border: 1px solid black;
+}
+
+
+.table-form {
+    display: flex;
+    border: 1px solid red;
 }
 
 /* .table tr th:active,

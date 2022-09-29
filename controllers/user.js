@@ -19,7 +19,7 @@ module.exports = {
       await User.findOneAndUpdate(
         { _id: req.user.id },
         {
-          $push: { leagues: { 'league': req.body.league.toLowerCase(), 'sport': req.body.sport } }
+          $push: { leagues: { 'league': req.body.league } }
         },
         {
           new: true
@@ -41,7 +41,7 @@ module.exports = {
       await User.findOneAndUpdate(
         { _id: req.user.id },
         {
-          $push: { teams: { 'team': req.body.team.toLowerCase() } }
+          $push: { teams: { 'team': req.body.team.toUpperCase() } }
           // $push: { teams: { 'team': req.body.team.toLowerCase(), 'sport': req.body.sport.toLowerCase() } }
         },
         {
@@ -73,7 +73,7 @@ module.exports = {
       const deleteLeagueFromUser = await User.updateOne(
         { _id: req.user.id },
         {
-          $pull: { 'leagues': user.leagues.filter(el => el.league === req.body.league)[0] }
+          $pull: { 'leagues': { 'league': user.leagues.filter(el => el.league === req.body.league)[0] } }
         }
       )
 

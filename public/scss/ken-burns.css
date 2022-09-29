@@ -16,41 +16,49 @@
   background-size: cover;
   background-position: center;
   opacity: 0;
-  transform: scale(1.3);
-  -webkit-animation: kenburns 24s linear infinite;
-          animation: kenburns 24s linear infinite;
+  transform: scale(1.2);
+  -webkit-animation: kenburns 20s linear infinite;
+          animation: kenburns 20s linear infinite;
 }
 .ken-burns-slideshow .slide:nth-child(1) {
   -webkit-animation-delay: 0s;
           animation-delay: 0s;
 }
 .ken-burns-slideshow .slide:nth-child(2) {
-  -webkit-animation-delay: 6s;
-          animation-delay: 6s;
+  -webkit-animation-delay: 4s;
+          animation-delay: 4s;
 }
 .ken-burns-slideshow .slide:nth-child(3) {
+  -webkit-animation-delay: 8s;
+          animation-delay: 8s;
+}
+.ken-burns-slideshow .slide:nth-child(4) {
   -webkit-animation-delay: 12s;
           animation-delay: 12s;
 }
-.ken-burns-slideshow .slide:nth-child(4) {
-  -webkit-animation-delay: 18s;
-          animation-delay: 18s;
+.ken-burns-slideshow .slide:nth-child(5) {
+  -webkit-animation-delay: 16s;
+          animation-delay: 16s;
 }
 
 #slide1 {
-  background-image: linear-gradient(rgba(16, 16, 16, 0.8), rgba(16, 16, 16, 0.8)), url("/imgs/bsb.png");
+  background-image: url("https://images.unsplash.com/photo-1627520547165-2421444d5596?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8YW1lcmljYW4lMjBmb290YmFsbHxlbnwwfDF8MHx8&auto=format&fit=crop&w=900&q=60");
 }
 
 #slide2 {
-  background-image: linear-gradient(rgba(16, 16, 16, 0.8), rgba(16, 16, 16, 0.8)), url("/imgs/bskt.jpg");
+  background-image: linear-gradient(rgba(16, 16, 16, 0.8), rgba(225, 167, 80, 0)), url("https://images.unsplash.com/photo-1560272564-c83b66b1ad12?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zm9vdGJhbGx8ZW58MHwxfDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60");
 }
 
 #slide3 {
-  background-image: linear-gradient(rgba(16, 16, 16, 0.8), rgba(16, 16, 16, 0.8)), url("/imgs/nfl1.png");
+  background-image: linear-gradient(rgba(225, 167, 80, 0.2), rgba(16, 16, 16, 0.8)), url("https://images.unsplash.com/photo-1632649177996-a4fbcae82d55?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80");
 }
 
 #slide4 {
-  background-image: linear-gradient(rgba(16, 16, 16, 0.8), rgba(16, 16, 16, 0.8)), url("/imgs/soccer1.jpg");
+  background-image: linear-gradient(rgba(16, 16, 16, 0.8), rgba(225, 167, 80, 0.2)), url("https://images.unsplash.com/photo-1585345379481-46246846403a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzh8fGJhc2tldGJhbGx8ZW58MHwxfDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60");
+}
+
+#slide5 {
+  background-image: linear-gradient(rgba(225, 167, 80, 0.2), rgba(16, 16, 16, 0.8)), url("https://images.unsplash.com/photo-1441441975082-af1c1cf58adb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8YmFzZWJhbGx8ZW58MHwxfDB8fA%3D%3D&auto=format&fit=crop&w=900&q=60");
 }
 
 @-webkit-keyframes kenburns {
