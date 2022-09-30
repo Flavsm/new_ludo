@@ -35,7 +35,6 @@ if (window.location.pathname.includes('home')) {
 }
 
 
-
 //////// TABLE /////
 
 // if (window.location.pathname.match(/[\d]/g)) {

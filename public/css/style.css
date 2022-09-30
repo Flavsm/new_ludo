@@ -1082,10 +1082,17 @@ body {
     gap: 1rem;
 }
 
-.post-btn {
-    color: #E1A750;
+.section-icons-post form {
+    border: 1px dashed #E1A750;
 }
 
+.section-icons-post form:hover,
+.section-icons-post form:hover i {
+    background: #E1A750;
+    color: #302f2d;
+}
+
+.post-btn,
 .pinned-btn {
     color: #E1A750;
 }
@@ -1094,9 +1101,13 @@ body {
     color: #D9D9D9;
 }
 
+
+
+
 .section-table-post {
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
     border: 2px dashed #E1A750;
     width: 100%;
@@ -1105,27 +1116,59 @@ body {
 
 }
 
-#table {
-    padding: 0.5rem;
-    width: 90%;
-}
-
 .table tr th,
 .table tr td {
-    background: white;
     border: 1px solid black;
 }
 
 
-.table-form {
-    display: flex;
-    border: 1px solid red;
+.table-head {
+    background: #E1A750;
 }
 
-/* .table tr th:active,
-.table tr td:active {
-    border: 1px solid #E1A750;
-} */
+.section-team-stats {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    /* border: 1px solid blue; */
+    width: 80%;
+}
+
+.team-stats-header {
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font-size: 2rem;
+    font-family: 'Jaldi', sans-serif;
+    line-height: 3rem;
+    text-align: left;
+    width: 100%;
+}
+
+.section-players-stats {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    /* border: 1px solid blue; */
+    width: 80%;
+}
+
+#add-row:hover,
+#add-row:hover i {
+    background: #302f2d;
+    color: #E1A750;
+}
+
+.btns-table {
+    width: 1rem;
+}
+
+.btns-table:hover i {
+    color: #302f2d;
+}
+
+
 
 /* DIAGONAL LINE ATTEMPT */
 

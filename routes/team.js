@@ -22,6 +22,15 @@ router.put('/editTeam/:id', teamController.editTeam)
 //pin a team from the team profile
 router.put("/pinTeam/:id", teamController.pinTeam);
 
+//create new row on table
+router.post('/createRow/:id', teamController.createRow);
+
+//edit row on table
+router.put("/editRow/:id", teamController.editRow);
+
+//delete row on table
+router.delete("/deleteRow/:id", teamController.deleteRow);
+
 // router.put("/createTable/:id", teamController.createTable);
 router.delete("/deleteTeam/:id", teamController.deleteTeam);
 
