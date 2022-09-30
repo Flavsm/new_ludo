@@ -98,24 +98,59 @@
         <section class="section-team-stats">
           <h3 class="team-stats-header ">TEAM STATS</h3>
           <table class="team-table table table-bordered table-striped table-responsive-md text-center table-hover">
+
             <thead>
               <tr class="table-head">
                 <th>MATCHUP</th>
                 <th>W/L</th>
-                <th>PTS</th>
-                <th>REB</th>
-                <th>AST</th>
-                <th>STL</th>
-                <th>BLK</th>
-                <th>TOV</th>
-                <th>PF</th>
-                <th></th>
-                <th id="add-row">
-                  <button type="button" class="btn add-row " data-toggle="modal" data-target="#team-add-row">
-                    <i class="fa-solid fa-circle-plus fa-xl add-row-btn"></i>
-                  </button>
-                </th>
-                <!-- <th></th> -->
+                <% if (team.sport=='BASKETBALL' ) { %>
+                  <th>PTS</th>
+                  <th>REB</th>
+                  <th>AST</th>
+                  <th>STL</th>
+                  <th>BLK</th>
+                  <th>TOV</th>
+                  <th>PF</th>
+                  <% } else if (team.sport=='BASEBALL' ) { %>
+                    <th>RUNS</th>
+                    <th>HITS</th>
+                    <th>2B</th>
+                    <th>3B</th>
+                    <th>HR</th>
+                    <th>RBI</th>
+                    <th>SO</th>
+                    <% } else if (team.sport=='FOOTBALL' ){ %>
+                      <th>TOTAL YARDS</th>
+                      <th>PASSING YARDS</th>
+                      <th>RUSHING YARDS</th>
+                      <th>POINTS</th>
+                      <th>FUMBLES</th>
+                      <th>INTERCEPTIONS</th>
+                      <th>SACKS</th>
+                      <% } else if (team.sport=='SOCCER' ){ %>
+                        <th>GOALS</th>
+                        <th>SHOTS ON TARGET</th>
+                        <th>PK</th>
+                        <th>CORNERS</th>
+                        <th>YELLOW CARDS</th>
+                        <th>RED CARDS</th>
+                        <th>OWN GOALS</th>
+                        <% } else { %>
+                          <th>TBD</th>
+                          <th>TBD</th>
+                          <th>TBD</th>
+                          <th>TBD</th>
+                          <th>TBD</th>
+                          <th>TBD</th>
+                          <th>TBD</th>
+                          <% } %>
+                            <th id="add-row">
+                              <button type="button" class="btn add-row " data-toggle="modal"
+                                data-target="#team-add-row">
+                                <i class="fa-solid fa-circle-plus fa-xl add-row-btn"></i>
+                              </button>
+                            </th>
+                            <!-- <th></th> -->
               </tr>
             </thead>
             <tbody>
@@ -175,68 +210,101 @@
                           <i class="fa-solid fa-square-xmark close" data-dismiss="modal"></i>
                         </div>
                         <div class="modal-body">
-                          <form action="/teams/editRow/<%= el._id %>?_method=PUT" method="POST">
+                          <<<<<<< HEAD <form action="/teams/editRow/<%= el._id %>?_method=PUT" method="POST">
                             <div class="mb-3">
                               <label for="cell1" class="form-label">MATCHUP</label>
-                              <input type="text" class="form-control form-control-sm" id="cell1" name="cell1"
-                                placeholder="" value="<%= el.row.cell1 %>">
+                              =======
+                              <form action="/teams/editRow/<%= el._id %>?_method=PUT" method="POST"
+                                class="team-edit-modal">
+                                <div class="mb-3">
+                                  <label for="cell1" class="form-label edit-label"></label>
+                                  >>>>>>> 432580b (dynamic table modal)
+                                  <input type="text" class="form-control form-control-sm" id="cell1" name="cell1"
+                                    placeholder="" value="<%= el.row.cell1 %>">
+                                </div>
+                                <div class="mb-3">
+                                  <<<<<<< HEAD <label for="cell2" class="form-label">W/L</label>
+                                    =======
+                                    <label for="cell2" class="form-label edit-label"></label>
+                                    >>>>>>> 432580b (dynamic table modal)
+                                    <input type="text" class="form-control form-control-sm" id="cell2" name="cell2"
+                                      placeholder="" value="<%= el.row.cell2 %>">
+                                </div>
+                                <div class="mb-3">
+                                  <<<<<<< HEAD <label for="cell3" class="form-label">PTS</label>
+                                    =======
+                                    <label for="cell3" class="form-label edit-label"></label>
+                                    >>>>>>> 432580b (dynamic table modal)
+                                    <input type="text" class="form-control form-control-sm" id="cell3" name="cell3"
+                                      placeholder="#" value="<%= el.row.cell3 %>">
+                                </div>
+                                <div class="mb-3">
+                                  <<<<<<< HEAD <label for="cell4" class="form-label">REB</label>
+                                    =======
+                                    <label for="cell4" class="form-label edit-label"></label>
+                                    >>>>>>> 432580b (dynamic table modal)
+                                    <input type="text" class="form-control form-control-sm" id="cell4" name="cell4"
+                                      placeholder="#" value="<%= el.row.cell4 %>">
+                                </div>
+                                <div class="mb-3">
+                                  <<<<<<< HEAD <label for="cell5" class="form-label">AST</label>
+                                    =======
+                                    <label for="cell5" class="form-label edit-label"></label>
+                                    >>>>>>> 432580b (dynamic table modal)
+                                    <input type="text" class="form-control form-control-sm" id="cell5" name="cell5"
+                                      placeholder="#" value="<%= el.row.cell5 %>">
+                                </div>
+                                <div class="mb-3">
+                                  <<<<<<< HEAD <label for="cell6" class="form-label">STL</label>
+                                    =======
+                                    <label for="cell6" class="form-label edit-label"></label>
+                                    >>>>>>> 432580b (dynamic table modal)
+                                    <input type="text" class="form-control form-control-sm" id="cell6" name="cell6"
+                                      placeholder="#" value="<%= el.row.cell6 %>">
+                                </div>
+                                <div class="mb-3">
+                                  <<<<<<< HEAD <label for="cell7" class="form-label">BLK</label>
+                                    =======
+                                    <label for="cell7" class="form-label edit-label"></label>
+                                    >>>>>>> 432580b (dynamic table modal)
+                                    <input type="text" class="form-control form-control-sm" id="cell7" name="cell7"
+                                      placeholder="#" value="<%= el.row.cell7 %>">
+                                </div>
+                                <div class="mb-3">
+                                  <<<<<<< HEAD <label for="cell8" class="form-label">TOV</label>
+                                    =======
+                                    <label for="cell8" class="form-label edit-label"></label>
+                                    >>>>>>> 432580b (dynamic table modal)
+                                    <input type="text" class="form-control form-control-sm" id="cell8" name="cell8"
+                                      placeholder="#" value="<%= el.row.cell8 %>">
+                                </div>
+                                <div class="mb-3">
+                                  <<<<<<< HEAD <label for="cell9" class="form-label">PF</label>
+                                    =======
+                                    <label for="cell9" class="form-label edit-label"></label>
+                                    >>>>>>> 432580b (dynamic table modal)
+                                    <input type="text" class="form-control form-control-sm" id="cell9" name="cell9"
+                                      placeholder="#" value="<%= el.row.cell9 %>">
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="submit" class="btn btn-primary submit" value="Upload">Submit</button>
+                                </div>
+                              </form>
                             </div>
-                            <div class="mb-3">
-                              <label for="cell2" class="form-label">W/L</label>
-                              <input type="text" class="form-control form-control-sm" id="cell2" name="cell2"
-                                placeholder="" value="<%= el.row.cell2 %>">
-                            </div>
-                            <div class="mb-3">
-                              <label for="cell3" class="form-label">PTS</label>
-                              <input type="text" class="form-control form-control-sm" id="cell3" name="cell3"
-                                placeholder="#" value="<%= el.row.cell3 %>">
-                            </div>
-                            <div class="mb-3">
-                              <label for="cell4" class="form-label">REB</label>
-                              <input type="text" class="form-control form-control-sm" id="cell4" name="cell4"
-                                placeholder="#" value="<%= el.row.cell4 %>">
-                            </div>
-                            <div class="mb-3">
-                              <label for="cell5" class="form-label">AST</label>
-                              <input type="text" class="form-control form-control-sm" id="cell5" name="cell5"
-                                placeholder="#" value="<%= el.row.cell5 %>">
-                            </div>
-                            <div class="mb-3">
-                              <label for="cell6" class="form-label">STL</label>
-                              <input type="text" class="form-control form-control-sm" id="cell6" name="cell6"
-                                placeholder="#" value="<%= el.row.cell6 %>">
-                            </div>
-                            <div class="mb-3">
-                              <label for="cell7" class="form-label">BLK</label>
-                              <input type="text" class="form-control form-control-sm" id="cell7" name="cell7"
-                                placeholder="#" value="<%= el.row.cell7 %>">
-                            </div>
-                            <div class="mb-3">
-                              <label for="cell8" class="form-label">TOV</label>
-                              <input type="text" class="form-control form-control-sm" id="cell8" name="cell8"
-                                placeholder="#" value="<%= el.row.cell8 %>">
-                            </div>
-                            <div class="mb-3">
-                              <label for="cell9" class="form-label">PF</label>
-                              <input type="text" class="form-control form-control-sm" id="cell9" name="cell9"
-                                placeholder="#" value="<%= el.row.cell9 %>">
-                            </div>
-                            <div class="modal-footer">
-                              <button type="submit" class="btn btn-primary submit" value="Upload">Submit</button>
-                            </div>
-                          </form>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <% })} %>
+                    <% })} %>
             </tbody>
           </table>
         </section>
         <section class="section-players-stats">
           <h3 class="team-stats-header ">PLAYER STATS</h3>
           <table class="team-table table table-bordered table-striped table-responsive-md text-center table-hover">
-            <thead>
+            <<<<<<< HEAD <thead>
+              =======
+              <!-- <thead>
+>>>>>>> 432580b (dynamic table modal)
               <tr class="table-head">
                 <th>MATCHUP</th>
                 <th>W/L</th>
@@ -253,55 +321,61 @@
                     <i class="fa-solid fa-circle-plus fa-xl add-row-btn"></i>
                   </button>
                 </th>
+<<<<<<< HEAD
                 <!-- <th></th> -->
+              =======
+              >>>>>>> 432580b (dynamic table modal)
               </tr>
-            </thead>
-            <tbody>
-              <% if (team.table.length> 0) { %>
-                <% team.table.sort((a, b)=> b.row.cell1-a.row.cell1).forEach(el=> { %>
-                  <tr class="table-light">
-                    <td>
-                      <%= el.row.cell1 %>
-                    </td>
-                    <td>
-                      <%= el.row.cell2 %>
-                    </td>
-                    <td>
-                      <%= el.row.cell3 %>
-                    </td>
-                    <td>
-                      <%= el.row.cell4 %>
-                    </td>
-                    <td>
-                      <%= el.row.cell5 %>
-                    </td>
-                    <td>
-                      <%= el.row.cell6 %>
-                    </td>
-                    <td>
-                      <%= el.row.cell7 %>
-                    </td>
-                    <td>
-                      <%= el.row.cell8 %>
-                    </td>
-                    <td>
-                      <%= el.row.cell9 %>
-                    </td>
-                    <td class="btns-table">
-                      <button class="btn" type="button" data-toggle="modal" data-target="#team-edit-row">
-                        <i class="fa-regular fa-pen-to-square fa-lg post-btn"></i>
-                      </button>
-                    </td>
-                    <td class="btns-table">
-                      <form action="/teams/deleteRow/<%= el._id %>?_method=DELETE" method="POST">
-                        <button class="btn" type="submit">
-                          <i class="fa-regular fa-trash-can fa-lg post-btn"></i>
+              </thead>
+              <tbody>
+                <% if (team.table.length> 0) { %>
+                  <% team.table.sort((a, b)=> b.row.cell1-a.row.cell1).forEach(el=> { %>
+                    <tr class="table-light">
+                      <td>
+                        <%= el.row.cell1 %>
+                      </td>
+                      <td>
+                        <%= el.row.cell2 %>
+                      </td>
+                      <td>
+                        <%= el.row.cell3 %>
+                      </td>
+                      <td>
+                        <%= el.row.cell4 %>
+                      </td>
+                      <td>
+                        <%= el.row.cell5 %>
+                      </td>
+                      <td>
+                        <%= el.row.cell6 %>
+                      </td>
+                      <td>
+                        <%= el.row.cell7 %>
+                      </td>
+                      <td>
+                        <%= el.row.cell8 %>
+                      </td>
+                      <td>
+                        <%= el.row.cell9 %>
+                      </td>
+                      <td class="btns-table">
+                        <button class="btn" type="button" data-toggle="modal" data-target="#team-edit-row">
+                          <i class="fa-regular fa-pen-to-square fa-lg post-btn"></i>
                         </button>
-                      </form>
-                    </td>
-                  </tr>
-                  <% })} %>
-            </tbody>
+                      </td>
+                      <td class="btns-table">
+                        <form action="/teams/deleteRow/<%= el._id %>?_method=DELETE" method="POST">
+                          <button class="btn" type="submit">
+                            <i class="fa-regular fa-trash-can fa-lg post-btn"></i>
+                          </button>
+                        </form>
+                      </td>
+                    </tr>
+                    <% })} %>
+                      <<<<<<< HEAD </tbody>
+                        =======
+              </tbody> -->
+              >>>>>>> 432580b (dynamic table modal)
           </table>
         </section>
       </section>

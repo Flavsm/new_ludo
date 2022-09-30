@@ -34,6 +34,20 @@ if (window.location.pathname.includes('home')) {
     }
 }
 
+// console.log(teamEditModal.slice(0, 9))
+
+// get table headers
+const tableHeader = Array.from(document.querySelectorAll('.table-head th')).slice(0, 9).map(el => el.innerText);
+
+//get edit and add modal labels
+const teamEditModal = Array.from(document.querySelectorAll('.edit-label'));
+const teamAddModal = Array.from(document.querySelectorAll('.add-label'));
+
+//place table headers as label in the modals
+teamEditModal.forEach((el, i) => el.innerText = tableHeader[i])
+teamAddModal.forEach((el, i) => el.innerText = tableHeader[i])
+
+// console.log(teamEditModal.slice(0, 9))
 
 //////// TABLE /////
 

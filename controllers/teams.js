@@ -24,6 +24,7 @@ module.exports = {
             const player = await Player.findById(req.params.id);
             const team = await Team.findById(req.params.id);
             const url = await req.originalUrl;
+
             /* console.log(post) */
             res.render("post-team.ejs", { player: player, user: req.user, team: team, url: url }); //changes req.user to req.email
         } catch (err) {

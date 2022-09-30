@@ -1132,6 +1132,7 @@ body {
     justify-content: space-around;
     align-items: center;
     /* border: 1px solid blue; */
+    font-family: 'Jaldi', sans-serif;
     width: 80%;
 }
 
@@ -1139,7 +1140,6 @@ body {
     color: #FFFFFF;
     text-transform: uppercase;
     font-size: 2rem;
-    font-family: 'Jaldi', sans-serif;
     line-height: 3rem;
     text-align: left;
     width: 100%;
