@@ -4,6 +4,7 @@ const TeamSchema = new mongoose.Schema({
     team: {
         type: String,
         required: false,
+        uppercase: true,
     },
     numberofplayers: {
         type: String,
@@ -12,6 +13,7 @@ const TeamSchema = new mongoose.Schema({
     sport: {
         type: String,
         required: false,
+        uppercase: true,
     },
     win: {
         type: String,
@@ -26,6 +28,7 @@ const TeamSchema = new mongoose.Schema({
     notes: {
         type: String,
         required: false,
+        uppercase: true,
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -38,7 +41,51 @@ const TeamSchema = new mongoose.Schema({
     pinned: {
         type: Boolean,
         default: false,
-    }
+    },
+    table: [
+        {
+            row: {
+                cell1: {
+                    type: String,
+                    required: true,
+                    uppercase: true
+                },
+                cell2: {
+                    type: String,
+                    required: true,
+                    uppercase: true
+                },
+                cell3: {
+                    type: String,
+                    required: true
+                },
+                cell4: {
+                    type: String,
+                    required: true
+                },
+                cell5: {
+                    type: String,
+                    required: true
+                },
+                cell6: {
+                    type: String,
+                    required: true
+                },
+                cell7: {
+                    type: String,
+                    required: true
+                },
+                cell8: {
+                    type: String,
+                    required: true
+                },
+                cell9: {
+                    type: String,
+                    required: true
+                }
+            }
+        }
+    ]
 })
 
 module.exports = mongoose.model("Team", TeamSchema);

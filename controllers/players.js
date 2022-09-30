@@ -48,12 +48,12 @@ module.exports = {
             /* let img_default = "https://res.cloudinary.com/dprkasf7b/image/upload/c_pad,h_300,w_400/v1663434846/LUDO/prof_dhezb9.jpg" */
 
             let newPlayer = await Player.create({
-                team: req.body.team.toUpperCase(),
-                player: req.body.player.toUpperCase(),
-                position: req.body.position.toUpperCase(),
+                team: req.body.team,
+                player: req.body.player,
+                position: req.body.position,
                 win: req.body.win,
                 loss: req.body.loss,
-                notes: req.body.notes.toUpperCase(),
+                notes: req.body.notes,
                 user: req.user.id,
                 image: {
                     feed: pattern.eager[0].secure_url,
@@ -83,12 +83,12 @@ module.exports = {
                 { _id: req.params.id },
                 [{
                     "$set": {
-                        'player': req.body.player.toUpperCase(),
-                        "team": req.body.team.toUpperCase(),
-                        'position': req.body.position.toUpperCase(),
+                        'player': req.body.player,
+                        "team": req.body.team,
+                        'position': req.body.position,
                         'win': req.body.win,
                         'loss': req.body.loss,
-                        'notes': req.body.notes.toUpperCase()
+                        'notes': req.body.notes
                     }
                 }]
             );
@@ -104,12 +104,12 @@ module.exports = {
                 { _id: req.params.id },
                 [{
                     "$set": {
-                        'player': req.body.player.toUpperCase(),
-                        "team": req.body.team.toUpperCase(),
-                        'position': req.body.position.toUpperCase(),
+                        'player': req.body.player,
+                        "team": req.body.team,
+                        'position': req.body.position,
                         'win': req.body.win,
                         'loss': req.body.loss,
-                        'notes': req.body.notes.toUpperCase()
+                        'notes': req.body.notes
                     }
                 }]
             );

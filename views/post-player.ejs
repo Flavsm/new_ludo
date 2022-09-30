@@ -26,15 +26,12 @@
                   </section>
                 </section>
                 <section class="section-icons-post">
-                  <button class="btn add-row">
-                    <i class="fa-solid fa-circle-plus fa-xl add-row-btn"></i>
-                  </button>
-                  <form class="col-1" action="/players/editPlayer/<%= player.id %>?_method=PUT" method="POST">
+                  <form action="/players/editPlayer/<%= player.id %>?_method=PUT" method="POST">
                     <button class="btn" type="submit">
                       <i class="fa-regular fa-pen-to-square fa-xl post-btn"></i>
                     </button>
                   </form>
-                  <form class="col-1" action="/players/pinPlayer/<%= player.id %>?_method=PUT" method="POST">
+                  <form action="/players/pinPlayer/<%= player.id %>?_method=PUT" method="POST">
                     <button class="btn" type="submit" data-bs-toggle="tooltip" data-bs-placement="top"
                       data-bs-title="Pin it">
                       <% if (player.pinned==true ) { %>
@@ -44,7 +41,7 @@
                           <% } %>
                     </button>
                   </form>
-                  <form action="/player/deletePlayer/<%= player.id %>?_method=DELETE" method="POST" class="col-1">
+                  <form action="/player/deletePlayer/<%= player.id %>?_method=DELETE" method="POST">
                     <button class="btn" type="submit">
                       <i class="fa-regular fa-trash-can fa-xl post-btn"></i>
                     </button>

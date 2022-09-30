@@ -41,7 +41,7 @@ module.exports = {
       await User.findOneAndUpdate(
         { _id: req.user.id },
         {
-          $push: { teams: { 'team': req.body.team.toUpperCase() } }
+          $push: { teams: { 'team': req.body.team } }
           // $push: { teams: { 'team': req.body.team.toLowerCase(), 'sport': req.body.sport.toLowerCase() } }
         },
         {

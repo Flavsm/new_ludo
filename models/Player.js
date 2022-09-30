@@ -5,6 +5,7 @@ const PlayerSchema = new mongoose.Schema({
   team: {
     type: String,
     required: false,
+    uppercase: true,
   },
   image: {
     feed: {
@@ -24,10 +25,12 @@ const PlayerSchema = new mongoose.Schema({
   player: {
     type: String,
     required: true,
+    uppercase: true,
   },
   position: {
     type: String,
     required: false,
+    uppercase: true,
   },
   win: {
     type: String,
@@ -42,6 +45,7 @@ const PlayerSchema = new mongoose.Schema({
   notes: {
     type: String,
     required: false,
+    uppercase: true,
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
