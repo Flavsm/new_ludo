@@ -1,7 +1,7 @@
 {
-  "name": "binary-upload-boom",
+  "name": "ludo",
   "version": "1.0.0",
-  "description": "100Devs Social Network",
+  "description": "stats app for amatures",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",

@@ -48,22 +48,26 @@
                                         </button>
                                     </form>
                                     <% } %>
-                                        <a href="#" data-toggle="modal" data-target="#<%= el._id%>" id="editBtn">
-                                            <i class="fa-regular fa-pen-to-square fa-lg"></i></a>
+                                        <button class='btn' type="button" data-bs-toggle="modal"
+                                            data-bs-target="#edit-players" id="editBtn">
+                                            <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                                        </button>
 
-
-                                        <a href="/players/<%= el._id%>"> <i class="fa-solid fa-eye fa-lg"></i></a>
+                                        <a href="/players/<%= el._id%>"> <i class="fa-solid fa-eye fa-lg"></i>
+                                        </a>
                             </section>
                         </section>
                     </li>
+
                     <!-- BEGINNIG EDIT MODAL -->
-                    <div class="modal fade" id="<%= el._id%>" tabindex="-1" role="dialog"
+                    <div class="modal fade" id="edit-players" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Edit Player</h5>
-                                    <i class="fa-solid fa-square-xmark close" data-dismiss="modal"></i>
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Edit Player
+                                    </h5>
+                                    <i class="fa-solid fa-square-xmark close" data-bs-dismiss="modal"></i>
                                 </div>
                                 <div class="modal-body">
                                     <form action="/players/editPlayers/<%= el._id%>?_method=PUT"

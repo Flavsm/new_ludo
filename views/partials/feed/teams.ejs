@@ -48,17 +48,15 @@
                                     </button>
                                 </form>
 
-                                <a href="#" data-toggle="modal" data-target="#<%= el._id%>" id="editBtn">
-                                    <i class="fa-regular fa-pen-to-square fa-lg"></i></a>
-
-
+                                <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#edit-teams">
+                                    <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                                </button>
                                 <a href="/teams/<%= el._id%>"> <i class="fa-solid fa-eye fa-lg"></i></a>
                             </section>
                         </section>
                     </li>
-
                     <!-- BEGINNIG EDIT MODAL -->
-                    <div class="modal fade" id="<%= el._id%>" tabindex="-1" role="dialog"
+                    <div class="modal fade" id="edit-teams" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
@@ -118,6 +116,7 @@
                             </div>
                         </div>
                     </div>
+
 
                     <% }}) %>
         </ul>
