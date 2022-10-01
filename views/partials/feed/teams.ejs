@@ -1,5 +1,5 @@
 <section class="feed-section-add">
-    <button class="btn profile-btns" type="submit" data-toggle="modal" data-target="#add-team">
+    <button class="btn profile-btns" type="submit" data-bs-toggle="modal" data-bs-target="#add-team">
         add team
         <i class="fa-solid fa-circle-plus fa-lg"></i>
     </button>
@@ -64,7 +64,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLongTitle">Edit Team</h5>
-                                    <i class="fa-solid fa-square-xmark close" data-dismiss="modal"></i>
+                                    <i class="fa-solid fa-square-xmark close" data-bs-dismiss="modal"></i>
                                 </div>
                                 <div class="modal-body">
                                     <form action="/teams/editTeams/<%= el._id%>?_method=PUT"
