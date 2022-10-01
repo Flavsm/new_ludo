@@ -34,7 +34,6 @@ module.exports = {
             // Upload image to cloudinary
 
             /* const result = await cloudinary.uploader.upload(req.file.path); */
-            console.log(req.body)
 
             const pattern = await cloudinary.uploader
                 .upload(req.file.path,
@@ -63,7 +62,6 @@ module.exports = {
                 cloudinaryId: pattern.public_id
             });
 
-            console.log(req.body)
             const addIdToUser = await User.findOneAndUpdate(
                 { _id: req.user.id },
                 {

@@ -44,12 +44,13 @@ module.exports = {
             /* let img_default = "https://res.cloudinary.com/dprkasf7b/image/upload/c_pad,h_300,w_400/v1663434846/LUDO/prof_dhezb9.jpg" */
 
             let newPost = await Player.create({
-                team: req.body.team.toUpperCase(),
-                player: req.body.player.toUpperCase(),
-                position: req.body.position.toUpperCase(),
+                team: req.body.team,
+                player: req.body.player,
+                sport: req.body.sport,
+                position: req.body.position,
                 win: req.body.win,
                 loss: req.body.loss,
-                notes: req.body.notes.toUpperCase(),
+                notes: req.body.notes,
                 user: req.user.id,
                 image: {
                     feed: pattern.eager[0].secure_url,
@@ -96,12 +97,12 @@ module.exports = {
             /* let img_default = "https://res.cloudinary.com/dprkasf7b/image/upload/c_pad,h_300,w_400/v1663434846/LUDO/prof_dhezb9.jpg" */
 
             let newTeam = await Team.create({
-                team: req.body.team.toUpperCase(),
-                sport: req.body.sport.toUpperCase(),
+                team: req.body.team,
+                sport: req.body.sport,
                 numberofplayers: req.body.numberofplayers,
                 win: req.body.win,
                 loss: req.body.loss,
-                notes: req.body.notes.toUpperCase(),
+                notes: req.body.notes,
                 user: req.user.id,
             });
 
@@ -165,7 +166,6 @@ module.exports = {
             )
             /* console.log(req.user) */ //gets the user model
             /* console.log(newPost) */ //get the new post info
-            console.log(req.body)
 
             console.log("League has been added!");
             res.redirect("/home"); //changed from profile to home
