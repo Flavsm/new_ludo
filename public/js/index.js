@@ -47,7 +47,49 @@ const teamAddModal = Array.from(document.querySelectorAll('.add-label'));
 teamEditModal.forEach((el, i) => el.innerText = tableHeader[i])
 teamAddModal.forEach((el, i) => el.innerText = tableHeader[i])
 
-// console.log(teamEditModal.slice(0, 9))
+
+//array of each sport position
+const football = ['C', 'G', 'T', 'TE', 'WR', 'FB', 'RB', 'QB', 'DE', 'DT', 'NG', 'LB', 'CB', 'FS/SS', 'K', 'H', 'LS', 'KR', 'P', 'PR', 'OTHER'].sort()
+const basketball = ['PG', 'SF', 'C', 'SG', 'PF'].sort()
+const baseball = ['P', 'C', '1B', '2B', '3B', 'SS', 'LF', 'RF', 'CF', 'DH'].sort()
+const soccer = ['GK', 'RB', 'LB', 'CB', 'CDM', 'RW', 'LW', 'CF', 'CM', 'F'].sort()
+const hockey = ['G', 'RD', 'LD', 'RW', 'LW', 'C'].sort()
+
+
+//get the select for sport and position
+const homeModalSport = document.querySelector('.home-sport')
+const homeModalPosition = document.querySelector('.home-position')
+
+//add change event to sport select
+homeModalSport.addEventListener('change', getSport);
+
+//function on sport change, change the options of position select
+function getSport(e) {
+    homeModalPosition.innerHTML = '<option selected>Select</option>'
+    e.target.value == 'Football' ?
+        football.forEach(el => {
+            let option = document.createElement('option');
+            option.innerText = `${el}`
+            homeModalPosition.appendChild(option)
+        }) : e.target.value == 'Basketball' ? basketball.forEach(el => {
+            let option = document.createElement('option');
+            option.innerText = `${el}`
+            homeModalPosition.appendChild(option)
+        }) : e.target.value == 'Baseball' ? baseball.forEach(el => {
+            let option = document.createElement('option');
+            option.innerText = `${el}`
+            homeModalPosition.appendChild(option)
+        }) : e.target.value == 'Soccer' ? soccer.forEach(el => {
+            let option = document.createElement('option');
+            option.innerText = `${el}`
+            homeModalPosition.appendChild(option)
+        }) : hockey.forEach(el => {
+            let option = document.createElement('option');
+            option.innerText = `${el}`
+            homeModalPosition.appendChild(option)
+        })
+}
+
 
 //////// TABLE /////
 

@@ -198,26 +198,26 @@ module.exports = {
   //     console.log(err);
   //   }
   // },
-  createTable: async (req, res) => {
-    try {
-      await Player.findOneAndUpdate(
-        { _id: req.params.id },
-        [{
-          "$set": { "table": { 'row': [req.body.cell1], 'column': [req.body.cell2] } }
-        }]
-      );
+  // createTable: async (req, res) => {
+  //   try {
+  //     await Player.findOneAndUpdate(
+  //       { _id: req.params.id },
+  //       [{
+  //         "$set": { "table": { 'row': [req.body.cell1], 'column': [req.body.cell2] } }
+  //       }]
+  //     );
 
-      const player = await Player.findById(req.params.id);
+  //     const player = await Player.findById(req.params.id);
 
-      console.log(player)
-      console.log(req.body)
+  //     console.log(player)
+  //     console.log(req.body)
 
-      console.log("Table created");
-      res.redirect(`/post/${req.params.id}`);
-    } catch (err) {
-      console.log(err);
-    }
-  },
+  //     console.log("Table created");
+  //     res.redirect(`/post/${req.params.id}`);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // },
   // deletePost: async (req, res) => {
   //   try {
 

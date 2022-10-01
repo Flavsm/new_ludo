@@ -82,12 +82,12 @@ module.exports = {
                 { _id: req.params.id },
                 [{
                     "$set": {
-                        'team': req.body.team,
-                        "sport": req.body.sport,
+                        'team': req.body.team.toUpperCase(),
+                        "sport": req.body.sport.toUpperCase(),
                         'numberofplayers': req.body.numberofplayers,
                         'win': req.body.win,
                         'loss': req.body.loss,
-                        'notes': req.body.notes
+                        'notes': req.body.notes.toUpperCase()
                     }
                 }]
             );
@@ -103,12 +103,12 @@ module.exports = {
                 { _id: req.params.id },
                 [{
                     "$set": {
-                        'team': req.body.team,
-                        "sport": req.body.sport,
+                        'team': req.body.team.toUpperCase(),
+                        "sport": req.body.sport.toUpperCase(),
                         'numberofplayers': req.body.numberofplayers,
                         'win': req.body.win,
                         'loss': req.body.loss,
-                        'notes': req.body.notes
+                        'notes': req.body.notes.toUpperCase()
                     }
                 }]
             );

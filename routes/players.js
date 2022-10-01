@@ -23,6 +23,15 @@ router.put('/editPlayer/:id', playersController.editPlayer)
 //pin a player from the player profile
 router.put("/pinPlayer/:id", playersController.pinPlayer);
 
+//create new row on table
+router.post('/createRow/:id', playersController.createRow);
+
+//edit row on table
+router.put("/editRow/:id", playersController.editRow);
+
+//delete row on table
+router.delete("/deleteRow/:id", playersController.deleteRow);
+
 //delete a player from the feed or player profile
 router.delete("/deletePlayer/:id", playersController.deletePlayer);
 

@@ -13,7 +13,7 @@ const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 // router.put("/pinPost/:id", postsController.pinPost);
 
-router.put("/createTable/:id", postsController.createTable);
+// router.put("/createTable/:id", postsController.createTable);
 
 // router.delete("/deletePost/:id", postsController.deletePost);
 

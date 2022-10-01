@@ -34,7 +34,7 @@ module.exports = {
             // Upload image to cloudinary
 
             /* const result = await cloudinary.uploader.upload(req.file.path); */
-
+            console.log(req.body)
 
             const pattern = await cloudinary.uploader
                 .upload(req.file.path,
@@ -50,6 +50,7 @@ module.exports = {
             let newPlayer = await Player.create({
                 team: req.body.team,
                 player: req.body.player,
+                sport: req.body.sport,
                 position: req.body.position,
                 win: req.body.win,
                 loss: req.body.loss,
@@ -62,7 +63,7 @@ module.exports = {
                 cloudinaryId: pattern.public_id
             });
 
-
+            console.log(req.body)
             const addIdToUser = await User.findOneAndUpdate(
                 { _id: req.user.id },
                 {
@@ -83,12 +84,13 @@ module.exports = {
                 { _id: req.params.id },
                 [{
                     "$set": {
-                        'player': req.body.player,
-                        "team": req.body.team,
+                        'player': req.body.player.toUpperCase(),
+                        "team": req.body.team.toUpperCase(),
+                        'sport': req.body.sport.toUpperCase(),
                         'position': req.body.position,
                         'win': req.body.win,
                         'loss': req.body.loss,
-                        'notes': req.body.notes
+                        'notes': req.body.notes.toUpperCase()
                     }
                 }]
             );
@@ -104,12 +106,13 @@ module.exports = {
                 { _id: req.params.id },
                 [{
                     "$set": {
-                        'player': req.body.player,
-                        "team": req.body.team,
+                        'player': req.body.player.toUpperCase(),
+                        "team": req.body.team.toUpperCase(),
+                        'sport': req.body.sport.toUpperCase(),
                         'position': req.body.position,
                         'win': req.body.win,
                         'loss': req.body.loss,
-                        'notes': req.body.notes
+                        'notes': req.body.notes.toUpperCase()
                     }
                 }]
             );
@@ -132,6 +135,82 @@ module.exports = {
             res.redirect(`/players/${req.params.id}`);
         } catch (err) {
             console.log(err);
+        }
+    },
+    createRow: async (req, res) => {
+        try {
+            let newRow = await Player.findOneAndUpdate(
+                { _id: req.params.id },
+                {
+                    '$push': { 'table': { 'row': { 'cell1': req.body.cell1, 'cell2': req.body.cell2, 'cell3': req.body.cell3, 'cell4': req.body.cell4, 'cell5': req.body.cell5, 'cell6': req.body.cell6, 'cell7': req.body.cell7, 'cell8': req.body.cell8, 'cell9': req.body.cell9 } } }
+
+                },
+                {
+                    new: true
+                }
+            )
+
+
+            console.log("Added row");
+            res.redirect(`/players/${req.params.id}`);
+        } catch {
+            res.redirect(`/players/${req.params.id}`);
+        }
+    },
+    editRow: async (req, res) => {
+        try {
+
+            // Find post by id
+            let player = await Player.findOne({
+                'table._id': req.params.id
+            });
+
+            console.log(team)
+
+            let editRow = await Player.findOneAndUpdate(
+                { 'table._id': req.params.id },
+                [{
+                    '$set': { 'table': { 'row': { 'cell1': req.body.cell1, 'cell2': req.body.cell2, 'cell3': req.body.cell3, 'cell4': req.body.cell4, 'cell5': req.body.cell5, 'cell6': req.body.cell6, 'cell7': req.body.cell7, 'cell8': req.body.cell8, 'cell9': req.body.cell9 } } }
+                }],
+                {
+                    new: true
+                }
+            )
+
+            console.log("Edited row");
+            res.redirect(`/players/${team._id}`);
+        }
+        catch {
+            res.redirect(`/players/${team._id}`);
+        }
+    },
+    deleteRow: async (req, res) => {
+        try {
+
+            // Find post by id
+            let player = await Player.findOne({
+                'table._id': req.params.id
+            });
+
+            // Delete image from cloudinary
+            //   await cloudinary.uploader.destroy(post.cloudinaryId);
+
+            // Delete row from DB array
+            await Player.findOneAndUpdate({
+                'table._id': req.params.id
+            },
+                {
+                    $pull: { 'table': team.table.filter(el => el._id == req.params.id)[0] }
+                },
+                {
+                    new: true
+                }
+            )
+
+            console.log("Deleted Row");
+            res.redirect(`/players/${team._id}`);
+        } catch (err) {
+            res.redirect("/players");
         }
     },
     deletePlayer: async (req, res) => {
