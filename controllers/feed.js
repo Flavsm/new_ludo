@@ -1,41 +1,42 @@
 const cloudinary = require("../middleware/cloudinary");
-const Post = require("../models/Post");
+const Player = require("../models/Player");
 const User = require('../models/User');
-
+const Team = require('../models/Team');
 
 module.exports = {
-  getPlayers: async (req, res) => {
+  /* getPlayers: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      /* const userPosts = await Post.find(req.user) */
+      const userPosts = await Post.find(req.user)
       const post = await Post.findById(req.params.id);
       const url = await req.originalUrl;
-      /* console.log(userPosts) */
-      res.render("partial-feed.ejs", { posts: posts, user: req.user, post: post, /* userPosts: userPosts, */ url: url });
+      console.log(userPosts)
+      res.render("partial-feed.ejs", { posts: posts, user: req.user, post: post, userPosts: userPosts, url: url });
     } catch (err) {
       console.log(err);
     }
-  },
-  getTeams: async (req, res) => {
-    try {
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      /* const userPosts = await Post.find(req.user) */
-      const post = await Post.findById(req.params.id);
-      const url = await req.originalUrl;
-      /* console.log(userPosts) */
-      res.render("partial-feed.ejs", { posts: posts, user: req.user, post: post, /* userPosts: userPosts, */ url: url });
-    } catch (err) {
-      console.log(err);
-    }
-  },
+  }, */
+  // getTeams: async (req, res) => {
+  //   try {
+  //     const posts = await Post.find().sort({ createdAt: "desc" }).lean();
+  //     const teams = await Team.find().sort({ createdAt: "desc" }).lean();
+  //     /* const userPosts = await Post.find(req.user) */
+  //     const post = await Post.findById(req.params.id);
+  //     const url = await req.originalUrl;
+  //     /* console.log(userPosts) */
+  //     res.render("partial-feed.ejs", { posts: posts, user: req.user, post: post, teams: teams, url: url });
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // },
   getLeagues: async (req, res) => {
     try {
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
+      const players = await Player.find().sort({ createdAt: "desc" }).lean();
       /* const userPosts = await Post.find(req.user) */
-      const post = await Post.findById(req.params.id);
+      const player = await Player.findById(req.params.id);
       const url = await req.originalUrl;
       /* console.log(userPosts) */
-      res.render("partial-feed.ejs", { posts: posts, user: req.user, post: post, /* userPosts: userPosts, */ url: url });
+      res.render("partial-feed.ejs", { posts: players, user: req.user, post: player, /* userPosts: userPosts, */ url: url });
     } catch (err) {
       console.log(err);
     }
@@ -44,12 +45,12 @@ module.exports = {
     try {
 
       // Find post by id
-      let post = await Post.findById({ _id: req.params.id });
+      let player = await Player.findById({ _id: req.params.id });
 
       // Delete image from cloudinary
       await cloudinary.uploader.destroy(post.cloudinaryId);
       // Delete post from db
-      await Post.deleteOne({ _id: req.params.id });
+      await Player.deleteOne({ _id: req.params.id });
 
       // Delete post from DB array
       const deleteIdFromUser = await User.updateOne(
@@ -66,3 +67,4 @@ module.exports = {
     }
   },
 }
+

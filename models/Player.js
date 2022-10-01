@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
 //const { url } = require("../middleware/cloudinary"); prob deleted it
 
-const PostSchema = new mongoose.Schema({
+const PlayerSchema = new mongoose.Schema({
   team: {
     type: String,
     required: false,
+    uppercase: true,
   },
   image: {
     feed: {
@@ -24,10 +25,12 @@ const PostSchema = new mongoose.Schema({
   player: {
     type: String,
     required: true,
+    uppercase: true,
   },
   position: {
     type: String,
     required: false,
+    uppercase: true,
   },
   win: {
     type: String,
@@ -42,6 +45,7 @@ const PostSchema = new mongoose.Schema({
   notes: {
     type: String,
     required: false,
+    uppercase: true,
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -57,4 +61,4 @@ const PostSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model("Post", PostSchema);
+module.exports = mongoose.model("Player", PlayerSchema);

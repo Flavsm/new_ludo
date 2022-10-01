@@ -1,0 +1,136 @@
+<%- include('partials/headers/header-menu') -%>
+
+  <main class="container container-post">
+    <section class="container-section-post">
+      <section class="section-profile-post">
+        <%if(player.user==user.id || user.teams.map(em=> em.team).includes(player.team)){ %>
+          <section class="nav-profile-post">
+            <img class="img-fluid post-img-top" src="<%= player.image.profile %>" />
+            <section class="section-column-post">
+              <section class="section-row-post">
+                <section class="section-second-column-post">
+                  <section class="section-each-extra-post">
+                    <h1>
+                      <%= player.player %>
+                    </h1>
+                  </section>
+                  <section class="section-each-extra-post">
+                    <h2>
+                      <%= player.team %>
+                    </h2>
+                  </section>
+                  <section class="section-each-extra-post">
+                    <h2>
+                      #17
+                    </h2>
+                  </section>
+                </section>
+                <section class="section-icons-post">
+                  <form action="/players/editPlayer/<%= player.id %>?_method=PUT" method="POST">
+                    <button class="btn" type="submit">
+                      <i class="fa-regular fa-pen-to-square fa-xl post-btn"></i>
+                    </button>
+                  </form>
+                  <form action="/players/pinPlayer/<%= player.id %>?_method=PUT" method="POST">
+                    <button class="btn" type="submit" data-bs-toggle="tooltip" data-bs-placement="top"
+                      data-bs-title="Pin it">
+                      <% if (player.pinned==true ) { %>
+                        <i class="fa-solid fa-thumbtack fa-xl pinned-btn"></i>
+                        <% } else { %>
+                          <i class="fa-solid fa-thumbtack fa-xl unpinned-btn"></i>
+                          <% } %>
+                    </button>
+                  </form>
+                  <form action="/player/deletePlayer/<%= player.id %>?_method=DELETE" method="POST">
+                    <button class="btn" type="submit">
+                      <i class="fa-regular fa-trash-can fa-xl post-btn"></i>
+                    </button>
+                  </form>
+                </section>
+              </section>
+              <section class="section-person-post">
+                <section class="section-person-post-extra-one">
+                  <section class="section-each-extra-post">
+                    <h2>
+                      <%= player.win %>-<%= player.loss%> | <%=
+                            `.${(Number(player.win)/(Number(player.win)+Number(player.loss))).toFixed(3).toString().split('.')[1]}`
+                            %>%
+                    </h2>
+                    <span>w-l | pct </span>
+                  </section>
+                  <section class="section-each-extra-post">
+                    <h2>
+                      <%= player.position %>
+                    </h2>
+                    <span>position</span>
+                  </section>
+                </section>
+                <section class="section-person-post-extra-two">
+                  <section class="section-each-extra-post">
+                    <h2>
+                      <%= %>
+                    </h2>
+                    <span>height</span>
+                  </section>
+                  <section class="section-each-extra-post">
+                    <h2>
+                      <%= %>
+                    </h2>
+                    <span>weight</span>
+                  </section>
+                  <section class="section-each-extra-post">
+                    <h2>
+                      <%= %>
+                    </h2>
+                    <span>age</span>
+                  </section>
+                </section>
+              </section>
+            </section>
+          </section>
+
+      </section>
+      <section class="section-table-post">
+
+        <!-- <form action="/player/createTable/<%= player.id %>?_method=PUT" class="col-1" enctype="multipart/form-data"
+          method="POST">
+          <button class="btn table-add" type="submit">
+            <i class="fa-solid fa-circle-plus"></i>
+          </button>
+         
+        </form> -->
+        <%- include('partials/bootstrap-table') -%>
+
+      </section>
+      <%}%>
+        </div>
+        </div>
+    </section>
+    </section>
+  </main>
+
+  <%- include('partials/footer') -%>
+
+    <!-- ATTEMPT DIAGONAL LINE -->
+
+    <!-- <section class="section-person-post-extra">
+  <div class="post">
+    <h3 class=""><%= player.player %></h3>
+  </div>
+  
+  <div class="div-post">
+    <h2 class="" >player</h2>
+   
+  </div>
+</section>
+<section class="section-person-post-extra">
+  
+  <div class="post">
+    <h3 class=""><%= player.team %></h3>
+  </div>
+  <div class="div-post">
+    <h2 class="" >team</h2>
+   
+  </div>
+  
+</section> -->

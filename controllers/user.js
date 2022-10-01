@@ -1,5 +1,5 @@
 const { ObjectId } = require("mongodb");
-const Post = require("../models/Post");
+const Player = require("../models/Player");
 const User = require('../models/User');
 
 module.exports = {
@@ -8,7 +8,7 @@ module.exports = {
       // const posts = await Post.find({ user: req.user.id });
       const users = await User.findById(req.params.id)
       const url = await req.originalUrl;
-      res.render("profile.ejs", { /* posts: posts,  */user: req.user, users: users, url: url, body: req.body, obj: req.body.leagues });
+      res.render("profile.ejs", { /* players: players,  */user: req.user, users: users, url: url, body: req.body, obj: req.body.leagues });
       /* console.log(users) */
     } catch (err) {
       console.log(err);
@@ -19,7 +19,7 @@ module.exports = {
       await User.findOneAndUpdate(
         { _id: req.user.id },
         {
-          $push: { leagues: { 'league': req.body.league, 'sport': req.body.sport } }
+          $push: { leagues: { 'league': req.body.league } }
         },
         {
           new: true
@@ -41,7 +41,8 @@ module.exports = {
       await User.findOneAndUpdate(
         { _id: req.user.id },
         {
-          $push: { teams: { 'team': req.body.team, 'sport': req.body.sport } }
+          $push: { teams: { 'team': req.body.team } }
+          // $push: { teams: { 'team': req.body.team.toLowerCase(), 'sport': req.body.sport.toLowerCase() } }
         },
         {
           new: true
@@ -72,9 +73,11 @@ module.exports = {
       const deleteLeagueFromUser = await User.updateOne(
         { _id: req.user.id },
         {
-          $pull: { 'leagues': user.leagues.filter(el => el.league === req.body.league)[0] }
+          $pull: { 'leagues': { 'league': user.leagues.filter(el => el.league === req.body.league)[0] } }
         }
       )
+
+      console.log(req.body)
 
       console.log("Deleted something");
       res.redirect(`/profile/${req.params.id}`);
@@ -95,6 +98,7 @@ module.exports = {
         }
       )
 
+      console.log(req.body)
       console.log("Deleted something");
       res.redirect(`/profile/${req.params.id}`);
     } catch (err) {

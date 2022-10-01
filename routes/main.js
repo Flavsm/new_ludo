@@ -4,6 +4,7 @@ const authController = require("../controllers/auth");
 const indexController = require('../controllers/index');
 const postsController = require("../controllers/posts");
 const feedController = require('../controllers/feed');
+const homeController = require('../controllers/home');
 /* const js = require('../public/js/index') */
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
@@ -18,11 +19,11 @@ router.get("/signup", authController.getSignup);
 router.post("/signup", authController.postSignup);
 
 //Home 
-router.get("/home", ensureAuth, postsController.getHome);
+router.get("/home", ensureAuth, homeController.getHome);
 
 //Players / Teams / Leagues
-router.get("/players", ensureAuth, feedController.getPlayers);
-router.get("/teams", ensureAuth, feedController.getTeams);
+// router.get("/players", ensureAuth, feedController.getPlayers);
+// router.get("/teams", ensureAuth, feedController.getTeams);
 router.get("/leagues", ensureAuth, feedController.getLeagues);
 
 

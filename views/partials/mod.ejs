@@ -1,16 +1,17 @@
-<div class="modal fade" id="add-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+<div class="modal fade" id="edit-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Create Something</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Edit Player</h5>
         <!--  <button type="button" data-dismiss="modal"> -->
 
         <i class="fa-solid fa-square-xmark close" data-dismiss="modal"></i>
         <!--  </button> -->
       </div>
       <div class="modal-body">
-        <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+        <form action="/players/editPlayer/<%= el._id%>?_method=PUT" enctype="application/x-www-form-urlencoded"
+          method="POST">
           <div class="mb-3">
             <label for="player" class="form-label">Player</label>
             <input type="text" class="form-control form-control-sm" id="player" name="player" placeholder="Player">
@@ -21,8 +22,8 @@
           </div>
           <div class="mb-3">
             <label for="position" class="form-label">Position</label>
-            <select class="form-select form-select-sm" id="position" name="position">
-              <option selected>Select</option>
+            <select class="form-select form-select-sm" id="position" name="position" autocomplete="off">
+              <option value='' selected disabled hidden>Select</option>
               <option>PG</option>
               <option>SG</option>
               <option>SF</option>

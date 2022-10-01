@@ -1,20 +1,18 @@
 <section class="feed-section-add">
-    <form class="" action="" method="POST">
-        <button class="btn profile-btns" type="submit">
-            add player
-            <i class="fa-solid fa-circle-plus fa-lg"></i>
-        </button>
-    </form>
+    <button class="btn profile-btns" type="submit" data-bs-toggle="modal" data-bs-target="#add-player">
+        add player
+        <i class="fa-solid fa-circle-plus fa-lg"></i>
+    </button>
 </section>
 <section class="section-feed">
     <section class="section-list-feed">
         <ul class="list-feed">
-            <% posts.forEach(el=> { %>
-                <% if(el.user==user.id) { %>
+            <% players.forEach(el=> { %>
+                <% if(el.user==user.id || user.teams.map(em=> em.team).includes(el.team)){ %>
                     <li class="item-list-feed">
                         <section class="card">
-                            <img src="<%= el.image.feed%>" class="card-img-top" alt="...">
-                            <ul class="list-group list-group-flush list-card-feed">
+                            <img src="<%= el.image.feed%>" class="card-img-top img-fluid" alt="...">
+                            <ul class="list-group list-group-flush list-card-feed" data-id="el._id">
                                 <li class="list-group-item item-list-card">
                                     <%= el.player%>
                                 </li>
@@ -42,16 +40,96 @@
                                 </p>
                             </section>
                             <section class="card-body-btns">
-                                <a href="/post/<%= el._id%>"> <i class="fa-regular fa-pen-to-square fa-lg"></i></a>
-                                <form action="/feed/deletePost/<%= el._id %>?_method=DELETE" method="POST"
-                                    class="feed-delete-form">
-                                    <button class="btn feed-delete-btn" type="submit">
-                                        <i class="fa-regular fa-trash-can fa-lg"></i>
-                                    </button>
-                                </form>
+                                <% if(el.user==user.id) { %>
+                                    <form action="/players/deletePlayer/<%= el._id %>?_method=DELETE" method="POST"
+                                        class="feed-delete-form">
+                                        <button class="btn feed-delete-btn" type="submit">
+                                            <i class="fa-regular fa-trash-can fa-lg"></i>
+                                        </button>
+                                    </form>
+                                    <% } %>
+                                        <button class='btn' type="button" data-bs-toggle="modal"
+                                            data-bs-target="#edit-players" id="editBtn">
+                                            <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                                        </button>
+
+                                        <a href="/players/<%= el._id%>"> <i class="fa-solid fa-eye fa-lg"></i>
+                                        </a>
                             </section>
                         </section>
                     </li>
+
+                    <!-- BEGINNIG EDIT MODAL -->
+                    <div class="modal fade" id="edit-players" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Edit Player
+                                    </h5>
+                                    <i class="fa-solid fa-square-xmark close" data-bs-dismiss="modal"></i>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/players/editPlayers/<%= el._id%>?_method=PUT"
+                                        enctype="application/x-www-form-urlencoded" method="POST">
+                                        <div class="mb-3">
+                                            <label for="player" class="form-label">Player</label>
+                                            <input type="text" class="form-control form-control-sm" id="player"
+                                                name="player" value="<%= el.player%>" placeholder="Player">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="team" class="form-label">Team</label>
+                                            <input type="text" class="form-control form-control-sm" id="team"
+                                                name="team" value="<%= el.team%>" placeholder="Team">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="position" class="form-label">Position</label>
+                                            <select class="form-select form-select-sm" id="position" name="position"
+                                                value="<%= el.position%>">
+                                                <option selected>
+                                                    <%= el.position%>
+                                                </option>
+                                                <option>PG</option>
+                                                <option>SG</option>
+                                                <option>SF</option>
+                                                <option>PF</option>
+                                                <option>C</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <label for="win" class="form-label">Win</label>
+                                                    <input type="text" class="form-control win-loss-input" id="win"
+                                                        name="win" value="<%= el.win%>" placeholder="">
+                                                </div>
+                                                <div class="col">
+                                                    <label for="loss" class="form-label">Loss</label>
+                                                    <input type="text" class="form-control win-loss-input" id="loss"
+                                                        name="loss" value="<%= el.loss%>" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="imgUpload" class="form-label">Image</label>
+                                            <input type="file" class="form-control form-control-sm" id="imageUpload"
+                                                name="file">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="notes" class="form-label">Notes</label>
+                                            <textarea class="form-control form-label-sm" id="notes"
+                                                name="notes"><%= el.notes%></textarea>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary submit"
+                                                value="Upload">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END EDIT MODAL -->
                     <% }}) %>
         </ul>
     </section>

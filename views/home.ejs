@@ -5,24 +5,34 @@
         <section class="section-my-home section-my-leagues">
           <h2>add something</h2>
           <ul class="list-my-leagues list-add-recently">
-            <li class="item-my-leagues add-league item-modal" data-toggle="modal" data-target="#add-data">
-              <a href="#">
+            <li class="item-my-leagues add-league item-modal" data-bs-toggle="modal" data-bs-target="#add-data">
+              <button type="button" class="btn">
                 <i class="fa-solid fa-circle-plus fa-2xl"></i>
-              </a>
+              </button>
             </li>
             <h2 class="recently-heading">recently added</h2>
             <li class="recently-added-item">
               <section class="recently-added-container">
                 <ul class="list-my-leagues recently-added-list">
                   <!-- limits the length of the recently added array to 4 and finds only the posts entried by the user -->
-                  <% let obj=posts.filter(el=> user.entries.map(em=> em==el.id)).reverse().slice(0,4) %>
-                    <% obj.forEach(el=> { %>
-                      <li class="item-my-leagues add-league">
-                        <a href="/post/<%= el.id%>">
-                          <%= el.player %>
+
+                  <% user.entries.reverse().slice(0,4).forEach(el=> { %>
+                    <li class="item-my-leagues add-league">
+                      <% let obj=players.concat(teams).find(em=> em._id == el);
+                        if(obj.player) { %>
+                        <a href="players/<%= obj._id%>">
+                          <%= obj.player %>
                         </a>
-                        <% }) %>
-                      </li>
+                        <% } else if(obj.numberofplayers){ %>
+                          <a href="teams/<%= obj._id%>">
+                            <%= obj.team %>
+                          </a>
+                          <% } else { %>
+                            <a href="leagues/<%= obj._id%>">
+                              <%= obj.league %>
+                            </a>
+                            <% }}) %>
+                    </li>
                 </ul>
               </section>
             </li>
@@ -31,18 +41,27 @@
         <section class="section-my-home section-my-leagues">
           <h2>pinned</h2>
           <ul class="list-my-leagues list-pinned">
-            <% posts.filter(el=> el.pinned).forEach(em => { %>
+            <% players.concat(teams).filter(el=> el.pinned).forEach(em => { %>
               <li class="item-my-leagues add-league">
-                <a href="/post/<%= em.id%>">
-                  <%= em.player %>
-                </a>
+                <% if (em.player) { %>
+                  <a href="/players/<%= em.id%>">
+                    <%= em.player %>
+                  </a>
+                  <% } else if (em.numberofplayers) { %>
+                    <a href="/teams/<%= em.id%>">
+                      <%= em.team %>
+                    </a>
+                    <% } else { %>
+                      <a href="/league/<%= em.id%>">
+                        <%= em.league %>
+                      </a>
+                      <% }}) %>
               </li>
-              <% }) %>
           </ul>
         </section>
       </section>
       <section class="other-section"></section>
     </section>
   </main>
-  <%- include('partials/modal') -%>
+  <%- include('partials/home-modal') -%>
     <%- include('partials/footer') -%>
