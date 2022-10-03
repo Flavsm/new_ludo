@@ -10,7 +10,7 @@
               class="post-img-top img-fluid" alt=" ...">
             <section class="section-column-post">
               <section class="section-row-post">
-                <section class="section-second-column-post">
+                <section class="section-main-player-info">
                   <section class="section-each-extra-post">
                     <h1>
                       <%= team.team %>
@@ -21,11 +21,6 @@
                       <%= team.sport %>
                     </h2>
                   </section>
-                  <!-- <section class="section-each-extra-post">
-                    <h2>
-                      #<%= team.numberofplayers %>
-                    </h2>
-                  </section> -->
                 </section>
                 <section class="section-icons-post">
                   <form action="/teams/editTeam/<%= team.id %>?_method=PUT" method="POST">
@@ -50,9 +45,9 @@
                   </form>
                 </section>
               </section>
-              <section class="section-person-post">
-                <section class="section-person-post-extra-one">
-                  <!-- <section class="section-each-extra-post">
+              <section class="section-secondary-player-info">
+                <!-- <section class="section-person-post-extra-one">
+                  <section class="section-each-extra-post">
                     <h2>
                       <%= %>
                     </h2>
@@ -63,42 +58,39 @@
                       <%= %>
                     </h2>
                     <span>weight</span>
-                  </section> -->
+                  </section>
+                </section> -->
+                <!-- <section class="section-person-post-extra-two">
+                  
+                </section> -->
+                <section class="section-each-extra-post">
+                  <h2>
+                    <%= team.win %>-<%= team.loss%> | <%=
+                          `.${(Number(team.win)/(Number(team.win)+Number(team.loss))).toFixed(3).toString().split('.')[1]}`
+                          %>%
+                  </h2>
+                  <span>w-l | pct </span>
                 </section>
-                <section class="section-person-post-extra-two">
-                  <section class="section-each-extra-post">
-                    <h2>
-                      <%= team.win %>-<%= team.loss%> | <%=
-                            `.${(Number(team.win)/(Number(team.win)+Number(team.loss))).toFixed(3).toString().split('.')[1]}`
-                            %>%
-                    </h2>
-                    <span>w-l | pct </span>
-
-                  </section>
-                  <section class="section-each-extra-post">
-
-                    <h2>
-                      <%= team.sport %>
-                    </h2>
-                    <span>sport</span>
-                  </section>
-                  <section class="section-each-extra-post">
-                    <h2>
-                      <%= team.numberofplayers %>
-                    </h2>
-                    <span># of players</span>
-                  </section>
+                <section class="section-each-extra-post">
+                  <h2>
+                    <%= team.sport %>
+                  </h2>
+                  <span>sport</span>
+                </section>
+                <section class="section-each-extra-post">
+                  <h2>
+                    <%= team.numberofplayers %>
+                  </h2>
+                  <span># of players</span>
                 </section>
               </section>
             </section>
           </section>
-
         </section>
         <section class="section-table-post">
           <section class="section-team-stats">
             <h3 class="team-stats-header ">TEAM STATS</h3>
             <table class="team-table table table-bordered table-striped table-responsive-md text-center table-hover">
-
               <thead>
                 <tr class="table-head">
                   <th>MATCHUP</th>
@@ -273,8 +265,8 @@
           </section>
           <section class="section-players-stats">
             <h3 class="team-stats-header">PLAYER STATS</h3>
-            <table class="team-table table table-bordered table-striped table-responsive-md text-center table-hover">
-            </table>
+            <!-- <table class="team-table table table-bordered table-striped table-responsive-md text-center table-hover">
+            </table> -->
           </section>
         </section>
         <% } %>

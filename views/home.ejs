@@ -15,24 +15,28 @@
               <section class="recently-added-container">
                 <ul class="list-my-leagues recently-added-list">
                   <!-- limits the length of the recently added array to 4 and finds only the posts entried by the user -->
-
                   <% user.entries.reverse().slice(0,4).forEach(el=> { %>
-                    <li class="item-my-leagues add-league">
-                      <% let obj=players.concat(teams).find(em=> em._id == el);
-                        if(obj.player) { %>
-                        <a href="players/<%= obj._id%>">
-                          <%= obj.player %>
-                        </a>
-                        <% } else if(obj.numberofplayers){ %>
-                          <a href="teams/<%= obj._id%>">
-                            <%= obj.team %>
-                          </a>
-                          <% } else { %>
-                            <a href="leagues/<%= obj._id%>">
-                              <%= obj.league %>
+
+                    <% let obj=players.concat(teams, leagues).filter(em=> em._id == el) %>
+                      <% if (obj.length> 0) { %>
+                        <li class="item-my-leagues add-league">
+                          <% if(obj.player) { %>
+                            <a href="players/<%= obj._id%>">
+                              <%= obj.player %>
                             </a>
-                            <% }}) %>
-                    </li>
+                            <% } else if(obj.numberofplayers){ %>
+                              <a href="teams/<%= obj._id%>">
+                                <%= obj.team %>
+                              </a>
+                              <% } else { %>
+                                <a href="leagues/<%= obj._id%>">
+                                  <%= obj.league %>
+                                </a>
+                                <% }} %>
+                        </li>
+                        <% }) %>
+
+
                 </ul>
               </section>
             </li>
@@ -41,7 +45,7 @@
         <section class="section-my-home section-my-leagues">
           <h2>pinned</h2>
           <ul class="list-my-leagues list-pinned">
-            <% players.concat(teams).filter(el=> el.pinned).forEach(em => { %>
+            <% players.concat(teams, leagues).filter(el=> el.pinned).forEach(em => { %>
               <li class="item-my-leagues add-league">
                 <% if (em.player) { %>
                   <a href="/players/<%= em.id%>">
@@ -52,7 +56,7 @@
                       <%= em.team %>
                     </a>
                     <% } else { %>
-                      <a href="/league/<%= em.id%>">
+                      <a href="/leagues/<%= em.id%>">
                         <%= em.league %>
                       </a>
                       <% }}) %>

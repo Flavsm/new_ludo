@@ -2,19 +2,19 @@ const cloudinary = require("../middleware/cloudinary");
 const Player = require("../models/Player");
 const User = require('../models/User');
 const Team = require('../models/Team');
+const League = require('../models/League')
 const { ObjectID } = require("mongodb");
-// const Table = require('../models/Table');
 
 module.exports = {
     getTeams: async (req, res) => {
         try {
             const players = await Player.find().sort({ createdAt: "desc" }).lean();
             const teams = await Team.find().sort({ createdAt: "desc" }).lean();
-            /* const userPosts = await Post.find(req.user) */
+            const leagues = await League.find().sort({ createdAt: "desc" }).lean();
             const player = await Player.findById(req.params.id);
             const url = await req.originalUrl;
             /* console.log(userPosts) */
-            res.render("partial-feed.ejs", { players: players, user: req.user, player: player, teams: teams, url: url });
+            res.render("partial-feed.ejs", { players: players, user: req.user, player: player, teams: teams, leagues: leagues, url: url });
         } catch (err) {
             console.log(err);
         }
@@ -23,10 +23,11 @@ module.exports = {
         try {
             const player = await Player.findById(req.params.id);
             const team = await Team.findById(req.params.id);
+            const league = await League.findById(req.params.id);
             const url = await req.originalUrl;
 
             /* console.log(post) */
-            res.render("post-team.ejs", { player: player, user: req.user, team: team, url: url }); //changes req.user to req.email
+            res.render("post-team.ejs", { player: player, user: req.user, team: team, league: league, url: url }); //changes req.user to req.email
         } catch (err) {
             console.log(err);
         }
@@ -114,6 +115,21 @@ module.exports = {
             );
 
             res.redirect(`/teams/${req.params.id}`);
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    pinTeams: async (req, res) => {
+        try {
+            await Team.findOneAndUpdate(
+                { _id: req.params.id },
+                [{
+                    "$set": { "pinned": { "$eq": [false, "$pinned"] } }
+                }]
+            );
+
+            console.log("Toggle pinned");
+            res.redirect("/teams");
         } catch (err) {
             console.log(err);
         }

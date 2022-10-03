@@ -12,7 +12,7 @@ module.exports = {
             const player = await Player.findById(req.params.id);
             const url = await req.originalUrl;
 
-            res.render("partial-feed.ejs", { players: players, user: req.user, player: player, /* userPosts: userPosts, */ url: url });
+            res.render("partial-feed.ejs", { players: players, user: req.user, player: player, url: url });
         } catch (err) {
             console.log(err);
         }
@@ -24,7 +24,7 @@ module.exports = {
             const team = await Team.findById(req.params.id);
             const url = await req.originalUrl;
             /* console.log(post) */
-            res.render("post-player.ejs", { player: player, user: req.user, team: team, url: url }); //changes req.user to req.email
+            res.render("post-player.ejs", { player: player, user: req.user, team: team, url: url });
         } catch (err) {
             console.log(err);
         }
@@ -120,6 +120,21 @@ module.exports = {
             console.log(err);
         }
     },
+    pinPlayers: async (req, res) => {
+        try {
+            await Player.findOneAndUpdate(
+                { _id: req.params.id },
+                [{
+                    "$set": { "pinned": { "$eq": [false, "$pinned"] } }
+                }]
+            );
+
+            console.log("Toggle pinned");
+            res.redirect("/players");
+        } catch (err) {
+            console.log(err);
+        }
+    },
     pinPlayer: async (req, res) => {
         try {
             await Player.findOneAndUpdate(
@@ -198,7 +213,7 @@ module.exports = {
                 'table._id': req.params.id
             },
                 {
-                    $pull: { 'table': team.table.filter(el => el._id == req.params.id)[0] }
+                    $pull: { 'table': player.table.filter(el => el._id == req.params.id)[0] }
                 },
                 {
                     new: true
@@ -206,7 +221,7 @@ module.exports = {
             )
 
             console.log("Deleted Row");
-            res.redirect(`/players/${team._id}`);
+            res.redirect(`/players/${player._id}`);
         } catch (err) {
             res.redirect("/players");
         }

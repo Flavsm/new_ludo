@@ -19,6 +19,9 @@ router.put('/editTeams/:id', teamController.editTeams)
 //edit a team from the team profile
 router.put('/editTeam/:id', teamController.editTeam)
 
+//pin a team from the teams feed
+router.put("/pinTeams/:id", teamController.pinTeams);
+
 //pin a team from the team profile
 router.put("/pinTeam/:id", teamController.pinTeam);
 

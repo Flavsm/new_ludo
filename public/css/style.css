@@ -674,8 +674,8 @@ body {
     color: black;
 }
 
-.win-loss-input {
-    width: 30%;
+.number-input {
+    width: 60%;
 }
 
 .modal-body .submit {
@@ -789,8 +789,12 @@ body {
     height: 50%;
 }
 
-.card-body-btns i {
+.colored-btn {
     color: #E1A750;
+}
+
+.card-body-btns i:hover {
+    color: black
 }
 
 .feed-delete-form {
@@ -799,6 +803,11 @@ body {
     margin-right: -0.7rem;
 }
 
+.feed-pin-form {
+    /* border: 1px solid greenyellow; */
+    margin-top: 0.2rem;
+    margin-left: -0.7rem;
+}
 
 /* PROFILE ///////////////////////////*/
 
@@ -911,7 +920,7 @@ body {
 
 .container-section-post {
     max-width: 90vw;
-    height: 100%;
+    height: 34%;
     /* border: 1px solid blue; */
 }
 
@@ -919,7 +928,7 @@ body {
     /* border: 1px solid #E1A750; */
     display: flex;
     flex-direction: column;
-    height: 32%;
+    height: 100%;
     align-items: center;
     gap: 3rem;
     margin-bottom: 2rem;
@@ -933,7 +942,7 @@ body {
     gap: 1rem;
     align-items: center;
     height: 110%;
-    width: 85%;
+    width: 65%;
 }
 
 .post-img-top {
@@ -954,72 +963,52 @@ body {
 .section-row-post {
     display: flex;
     width: 100%;
-    height: 30%;
-    justify-content: space-between;
+    height: 50%;
     /* border: 1px solid blue; */
 }
 
-.section-second-column-post {
+.section-main-player-info {
     display: flex;
     flex-direction: column;
     /* justify-content: flex-start; */
-    width: 60%;
+    align-items: flex-start;
+    width: 50%;
     height: 100%;
-    /* border: 1px solid fuchsia; */
+    margin-left: 1rem;
+    /* border: 1px solid orange; */
     /* margin-bottom: 2rem; */
-    padding-left: 1rem;
+    /* padding-left: 1rem; */
     /* margin-bottom: 0.5rem; */
 }
 
-.section-second-column-post .section-each-extra-post {
-    /* display: flex;
-    align-items: flex-start;
-    justify-content: center; */
-    font-family: 'Jaldi', sans-serif;
-    color: #FFFFFF;
-    /* border: 1px solid blanchedalmond; */
-    text-align: left;
-    width: 70%;
-}
-
-.section-second-column-post .section-each-extra-post h1 {
-    display: flex;
-    align-items: flex-start;
+.section-main-player-info h1 {
     font-size: 3.5rem;
-    /* border: 1px dashed #E1A750; */
-    width: 100%;
-    height: 100%;
     text-transform: uppercase;
+    text-align: left;
 
 }
 
-.section-second-column-post .section-each-extra-post h2 {
-    display: flex;
-    /* justify-content: center;
-    align-items: center; */
+.section-main-player-info h2 {
     font-size: 1.7rem;
-    /* border: 1px dashed #E1A750; */
-    width: 100%;
-    height: 100%;
     text-transform: uppercase;
     text-align: left;
     color: #E1A750;
-    /* padding: 0.3rem; */
 }
 
-.section-person-post {
+.section-secondary-player-info {
     display: flex;
-    flex-direction: column;
+    justify-content: flex-end;
     align-items: center;
     font-family: 'Jaldi', sans-serif;
     color: #FFFFFF;
     /* border: 1px solid red; */
-    height: 65%;
+    height: 50%;
     width: 100%;
+    gap: 1rem;
 
 }
 
-.section-person-post-extra-one {
+/* .section-person-post-extra-one {
     display: flex;
     justify-content: flex-end;
     font-family: 'Jaldi', sans-serif;
@@ -1027,10 +1016,10 @@ body {
     width: 90%;
     height: 85%;
     gap: 1rem;
-}
+} */
 
 
-.section-person-post-extra-two {
+/* .section-person-post-extra-two {
     display: flex;
     justify-content: flex-end;
     font-family: 'Jaldi', sans-serif;
@@ -1038,7 +1027,8 @@ body {
     width: 90%;
     height: 85%;
     gap: 1rem;
-}
+} */
+
 
 .section-each-extra-post {
     display: flex;
@@ -1047,9 +1037,11 @@ body {
     align-content: center;
     width: 25%;
     text-align: center;
+    font-family: 'Jaldi', sans-serif;
+    color: #FFFFFF;
 }
 
-.section-person-post .section-each-extra-post h2 {
+.section-secondary-player-info .section-each-extra-post h2 {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1077,9 +1069,10 @@ body {
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
-    padding-right: 3.2rem;
+    /* padding-right: 3.2rem; */
+    padding-top: 0.5rem;
     /* border: 1px solid red; */
-    width: 40%;
+    width: 50%;
     gap: 1rem;
 }
 
@@ -1103,7 +1096,7 @@ body {
 }
 
 
-
+/* TABLE SECTION */
 
 .section-table-post {
     display: flex;
@@ -1114,6 +1107,7 @@ body {
     width: 100%;
     min-height: 15vh;
     margin-top: 2rem;
+    font-family: 'Jaldi', sans-serif;
 
 }
 
@@ -1127,32 +1121,24 @@ body {
     background: #E1A750;
 }
 
-.section-team-stats {
+.section-team-stats,
+.section-player-stats {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     /* border: 1px solid blue; */
-    font-family: 'Jaldi', sans-serif;
     width: 80%;
 }
 
-.team-stats-header {
+.team-stats-header,
+.player-stats-header {
     color: #FFFFFF;
     text-transform: uppercase;
     font-size: 2rem;
     line-height: 3rem;
     text-align: left;
     width: 100%;
-}
-
-.section-players-stats {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    /* border: 1px solid blue; */
-    width: 80%;
 }
 
 #add-row:hover,

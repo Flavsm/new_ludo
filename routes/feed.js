@@ -13,6 +13,6 @@ router.get("/feed/teams", ensureAuth, feedController.getTeams);
 router.get("/feed/leagues", ensureAuth, feedController.getLeagues);
  */
 
-router.delete("/deletePost/:id", feedController.deletePost);
+// router.delete("/deletePost/:id", feedController.deletePost);
 
 module.exports = router;

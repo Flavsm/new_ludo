@@ -1,8 +1,8 @@
-const express = require("express");
-const router = express.Router();
-const upload = require("../middleware/multer");
-const postsController = require("../controllers/posts"); //changed from posts to original
-const { ensureAuth, ensureGuest } = require("../middleware/auth");
+// const express = require("express");
+// const router = express.Router();
+// const upload = require("../middleware/multer");
+// const postsController = require("../controllers/posts"); //changed from posts to original
+// const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 //Post Routes - simplified for now
 
@@ -18,4 +18,4 @@ const { ensureAuth, ensureGuest } = require("../middleware/auth");
 // router.delete("/deletePost/:id", postsController.deletePost);
 
 
-module.exports = router;
+// module.exports = router;

@@ -9,12 +9,13 @@ const flash = require("express-flash");
 const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
-const postRoutes = require("./routes/posts");
+// const postRoutes = require("./routes/posts");
 const profileRoutes = require('./routes/profile');
 const feedRoutes = require('./routes/feed');
 const playersRoutes = require('./routes/players');
 const teamRoutes = require('./routes/team');
 const homeRoutes = require('./routes/home');
+const leagueRoutes = require('./routes/league');
 const { application } = require("express");
 const jsdom = require('jsdom');
 
@@ -63,12 +64,13 @@ app.use(flash());
 
 //Setup Routes For Which Server Is Listening
 app.use("/", mainRoutes);
-app.use("/post", postRoutes);
+// app.use("/post", postRoutes);
 app.use("/profile", profileRoutes);
-app.use("/feed", feedRoutes);
+// app.use("/feed", feedRoutes);
 app.use('/players', playersRoutes);
-app.use('/teams', teamRoutes)
-app.use('/home', homeRoutes)
+app.use('/teams', teamRoutes);
+app.use('/home', homeRoutes);
+app.use('/leagues', leagueRoutes);
 
 //Server Running
 app.listen(process.env.PORT, () => {

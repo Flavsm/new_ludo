@@ -1,6 +1,7 @@
 const { ObjectId } = require("mongodb");
 const Player = require("../models/Player");
 const User = require('../models/User');
+const League = require('../models/League')
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -19,7 +20,7 @@ module.exports = {
       await User.findOneAndUpdate(
         { _id: req.user.id },
         {
-          $push: { leagues: { 'league': req.body.league } }
+          $push: { leagues: { 'league': req.body.league.toUpperCase() } }
         },
         {
           new: true
@@ -41,7 +42,7 @@ module.exports = {
       await User.findOneAndUpdate(
         { _id: req.user.id },
         {
-          $push: { teams: { 'team': req.body.team } }
+          $push: { teams: { 'team': req.body.team.toUpperCase() } }
           // $push: { teams: { 'team': req.body.team.toLowerCase(), 'sport': req.body.sport.toLowerCase() } }
         },
         {
@@ -105,21 +106,5 @@ module.exports = {
       console.log(err);
     }
   },
-  /* deleteSomething: async (req, res) => {
-    try {
-
-      // Find post by id
-      //let post = await Post.findById({ _id: req.params.id });
-      const users = await User.find({ user: req.user.id })
-
-      // Delete post from db
-      await User.remove({ user: req.params });
-
-      console.log("Deleted something");
-      res.redirect(`/profile/{${req.params.id}`);
-    } catch (err) {
-      console.log(err);
-    }
-  } */
 }
 

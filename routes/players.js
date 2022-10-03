@@ -14,14 +14,17 @@ router.get("/:id", ensureAuth, playersController.getPlayer);
 //create a player from the players feed
 router.post('/createPlayer', upload.single("file"), playersController.createPlayer);
 
+//pin a player from the player feed
+router.put("/pinPlayers/:id", playersController.pinPlayers);
+
+//pin a player from the player profile
+router.put("/pinPlayer/:id", playersController.pinPlayer);
+
 //edit a player from the players feed
 router.put('/editPlayers/:id', playersController.editPlayers)
 
 //edit a player from the player profile
 router.put('/editPlayer/:id', playersController.editPlayer)
-
-//pin a player from the player profile
-router.put("/pinPlayer/:id", playersController.pinPlayer);
 
 //create new row on table
 router.post('/createRow/:id', playersController.createRow);
@@ -36,13 +39,5 @@ router.delete("/deleteRow/:id", playersController.deleteRow);
 router.delete("/deletePlayer/:id", playersController.deletePlayer);
 
 // router.post("/createPlayer", upload.single("file"), postsController.createPlayer);
-
-// router.post("/createTeam", postsController.createTeam);
-
-// router.post("/createLeague", postsController.createLeague);
-
-// router.put("/createTable/:id", postsController.createTable);
-
-
 
 module.exports = router;

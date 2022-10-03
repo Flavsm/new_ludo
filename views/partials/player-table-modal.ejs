@@ -1,4 +1,4 @@
-<div class="modal fade" id="team-edit-row" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+<div class="modal fade" id="player-add-row" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -7,52 +7,43 @@
                 <i class="fa-solid fa-square-xmark close" data-bs-dismiss="modal"></i>
             </div>
             <div class="modal-body">
-                <form action="/teams/editRow/<%= team.id %>?_method=PUT" enctype="application/x-www-form-urlencoded"
+                <form action="/players/createRow/<%= player.id %>" enctype="application/x-www-form-urlencoded"
                     method="POST">
                     <div class="mb-3">
-                        <label for="cell1" class="form-label">MATCHUP</label>
-                        <input type="text" class="form-control form-control-sm" id="cell1" name="cell1" placeholder=""
-                            value="<%= team.table.row.cell1 %>">
+                        <label for="cell1" class="form-label add-label"></label>
+                        <input type="text" class="form-control form-control-sm" id="cell1" name="cell1" placeholder="">
                     </div>
                     <div class="mb-3">
-                        <label for="cell2" class="form-label">W/L</label>
-                        <input type="text" class="form-control form-control-sm" id="cell2" name="cell2" placeholder=""
-                            value="<%= team.table.row.cell2 %>">
+                        <label for="cell2" class="form-label add-label"></label>
+                        <input type="text" class="form-control form-control-sm" id="cell2" name="cell2" placeholder="">
                     </div>
                     <div class="mb-3">
-                        <label for="cell3" class="form-label">PTS</label>
-                        <input type="text" class="form-control form-control-sm" id="cell3" name="cell3" placeholder="#"
-                            value="<%= team.table.row.cell3 %>">
+                        <label for="cell3" class="form-label add-label"></label>
+                        <input type="text" class="form-control form-control-sm" id="cell3" name="cell3" placeholder="#">
                     </div>
                     <div class="mb-3">
-                        <label for="cell4" class="form-label">REB</label>
-                        <input type="text" class="form-control form-control-sm" id="cell4" name="cell4" placeholder="#"
-                            value="<%= team.table.row.cell4 %>">
+                        <label for="cell4" class="form-label add-label"></label>
+                        <input type="text" class="form-control form-control-sm" id="cell4" name="cell4" placeholder="#">
                     </div>
                     <div class="mb-3">
-                        <label for="cell5" class="form-label">AST</label>
-                        <input type="text" class="form-control form-control-sm" id="cell5" name="cell5" placeholder="#"
-                            value="<%= team.table.row.cell5 %>">
+                        <label for="cell5" class="form-label add-label"></label>
+                        <input type="text" class="form-control form-control-sm" id="cell5" name="cell5" placeholder="#">
                     </div>
                     <div class="mb-3">
-                        <label for="cell6" class="form-label">STL</label>
-                        <input type="text" class="form-control form-control-sm" id="cell6" name="cell6" placeholder="#"
-                            value="<%= team.table.row.cell6 %>">
+                        <label for="cell6" class="form-label add-label"></label>
+                        <input type="text" class="form-control form-control-sm" id="cell6" name="cell6" placeholder="#">
                     </div>
                     <div class="mb-3">
-                        <label for="cell7" class="form-label">BLK</label>
-                        <input type="text" class="form-control form-control-sm" id="cell7" name="cell7" placeholder="#"
-                            value="<%= team.table.row.cell7 %>">
+                        <label for="cell7" class="form-label add-label"></label>
+                        <input type="text" class="form-control form-control-sm" id="cell7" name="cell7" placeholder="#">
                     </div>
                     <div class="mb-3">
-                        <label for="cell8" class="form-label">TOV</label>
-                        <input type="text" class="form-control form-control-sm" id="cell8" name="cell8" placeholder="#"
-                            value="<%= team.table.row.cell8%>">
+                        <label for="cell8" class="form-label add-label"></label>
+                        <input type="text" class="form-control form-control-sm" id="cell8" name="cell8" placeholder="#">
                     </div>
                     <div class="mb-3">
-                        <label for="cell9" class="form-label">PF</label>
-                        <input type="text" class="form-control form-control-sm" id="cell9" name="cell9" placeholder="#"
-                            value="<%= team.table.row.cell9 %>">
+                        <label for="cell9" class="form-label add-label"></label>
+                        <input type="text" class="form-control form-control-sm" id="cell9" name="cell9" placeholder="#">
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary submit" value="Upload">Submit</button>

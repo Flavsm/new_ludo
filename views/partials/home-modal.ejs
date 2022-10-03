@@ -82,11 +82,6 @@
             <input type="text" class="form-control form-control-sm" id="team" name="team" placeholder="Team">
           </div>
           <div class="mb-3">
-            <label for="numberofplayers" class="form-label">Number of Players</label>
-            <input type="text" class="form-control form-control-sm" id="numberofplayers" name="numberofplayers"
-              placeholder="#">
-          </div>
-          <div class="mb-3">
             <label for="sport" class="form-label">Sport</label>
             <select class="form-select form-select-sm" id="sport" name="sport" autocomplete="off">
               <option selected>Select</option>
@@ -101,11 +96,16 @@
             <div class="row">
               <div class="col">
                 <label for="win" class="form-label">Win</label>
-                <input type="text" class="form-control win-loss-input" id="win" name="win" placeholder="#">
+                <input type="text" class="form-control number-input" id="win" name="win" placeholder="#">
               </div>
               <div class="col">
                 <label for="loss" class="form-label">Loss</label>
-                <input type="text" class="form-control win-loss-input" id="loss" name="loss" placeholder="#">
+                <input type="text" class="form-control number-input" id="loss" name="loss" placeholder="#">
+              </div>
+              <div class="col">
+                <label for="numberofplayers" class="form-label"># of Players</label>
+                <input type="text" class="form-control number-input" id="numberofplayers" name="numberofplayers"
+                  placeholder="#">
               </div>
             </div>
           </div>
@@ -130,11 +130,6 @@
             <input type="text" class="form-control form-control-sm" id="league" name="league" placeholder="League">
           </div>
           <div class="mb-3">
-            <label for="numberofteams" class="form-label">Number of Teams</label>
-            <input type="text" class="form-control form-control-sm" id="numberofteams" name="numberofteams"
-              placeholder="#">
-          </div>
-          <div class="mb-3">
             <label for="sport" class="form-label">Sport</label>
             <select class="form-select form-select-sm" id="sport" name="sport">
               <option selected>Select</option>
@@ -144,6 +139,11 @@
               <option>Hockey</option>
               <option>Soccer</option>
             </select>
+          </div>
+          <div class="mb-3">
+            <label for="numberofteams" class="form-label">Number of Teams</label>
+            <input type="text" class="form-control form-control-sm" id="numberofteams" name="numberofteams"
+              placeholder="#">
           </div>
           <!-- <div class="mb-3">
             <div class="row">

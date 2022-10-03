@@ -3,7 +3,7 @@
   <main class="container container-post">
     <section class="container-section-post">
       <section class="section-profile-post">
-        <%if(team.user==user.id || user.league.map(em=> em.league).includes(el.team)){ %>
+        <%if(league.user==user.id || user.league.map(em=> em.league).includes(el.team)){ %>
           <section class="nav-profile-post">
             <img
               src="https://res.cloudinary.com/dprkasf7b/image/upload/c_thumb,w_200,g_face/v1664241356/soccer_t6mqfe.jpg"
@@ -13,17 +13,17 @@
                 <section class="section-second-column-post">
                   <section class="section-each-extra-post">
                     <h1>
-                      <%= team.team%>
+                      <%= league.league%>
                     </h1>
                   </section>
                   <section class="section-each-extra-post">
                     <h2>
-                      <%= team.sport %>
+                      <%= league.sport %>
                     </h2>
                   </section>
                   <section class="section-each-extra-post">
                     <h2>
-                      #<%= team.numberofplayers %>
+                      #<%= league.numberofplayers %>
                     </h2>
                   </section>
                 </section>
@@ -36,7 +36,7 @@
                   <form class="col-1" action="/teams/pinTeam/<%= team.id %>?_method=PUT" method="POST">
                     <button class="btn" type="submit" data-bs-toggle="tooltip" data-bs-placement="top"
                       data-bs-title="Pin it">
-                      <% if (team.pinned==true ) { %>
+                      <% if (league.pinned==true ) { %>
                         <i class="fa-solid fa-thumbtack fa-xl pinned-btn"></i>
                         <% } else { %>
                           <i class="fa-solid fa-thumbtack fa-xl unpinned-btn"></i>
@@ -66,7 +66,7 @@
                   </section> -->
                 </section>
                 <section class="section-person-post-extra-two">
-                  <section class="section-each-extra-post">
+                  <!-- <section class="section-each-extra-post">
                     <h2>
                       <%= team.win %>-<%= team.loss%> | <%=
                             `.${(Number(team.win)/(Number(team.win)+Number(team.loss))).toFixed(3).toString().split('.')[1]}`
@@ -74,19 +74,19 @@
                     </h2>
                     <span>w-l | pct </span>
 
-                  </section>
+                  </section> -->
                   <section class="section-each-extra-post">
 
                     <h2>
-                      <%= team.sport %>
+                      <%= league.sport %>
                     </h2>
                     <span>sport</span>
                   </section>
                   <section class="section-each-extra-post">
                     <h2>
-                      <%= team.numberofplayers %>
+                      <%= team.numberofteams %>
                     </h2>
-                    <span># of players</span>
+                    <span># of teams</span>
                   </section>
                 </section>
               </section>

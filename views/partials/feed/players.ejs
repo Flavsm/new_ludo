@@ -44,16 +44,26 @@
                                     <form action="/players/deletePlayer/<%= el._id %>?_method=DELETE" method="POST"
                                         class="feed-delete-form">
                                         <button class="btn feed-delete-btn" type="submit">
-                                            <i class="fa-regular fa-trash-can fa-lg"></i>
+                                            <i class="fa-regular fa-trash-can fa-lg colored-btn"></i>
                                         </button>
                                     </form>
+                                    <button class='btn' type="button" data-bs-toggle="modal"
+                                        data-bs-target="#edit-players" id="editBtn">
+                                        <i class="fa-regular fa-pen-to-square fa-lg colored-btn"></i>
+                                    </button>
                                     <% } %>
-                                        <button class='btn' type="button" data-bs-toggle="modal"
-                                            data-bs-target="#edit-players" id="editBtn">
-                                            <i class="fa-regular fa-pen-to-square fa-lg"></i>
-                                        </button>
-
-                                        <a href="/players/<%= el._id%>"> <i class="fa-solid fa-eye fa-lg"></i>
+                                        <form action="/players/pinPlayers/<%= el._id %>?_method=PUT" method="POST"
+                                            class="feed-pin-form">
+                                            <button class="btn" type="submit">
+                                                <% if (el.pinned==true ) { %>
+                                                    <i class="fa-solid fa-thumbtack fa-lg pinned-btn"></i>
+                                                    <% } else { %>
+                                                        <i class="fa-solid fa-thumbtack fa-lg unpinned-btn"></i>
+                                                        <% } %>
+                                            </button>
+                                        </form>
+                                        <a href="/players/<%= el._id%>">
+                                            <i class="fa-solid fa-eye fa-lg colored-btn"></i>
                                         </a>
                             </section>
                         </section>
