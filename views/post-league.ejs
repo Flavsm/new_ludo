@@ -7,7 +7,7 @@
           <section class="nav-profile-post">
             <img
               src="https://res.cloudinary.com/dprkasf7b/image/upload/c_thumb,w_200,g_face/v1664241356/soccer_t6mqfe.jpg"
-              class="post-img-top img-fluid"" alt=" ...">
+              class="post-img-top img-fluid" alt=" ...">
             <section class="section-column-post">
               <section class="section-row-post">
                 <section class="section-second-column-post">
@@ -28,12 +28,12 @@
                   </section>
                 </section>
                 <section class="section-icons-post">
-                  <form class="col-1" action="/teams/editTeam/<%= team.id %>?_method=PUT" method="POST">
+                  <form class="col-1" action="/leagues/editLeague/<%= league.id %>?_method=PUT" method="POST">
                     <button class="btn" type="submit">
                       <i class="fa-regular fa-pen-to-square fa-xl post-btn"></i>
                     </button>
                   </form>
-                  <form class="col-1" action="/teams/pinTeam/<%= team.id %>?_method=PUT" method="POST">
+                  <form class="col-1" action="/leagues/pinLeague/<%= league.id %>?_method=PUT" method="POST">
                     <button class="btn" type="submit" data-bs-toggle="tooltip" data-bs-placement="top"
                       data-bs-title="Pin it">
                       <% if (league.pinned==true ) { %>
@@ -43,7 +43,7 @@
                           <% } %>
                     </button>
                   </form>
-                  <form action="/teams/deleteTeam/<%= team.id %>?_method=DELETE" method="POST" class="col-1">
+                  <form action="/leagues/deleteLeague/<%= league.id %>?_method=DELETE" method="POST" class="col-1">
                     <button class="btn" type="submit">
                       <i class="fa-regular fa-trash-can fa-xl post-btn"></i>
                     </button>
@@ -66,15 +66,6 @@
                   </section> -->
                 </section>
                 <section class="section-person-post-extra-two">
-                  <!-- <section class="section-each-extra-post">
-                    <h2>
-                      <%= team.win %>-<%= team.loss%> | <%=
-                            `.${(Number(team.win)/(Number(team.win)+Number(team.loss))).toFixed(3).toString().split('.')[1]}`
-                            %>%
-                    </h2>
-                    <span>w-l | pct </span>
-
-                  </section> -->
                   <section class="section-each-extra-post">
 
                     <h2>
@@ -84,7 +75,7 @@
                   </section>
                   <section class="section-each-extra-post">
                     <h2>
-                      <%= team.numberofteams %>
+                      <%= league.numberoftems %>
                     </h2>
                     <span># of teams</span>
                   </section>
@@ -96,14 +87,13 @@
       </section>
       <section class="section-table-post">
 
-        <!-- <form action="/post/createTable/<%= team.id %>?_method=PUT" class="col-1" enctype="multipart/form-data"
+        <!-- <form action="/leagues/createTable/<%= league.id %>?_method=PUT" class="col-1" enctype="multipart/form-data"
           method="POST">
           <button class="btn table-add" type="submit">
             <i class="fa-solid fa-circle-plus"></i>
           </button>
          
         </form> -->
-        <%- include('partials/bootstrap-table') -%>
 
       </section>
       <%}%>

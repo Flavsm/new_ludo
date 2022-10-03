@@ -15,27 +15,26 @@
               <section class="recently-added-container">
                 <ul class="list-my-leagues recently-added-list">
                   <!-- limits the length of the recently added array to 4 and finds only the posts entried by the user -->
-                  <% user.entries.reverse().slice(0,4).forEach(el=> { %>
-
-                    <% let obj=players.concat(teams, leagues).filter(em=> em._id == el) %>
-                      <% if (obj.length> 0) { %>
+                  <% let arr=players.filter(el=> el.user == user.id).concat(teams.filter(el => el.user == user.id),
+                    leagues.filter(el => el.user == user.id)).sort((a,b) => b.createdAt-a.createdAt).slice(0,4) %>
+                    <% if (arr.length> 0) { %>
+                      <% arr.forEach(e=> { %>
                         <li class="item-my-leagues add-league">
-                          <% if(obj.player) { %>
-                            <a href="players/<%= obj._id%>">
-                              <%= obj.player %>
+                          <% if(e.player) { %>
+                            <a href="players/<%= e.id%>">
+                              <%= e.player %>
                             </a>
-                            <% } else if(obj.numberofplayers){ %>
-                              <a href="teams/<%= obj._id%>">
-                                <%= obj.team %>
+                            <% } else if(e.numberofplayers){ %>
+                              <a href="teams/<%= e.id%>">
+                                <%= e.team %>
                               </a>
                               <% } else { %>
-                                <a href="leagues/<%= obj._id%>">
-                                  <%= obj.league %>
+                                <a href="leagues/<%= e.id%>">
+                                  <%= e.league %>
                                 </a>
-                                <% }} %>
+                                <% } %>
                         </li>
-                        <% }) %>
-
+                        <% })} %>
 
                 </ul>
               </section>
