@@ -46,16 +46,17 @@
           <ul class="profile-third-list">
             <li class="profile-list-item">
               <% if (user.leagues.length> 0) { %>
-                <% user.leagues.forEach(el=> { %>
-                  <form class="" action="/profile/deleteLeague/<%= user.id %>?_method=DELETE" method="POST">
-                    <button class="btn  profile-delete-btns" type="submit" name="league" value="<%= el.league%>">
-                      <%= el.league %>
-                        <i class="fa-solid fa-circle-xmark"></i>
-                    </button>
+                <% console.log(user.leagues) %>
+                  <% user.leagues.forEach(el=> { %>
+                    <form class="" action="/profile/deleteLeague/<%= user.id %>?_method=DELETE" method="POST">
+                      <button class="btn  profile-delete-btns" type="submit" name="league" value="<%= el.league%>">
+                        <%= el.league %>
+                          <i class="fa-solid fa-circle-xmark"></i>
+                      </button>
 
-                  </form>
-                  <% })} else { %>
-                    <h2 class="profile-headings"> N/A </h2>
+                    </form>
+                    <% })} else { %>
+                      <h2 class="profile-headings"> N/A </h2>
             </li>
             <% } %>
               <li class="profile-item-form-button">

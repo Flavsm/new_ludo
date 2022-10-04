@@ -3,14 +3,14 @@
   <main class="container container-post">
     <section class="container-section-post">
       <section class="section-profile-post">
-        <%if(league.user==user.id || user.league.map(em=> em.league).includes(el.team)){ %>
+        <%if(league.user==user.id || user.leagues.map(em=> em.league).includes(league.league)){ %>
           <section class="nav-profile-post">
             <img
               src="https://res.cloudinary.com/dprkasf7b/image/upload/c_thumb,w_200,g_face/v1664241356/soccer_t6mqfe.jpg"
               class="post-img-top img-fluid" alt=" ...">
             <section class="section-column-post">
               <section class="section-row-post">
-                <section class="section-second-column-post">
+                <section class="section-main-player-info">
                   <section class="section-each-extra-post">
                     <h1>
                       <%= league.league%>
@@ -28,12 +28,12 @@
                   </section>
                 </section>
                 <section class="section-icons-post">
-                  <form class="col-1" action="/leagues/editLeague/<%= league.id %>?_method=PUT" method="POST">
+                  <form action="/leagues/editLeague/<%= league.id %>?_method=PUT" method="POST">
                     <button class="btn" type="submit">
-                      <i class="fa-regular fa-pen-to-square fa-xl post-btn"></i>
+                      <i class="fa-regular fa-pen-to-square fa-xl post-btn hover-top"></i>
                     </button>
                   </form>
-                  <form class="col-1" action="/leagues/pinLeague/<%= league.id %>?_method=PUT" method="POST">
+                  <form action="/leagues/pinLeague/<%= league.id %>?_method=PUT" method="POST">
                     <button class="btn" type="submit" data-bs-toggle="tooltip" data-bs-placement="top"
                       data-bs-title="Pin it">
                       <% if (league.pinned==true ) { %>
@@ -43,16 +43,16 @@
                           <% } %>
                     </button>
                   </form>
-                  <form action="/leagues/deleteLeague/<%= league.id %>?_method=DELETE" method="POST" class="col-1">
+                  <form action="/leagues/deleteLeague/<%= league.id %>?_method=DELETE" method="POST">
                     <button class="btn" type="submit">
-                      <i class="fa-regular fa-trash-can fa-xl post-btn"></i>
+                      <i class="fa-regular fa-trash-can fa-xl post-btn hover-top"></i>
                     </button>
                   </form>
                 </section>
               </section>
-              <section class="section-person-post">
-                <section class="section-person-post-extra-one">
-                  <!-- <section class="section-each-extra-post">
+              <section class="section-secondary-player-info">
+                <!-- <section class="section-person-post-extra-one">
+                  <section class="section-each-extra-post">
                     <h2>
                       <%= %>
                     </h2>
@@ -63,22 +63,22 @@
                       <%= %>
                     </h2>
                     <span>weight</span>
-                  </section> -->
+                  </section>
+                </section> -->
+                <!-- <section class="section-person-post-extra-two">
+                 
+                </section> -->
+                <section class="section-each-extra-post">
+                  <h2>
+                    <%= league.sport %>
+                  </h2>
+                  <span>sport</span>
                 </section>
-                <section class="section-person-post-extra-two">
-                  <section class="section-each-extra-post">
-
-                    <h2>
-                      <%= league.sport %>
-                    </h2>
-                    <span>sport</span>
-                  </section>
-                  <section class="section-each-extra-post">
-                    <h2>
-                      <%= league.numberoftems %>
-                    </h2>
-                    <span># of teams</span>
-                  </section>
+                <section class="section-each-extra-post">
+                  <h2>
+                    <%= league.numberofteams %>
+                  </h2>
+                  <span># of teams</span>
                 </section>
               </section>
             </section>
@@ -86,15 +86,6 @@
 
       </section>
       <section class="section-table-post">
-
-        <!-- <form action="/leagues/createTable/<%= league.id %>?_method=PUT" class="col-1" enctype="multipart/form-data"
-          method="POST">
-          <button class="btn table-add" type="submit">
-            <i class="fa-solid fa-circle-plus"></i>
-          </button>
-         
-        </form> -->
-
       </section>
       <%}%>
         </div>

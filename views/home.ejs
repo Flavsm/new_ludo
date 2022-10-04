@@ -41,7 +41,7 @@
             </li>
           </ul>
         </section>
-        <section class="section-my-home section-my-leagues">
+        <section class="section-my-home">
           <h2>pinned</h2>
           <ul class="list-my-leagues list-pinned">
             <% players.concat(teams, leagues).filter(el=> el.pinned).forEach(em => { %>
@@ -63,7 +63,7 @@
           </ul>
         </section>
       </section>
-      <section class="other-section"></section>
+      <!-- <section class="other-section"></section> -->
     </section>
   </main>
   <%- include('partials/home-modal') -%>

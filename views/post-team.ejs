@@ -3,7 +3,7 @@
   <main class="container container-post">
     <section class="container-section-post">
       <section class="section-profile-post">
-        <%if(team.user==user.id || user.teams.includes(team.team)){ %>
+        <%if(team.user==user.id || user.teams.map(el=> el.team).includes(team.team)){ %>
           <section class="nav-profile-post">
             <img
               src="https://res.cloudinary.com/dprkasf7b/image/upload/c_thumb,w_200,g_face/v1664241356/soccer_t6mqfe.jpg"
@@ -65,9 +65,13 @@
                 </section> -->
                 <section class="section-each-extra-post">
                   <h2>
-                    <%= team.win %>-<%= team.loss%> | <%=
-                          `.${(Number(team.win)/(Number(team.win)+Number(team.loss))).toFixed(3).toString().split('.')[1]}`
-                          %>%
+                    <% if (team.win==='' || team.loss==='' ) {%>
+                      0-0
+                      <% } else { %>
+                        <%= team.win %>-<%= team.loss%> | <%=
+                              `.${(Number(team.win)/(Number(team.win)+Number(team.loss))).toFixed(3).toString().split('.')[1]}`
+                              %>%
+                              <% } %>
                   </h2>
                   <span>w-l | pct </span>
                 </section>

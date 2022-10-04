@@ -161,7 +161,7 @@ module.exports = {
             const addIdToUser = await User.findOneAndUpdate(
                 { _id: req.user.id },
                 {
-                    $push: { leagues: { 'league': newLeague.team }, entries: newLeague.id, leagueEntries: newLeague.id },
+                    $push: { leagues: { 'league': newLeague.league }, entries: newLeague.id, leagueEntries: newLeague.id },
                 }
             )
             /* console.log(req.user) */ //gets the user model

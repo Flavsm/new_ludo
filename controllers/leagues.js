@@ -62,7 +62,7 @@ module.exports = {
 
             /* req.user.entries.push(newPost.id) */
             // console.log(req.body)
-
+            console.log(newLeague.league)
             const addIdToUser = await User.findOneAndUpdate(
                 { _id: req.user.id },
                 {
@@ -83,7 +83,7 @@ module.exports = {
                 { _id: req.params.id },
                 [{
                     "$set": {
-                        'team': req.body.team.toUpperCase(),
+                        'league': req.body.league.toUpperCase(),
                         "sport": req.body.sport.toUpperCase(),
                         'numberofteams': req.body.numberofteams,
                         'notes': req.body.notes.toUpperCase()
@@ -102,7 +102,7 @@ module.exports = {
                 { _id: req.params.id },
                 [{
                     "$set": {
-                        'team': req.body.team.toUpperCase(),
+                        'league': req.body.league.toUpperCase(),
                         "sport": req.body.sport.toUpperCase(),
                         'numberofteams': req.body.numberofteams,
                         'notes': req.body.notes.toUpperCase()

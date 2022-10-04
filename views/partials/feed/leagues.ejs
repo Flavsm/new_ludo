@@ -1,16 +1,14 @@
 <section class="feed-section-add">
-    <form class="" action="" method="POST">
-        <button class="btn profile-btns" type="submit">
-            add leagues
-            <i class="fa-solid fa-circle-plus fa-lg"></i>
-        </button>
-    </form>
+    <button class="btn profile-btns" type="submit" data-bs-toggle="modal" data-bs-target="#add-league">
+        add league
+        <i class="fa-solid fa-circle-plus fa-lg"></i>
+    </button>
 </section>
 <section class="section-feed">
     <section class="section-list-feed">
         <ul class="list-feed">
             <% leagues.forEach(el=> { %>
-                <% if(el.user==user.id) { %>
+                <% if(el.user==user.id || user.leagues.map(el=> el.league).includes(el.league)) { %>
                     <li class="item-list-feed">
                         <section class="card">
                             <img src="https://img.favpng.com/14/2/16/logo-football-team-png-favpng-tzdASz0r6s1juSpCZVyq4VZJm.jpg"

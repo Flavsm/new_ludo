@@ -505,21 +505,16 @@ body {
     /* border: 1px solid wheat; */
 }
 
-.pinned-home {
+/* .pinned-home {
     color: #E1A750;
-}
+} */
 
 .section-my-home {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     min-height: 10rem;
-    width: 100%;
-    /* border: 1px solid black; */
-}
-
-
-.section-my-leagues {
+    /* width: 100%; */
     max-width: 90vw;
     /* border: 1px solid black; */
 }
@@ -588,7 +583,6 @@ body {
     width: 15%;
     min-width: 12rem;
     border: 2px dashed #E1A750;
-
 }
 
 .add-league .btn,
@@ -605,10 +599,10 @@ body {
     font-size: 2.5rem;
 }
 
-.other-section {
+/* .other-section {
     display: flex;
     height: 90vh;
-}
+} */
 
 .section-my-home h2 {
     color: #E1A750;

@@ -51,9 +51,13 @@
               <section class="section-secondary-player-info">
                 <section class="section-each-extra-post">
                   <h2>
-                    <%= player.win %>-<%= player.loss%> | <%=
-                          `.${(Number(player.win)/(Number(player.win)+Number(player.loss))).toFixed(3).toString().split('.')[1]}`
-                          %>%
+                    <% if (player.win==='' || player.loss==='' ) {%>
+                      0-0
+                      <% } else { %>
+                        <%= player.win %>-<%= player.loss%> | <%=
+                              `.${(Number(player.win)/(Number(player.win)+Number(player.loss))).toFixed(3).toString().split('.')[1]}`
+                              %>%
+                              <% } %>
                   </h2>
                   <span>w-l | pct </span>
                 </section>
