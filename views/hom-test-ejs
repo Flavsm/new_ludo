@@ -1,0 +1,71 @@
+<main class="home-main-container">
+    <section class="home-section-container">
+        <section class="home-section">
+            <section class="section-add-something section-recent-pinned">
+                <h2>add something</h2>
+                <section class="section-recently-added">
+                    <ul class="list-recent list-recent-pinned">
+                        <li class="each-item add-league item-modal" data-bs-toggle="modal" data-bs-target="#add-data">
+                            <button type="button" class="btn">
+                                <i class="fa-solid fa-circle-plus fa-2xl"></i>
+                            </button>
+                        </li>
+                        <h2 class="recently-heading">recently added</h2>
+                        <li class="recently-added-item">
+                            <section class="recently-added-container">
+                                <ul class="recently-added-list">
+                                    <!-- limits the length of the recently added array to 4 and finds only the posts entried by the user -->
+                                    <% let arr=players.filter(el=> el.user == user.id).concat(teams.filter(el => el.user
+                                        == user.id),
+                                        leagues.filter(el => el.user == user.id)).sort((a,b) =>
+                                        b.createdAt-a.createdAt).slice(0,4) %>
+                                        <% if (arr.length> 0) { %>
+                                            <% arr.forEach(e=> { %>
+                                                <li class="each-item add-league">
+                                                    <% if(e.player) { %>
+                                                        <a href="players/<%= e.id%>">
+                                                            <%= e.player %>
+                                                        </a>
+                                                        <% } else if(e.numberofplayers){ %>
+                                                            <a href="teams/<%= e.id%>">
+                                                                <%= e.team %>
+                                                            </a>
+                                                            <% } else { %>
+                                                                <a href="leagues/<%= e.id%>">
+                                                                    <%= e.league %>
+                                                                </a>
+                                                                <% } %>
+                                                </li>
+                                                <% })} %>
+
+                                </ul>
+                            </section>
+                        </li>
+                    </ul>
+                </section>
+
+            </section>
+            <section class="section-pinned section-recent-pinned">
+                <h2>pinned</h2>
+                <ul class="list-recent-pinned list-pinned">
+                    <% players.concat(teams, leagues).filter(el=> el.pinned).forEach(em => { %>
+                        <li class="each-item add-league">
+                            <% if (em.player) { %>
+                                <a href="/players/<%= em.id%>">
+                                    <%= em.player %>
+                                </a>
+                                <% } else if (em.numberofplayers) { %>
+                                    <a href="/teams/<%= em.id%>">
+                                        <%= em.team %>
+                                    </a>
+                                    <% } else { %>
+                                        <a href="/leagues/<%= em.id%>">
+                                            <%= em.league %>
+                                        </a>
+                                        <% }}) %>
+                        </li>
+                </ul>
+            </section>
+        </section>
+    </section>
+</main>

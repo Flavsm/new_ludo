@@ -25,6 +25,9 @@ router.put("/pinTeams/:id", teamController.pinTeams);
 //pin a team from the team profile
 router.put("/pinTeam/:id", teamController.pinTeam);
 
+//pin a team from the team profile
+router.put("/addToPinned/:id", teamController.addToPinned);
+
 //create new row on table
 router.post('/createRow/:id', teamController.createRow);
 

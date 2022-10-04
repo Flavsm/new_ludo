@@ -28,21 +28,34 @@
                       <i class="fa-regular fa-pen-to-square fa-xl post-btn hover-top"></i>
                     </button>
                   </form>
-                  <form action="/teams/pinTeam/<%= team.id %>?_method=PUT" method="POST">
-                    <button class="btn" type="submit" data-bs-toggle="tooltip" data-bs-placement="top"
-                      data-bs-title="Pin it">
-                      <% if (team.pinned==true ) { %>
-                        <i class="fa-solid fa-thumbtack fa-xl pinned-btn"></i>
-                        <% } else { %>
-                          <i class="fa-solid fa-thumbtack fa-xl unpinned-btn"></i>
-                          <% } %>
-                    </button>
-                  </form>
-                  <form action="/teams/deleteTeam/<%= team.id %>?_method=DELETE" method="POST">
-                    <button class="btn" type="submit">
-                      <i class="fa-regular fa-trash-can fa-xl post-btn hover-top"></i>
-                    </button>
-                  </form>
+                  <% if (team.user==user.id ) { %>
+                    <form action="/teams/pinTeam/<%= team.id %>?_method=PUT" method="POST">
+                      <button class="btn" type="submit" data-bs-toggle="tooltip" data-bs-placement="top"
+                        data-bs-title="Pin it">
+                        <% if (team.pinned==true ) { %>
+                          <i class="fa-solid fa-thumbtack fa-xl pinned-btn"></i>
+                          <% } else { %>
+                            <i class="fa-solid fa-thumbtack fa-xl unpinned-btn"></i>
+                            <% } %>
+                      </button>
+                    </form>
+                    <% } else { %>
+                      <form action="/teams/addToPinned/<%= team.id %>?_method=PUT" method="POST">
+                        <button class="btn" type="submit" data-bs-toggle="tooltip" data-bs-placement="top"
+                          data-bs-title="Pin it">
+                          <% if (team.pinned==true ) { %>
+                            <i class="fa-solid fa-thumbtack fa-xl pinned-btn"></i>
+                            <% } else { %>
+                              <i class="fa-solid fa-thumbtack fa-xl unpinned-btn"></i>
+                              <% } %>
+                        </button>
+                      </form>
+                      <% } %>
+                        <form action="/teams/deleteTeam/<%= team.id %>?_method=DELETE" method="POST">
+                          <button class="btn" type="submit">
+                            <i class="fa-regular fa-trash-can fa-xl post-btn hover-top"></i>
+                          </button>
+                        </form>
                 </section>
               </section>
               <section class="section-secondary-player-info">

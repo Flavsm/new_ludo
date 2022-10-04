@@ -9,6 +9,7 @@ const UserSchema = new mongoose.Schema({
   leagues: [],
   teams: [],
   teamEntries: [],
+  pinned: []
 });
 
 // Password hash middleware.

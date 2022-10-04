@@ -1,70 +1,83 @@
 <%- include('partials/headers/header-menu') -%>
-  <main class="container">
-    <section class="container-home">
-      <section class="container-main-home">
-        <section class="section-my-home section-my-leagues">
-          <h2>add something</h2>
-          <ul class="list-my-leagues list-add-recently">
-            <li class="item-my-leagues add-league item-modal" data-bs-toggle="modal" data-bs-target="#add-data">
-              <button type="button" class="btn">
-                <i class="fa-solid fa-circle-plus fa-2xl"></i>
-              </button>
-            </li>
-            <h2 class="recently-heading">recently added</h2>
-            <li class="recently-added-item">
-              <section class="recently-added-container">
-                <ul class="list-my-leagues recently-added-list">
-                  <!-- limits the length of the recently added array to 4 and finds only the posts entried by the user -->
-                  <% let arr=players.filter(el=> el.user == user.id).concat(teams.filter(el => el.user == user.id),
-                    leagues.filter(el => el.user == user.id)).sort((a,b) => b.createdAt-a.createdAt).slice(0,4) %>
-                    <% if (arr.length> 0) { %>
-                      <% arr.forEach(e=> { %>
-                        <li class="item-my-leagues add-league">
-                          <% if(e.player) { %>
-                            <a href="players/<%= e.id%>">
-                              <%= e.player %>
-                            </a>
-                            <% } else if(e.numberofplayers){ %>
-                              <a href="teams/<%= e.id%>">
-                                <%= e.team %>
-                              </a>
-                              <% } else { %>
-                                <a href="leagues/<%= e.id%>">
-                                  <%= e.league %>
-                                </a>
-                                <% } %>
-                        </li>
-                        <% })} %>
 
-                </ul>
-              </section>
-            </li>
-          </ul>
-        </section>
-        <section class="section-my-home">
-          <h2>pinned</h2>
-          <ul class="list-my-leagues list-pinned">
-            <% players.concat(teams, leagues).filter(el=> el.pinned).forEach(em => { %>
-              <li class="item-my-leagues add-league">
-                <% if (em.player) { %>
-                  <a href="/players/<%= em.id%>">
-                    <%= em.player %>
+  <main class="home-main-container">
+    <section class="home-section-container">
+      <section class="section-top section-column">
+        <h2 class="home-heading">add something</h2>
+        <ul class="list-recents list-row">
+          <li class="add-btn" data-bs-toggle="modal" data-bs-target="#add-data">
+            <button type="button" class="btn">
+              <i class="fa-solid fa-circle-plus fa-2xl"></i>
+            </button>
+          </li>
+          <li class="heading-item">
+            <h2 class="home-heading">recently added</h2>
+          </li>
+          <!-- limits the length of the recently added array to 4 and finds only the posts entried by the user -->
+          <% let arr=players.filter(el=> el.user == user.id).concat(teams.filter(el => el.user == user.id),
+            leagues.filter(el => el.user == user.id)).sort((a,b) => b.createdAt-a.createdAt).slice(0,4) %>
+            <% if (arr.length> 0) { %>
+              <% arr.forEach(e=> { %>
+                <% if(e.player) { %>
+                  <a href="players/<%= e.id%>" class="each-item recent-item">
+                    <li class="item-link">
+                      <%= e.player %>
+                        <h2 class="home-heading">player</h2>
+                    </li>
                   </a>
-                  <% } else if (em.numberofplayers) { %>
-                    <a href="/teams/<%= em.id%>">
-                      <%= em.team %>
+                  <% } else if(e.team){ %>
+                    <a href="teams/<%= e.id%>" class="each-item recent-item">
+                      <li class="item-link">
+                        <%= e.team %>
+                          <h2 class="home-heading">team</h2>
+                      </li>
                     </a>
                     <% } else { %>
-                      <a href="/leagues/<%= em.id%>">
-                        <%= em.league %>
+                      <a href="leagues/<%= e.id%>" class="each-item recent-item">
+                        <li class="item-link">
+                          <%= e.league %>
+                            <h2 class="home-heading">league</h2>
+                        </li>
                       </a>
-                      <% }}) %>
-              </li>
-          </ul>
-        </section>
+                      <% } %>
+                        <% })} %>
+        </ul>
       </section>
-      <!-- <section class="other-section"></section> -->
+      <section class="section-bottom section-column">
+        <h2 class="home-heading pinned-heading">pinned</h2>
+        <ul class="list-pinned list-row">
+          <!-- <% console.log(players.concat(teams, leagues).filter(el=> el.pinned)) %> -->
+          <% players.concat(teams, leagues).filter(el=> el.pinned).forEach(em => { %>
+
+            <% if (em.player) { %>
+              <a href="/players/<%= em.id%>" class="each-item pinned-item">
+                <li class="item-link">
+                  <%= em.player %>
+                    <h2 class="home-heading">player</h2>
+                </li>
+              </a>
+
+              <% } else if (em.team) { %>
+                <a href="/teams/<%= em.id%>" class="each-item pinned-item">
+                  <li class="item-link">
+                    <%= em.team %>
+                      <h2 class="home-heading">team</h2>
+                  </li>
+                </a>
+                <% } else { %>
+                  <a href="/leagues/<%= em.id%>" class="each-item pinned-item">
+                    <li class="item-link">
+                      <%= em.league %>
+                        <h2 class="home-heading">league</h2>
+                    </li>
+                  </a>
+                  <% }}) %>
+
+        </ul>
+      </section>
     </section>
+
   </main>
+
   <%- include('partials/home-modal') -%>
     <%- include('partials/footer') -%>

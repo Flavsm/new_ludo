@@ -149,6 +149,39 @@ module.exports = {
             console.log(err);
         }
     },
+    addToPinned: async (req, res) => {
+        try {
+
+            let obj = await Team.findById(req.params.id)
+            let user = await User.findById(req.user)
+
+
+            const addPinnedToUser = await User.updateOne(
+                { _id: req.user.id },
+                {
+                    $push: { pinned: obj },
+                }, {
+                new: true
+            }
+            )
+
+            await User.findOneAndUpdate(
+                { _id: req.user.id },
+                [{
+                    "$set": { pinned: { "pinned": { "$eq": [false, "$pinned"] } } }
+                }]
+            );
+
+
+            console.log(obj)
+            console.log(user)
+
+            console.log("Add pinned");
+            res.redirect(`/teams/${req.params.id}`);
+        } catch (err) {
+            console.log(err);
+        }
+    },
     createRow: async (req, res) => {
         try {
             let newRow = await Team.findOneAndUpdate(

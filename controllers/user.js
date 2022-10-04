@@ -63,24 +63,18 @@ module.exports = {
   deleteLeague: async (req, res) => {
     try {
 
-      // Find post by id
-      //let post = await Post.findById({ _id: req.params.id });
-      /* const users = await User.find({ user: req.user.id }) */
 
-      //Delete post from db
-      //Delete post from DB array
+      // Find user by id
       const user = await User.findById(req.params.id)
-
+      //Delete post from DB array
       const deleteLeagueFromUser = await User.updateOne(
         { _id: req.user.id },
         {
-          $pull: { 'leagues': { 'league': user.leagues.filter(el => el.league === req.body.league)[0] } }
+          $pull: { 'leagues': user.leagues.filter(el => el.league === req.body.league)[0] }
         }
       )
 
-      console.log(req.body)
-
-      console.log("Deleted something");
+      console.log("Deleted league");
       res.redirect(`/profile/${req.params.id}`);
     } catch (err) {
       console.log(err);
@@ -91,7 +85,7 @@ module.exports = {
 
       // Find user by id
       const user = await User.findById(req.params.id)
-
+      //Delete post from DB array
       const deleteTeamFromUser = await User.updateOne(
         { _id: req.user.id },
         {
@@ -99,8 +93,7 @@ module.exports = {
         }
       )
 
-      console.log(req.body)
-      console.log("Deleted something");
+      console.log("Deleted team");
       res.redirect(`/profile/${req.params.id}`);
     } catch (err) {
       console.log(err);
