@@ -18,14 +18,14 @@
                   </section>
                   <section class="section-each-extra-post">
                     <h2>
-                      <%= league.sport %>
+                      2022/23
                     </h2>
                   </section>
-                  <section class="section-each-extra-post">
+                  <!-- <section class="section-each-extra-post">
                     <h2>
-                      #<%= league.numberofplayers %>
+                      <%= league.numberofteams %>
                     </h2>
-                  </section>
+                  </section> -->
                 </section>
                 <section class="section-icons-post">
                   <form action="/leagues/editLeague/<%= league.id %>?_method=PUT" method="POST">
@@ -43,7 +43,7 @@
                           <% } %>
                     </button>
                   </form>
-                  <form action="/leagues/deleteLeague/<%= league.id %>?_method=DELETE" method="POST">
+                  <form action="/leagues/deleteLeagues/<%= league.id %>?_method=DELETE" method="POST">
                     <button class="btn" type="submit">
                       <i class="fa-regular fa-trash-can fa-xl post-btn hover-top"></i>
                     </button>

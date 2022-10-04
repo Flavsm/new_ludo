@@ -26,11 +26,12 @@
 
         <form action="/home/createPlayer" enctype="multipart/form-data" method="POST" id="form-player">
           <div class="mb-3">
-            <label for="player" class="form-label">Player</label>
-            <input type="text" class="form-control form-control-sm" id="player" name="player" placeholder="Player">
+            <label for="player" class="form-label">Player Name</label>
+            <input type="text" class="form-control form-control-sm" id="player" name="player" placeholder="Player"
+              required>
           </div>
           <div class="mb-3">
-            <label for="team" class="form-label">Team</label>
+            <label for="team" class="form-label">Team Name</label>
             <input type="text" class="form-control form-control-sm" id="team" name="team" placeholder="Team">
           </div>
           <div class="mb-3">
@@ -78,8 +79,8 @@
         <!-- TEAM -->
         <form action="/home/createTeam" enctype="application/x-www-form-urlencoded" method="POST" id="form-team">
           <div class="mb-3">
-            <label for="team" class="form-label">Team</label>
-            <input type="text" class="form-control form-control-sm" id="team" name="team" placeholder="Team">
+            <label for="team" class="form-label">Team Name</label>
+            <input type="text" class="form-control form-control-sm" id="team" name="team" placeholder="Team" required>
           </div>
           <div class="mb-3">
             <label for="sport" class="form-label">Sport</label>
@@ -126,8 +127,9 @@
 
         <form action="/home/createLeague" enctype="application/x-www-form-urlencoded" method="POST" id="form-league">
           <div class="mb-3">
-            <label for="league" class="form-label">League</label>
-            <input type="text" class="form-control form-control-sm" id="league" name="league" placeholder="League">
+            <label for="league" class="form-label">League Name</label>
+            <input type="text" class="form-control form-control-sm" id="league" name="league" placeholder="League"
+              required>
           </div>
           <div class="mb-3">
             <label for="sport" class="form-label">Sport</label>
@@ -141,9 +143,8 @@
             </select>
           </div>
           <div class="mb-3">
-            <label for="numberofteams" class="form-label">Number of Teams</label>
-            <input type="text" class="form-control form-control-sm" id="numberofteams" name="numberofteams"
-              placeholder="#">
+            <label for="allteams" class="form-label">Teams Names (comma separated) </label>
+            <input type="text" class="form-control form-control-sm" id="allteams" name="allteams" placeholder="">
           </div>
           <!-- <div class="mb-3">
             <div class="row">

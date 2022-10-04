@@ -146,6 +146,7 @@ module.exports = {
             let newLeague = await League.create({
                 league: req.body.league,
                 sport: req.body.sport,
+                allteams: req.body.allteams.split(',').map(el => el.toUpperCase()),
                 numberofteams: req.body.numberofteams,
                 notes: req.body.notes,
                 user: req.user.id,

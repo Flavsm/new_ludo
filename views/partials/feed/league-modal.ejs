@@ -9,8 +9,9 @@
       <div class="modal-body">
         <form action="/leagues/createLeague" enctype="application/x-www-form-urlencoded" method="POST">
           <div class="mb-3">
-            <label for="league" class="form-label">League</label>
-            <input type="text" class="form-control form-control-sm" id="league" name="league" placeholder="League">
+            <label for="league" class="form-label">League Name</label>
+            <input type="text" class="form-control form-control-sm" id="league" name="league" placeholder="League"
+              required>
           </div>
           <div class="mb-3">
             <label for="sport" class="form-label">Sport</label>
@@ -24,9 +25,8 @@
             </select>
           </div>
           <div class="mb-3">
-            <label for="numberofteams" class="form-label">Number of Teams</label>
-            <input type="text" class="form-control form-control-sm" id="numberofteams" name="numberofteams"
-              placeholder="#">
+            <label for="allteams" class="form-label">Teams Names (comma separated) </label>
+            <input type="text" class="form-control form-control-sm" id="allteams" name="allteams" placeholder="">
           </div>
           <!-- <div class="mb-3">
             <div class="row">

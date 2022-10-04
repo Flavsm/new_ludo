@@ -83,12 +83,12 @@
                                     <form action="/players/editPlayers/<%= el._id%>?_method=PUT"
                                         enctype="application/x-www-form-urlencoded" method="POST">
                                         <div class="mb-3">
-                                            <label for="player" class="form-label">Player</label>
+                                            <label for="player" class="form-label">Player Name</label>
                                             <input type="text" class="form-control form-control-sm" id="player"
                                                 name="player" value="<%= el.player%>" placeholder="Player">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="team" class="form-label">Team</label>
+                                            <label for="team" class="form-label">Team Name</label>
                                             <input type="text" class="form-control form-control-sm" id="team"
                                                 name="team" value="<%= el.team%>" placeholder="Team">
                                         </div>

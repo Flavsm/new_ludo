@@ -21,8 +21,14 @@
                                     <%= el.sport%>
                                 </li>
                                 <li class="list-group-item item-list-card">
-                                    <%= el.numberofteams%>
+                                    <% if (el.allteams.length>0) {%>
+                                        <% el.allteams.forEach(e=> { %>
+                                            <%= e %> |
+                                                <% })} %>
+
                                 </li>
+
+
                                 <!-- <li class="list-group-item item-list-card">
                                     <%= el.win %>-<%= el.loss%> | <%=
                                                 `.${(Number(el.win)/(Number(el.win)+Number(el.loss))).toFixed(3).toString().split('.')[1]}`
@@ -75,7 +81,7 @@
                                     <form action="/leagues/editLeagues/<%= el._id%>?_method=PUT"
                                         enctype="application/x-www-form-urlencoded" method="POST">
                                         <div class="mb-3">
-                                            <label for="league" class="form-label">League</label>
+                                            <label for="league" class="form-label">League Name</label>
                                             <input type="text" class="form-control form-control-sm" id="league"
                                                 name="league" value="<%= el.league%>" placeholder="Team">
                                         </div>
@@ -85,10 +91,9 @@
                                                 name="sport" value="<%= el.sport%>" placeholder="Sport">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="numberofteams" class="form-label"># of Teams</label>
-                                            <input type="text" class="form-control form-control-sm" id="numberofteams"
-                                                name="numberofteams" value="<%= el.numberofteams%>"
-                                                placeholder="# of Teams">
+                                            <label for="allteams" class="form-label">Teams Names</label>
+                                            <input type="text" class="form-control form-control-sm" id="allteams"
+                                                name="allteams" value="<%= el.allteams%>" placeholder="Teams Names">
                                         </div>
                                         <!-- <div class="mb-3">
                                          <div class="row">

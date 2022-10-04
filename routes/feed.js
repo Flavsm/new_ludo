@@ -3,7 +3,7 @@ const router = express.Router();
 /* const authController = require("../controllers/auth");
 const homeController = require("../controllers/home");
 const postsController = require("../controllers/posts"); */
-const feedController = require('../controllers/feed');
+// const feedController = require('../controllers/feed');
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 /* router.get("/", ensureAuth, feedController.getFeed); */

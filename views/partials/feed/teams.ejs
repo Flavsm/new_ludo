@@ -7,8 +7,9 @@
 <section class="section-feed">
     <section class="section-list-feed">
         <ul class="list-feed">
+            <!-- user.leagues.map(em =>em.league).includes(...user.teams.map(em=> em.team)) -->
             <% teams.forEach(el=> { %>
-                <% if(el.user==user.id || user.teams.map(em=> em.team).includes(el.team)) { %>
+                <% if(el.user==user.id || user.teams.map(em=> em.team).includes) { %>
                     <li class="item-list-feed">
                         <section class="card">
                             <img src="https://img.favpng.com/14/2/16/logo-football-team-png-favpng-tzdASz0r6s1juSpCZVyq4VZJm.jpg"
@@ -81,7 +82,7 @@
                                     <form action="/teams/editTeams/<%= el._id%>?_method=PUT"
                                         enctype="application/x-www-form-urlencoded" method="POST">
                                         <div class="mb-3">
-                                            <label for="team" class="form-label">Team</label>
+                                            <label for="team" class="form-label">Team Name</label>
                                             <input type="text" class="form-control form-control-sm" id="team"
                                                 name="team" value="<%= el.team%>" placeholder="Team">
                                         </div>

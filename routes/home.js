@@ -3,8 +3,8 @@ const router = express.Router();
 const upload = require("../middleware/multer");
 const authController = require("../controllers/auth");
 const indexController = require('../controllers/index');
-const postsController = require("../controllers/posts");
-const feedController = require('../controllers/feed');
+// const postsController = require("../controllers/posts");
+// const feedController = require('../controllers/feed');
 const homeController = require('../controllers/home');
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
@@ -17,7 +17,7 @@ router.post("/createTeam", homeController.createTeam);
 
 router.post("/createLeague", homeController.createLeague);
 
-router.post("/createTeam", homeController.createTeam);
+// router.post("/createTeam", homeController.createTeam);
 
 // router.post("/createLeague", postsController.createLeague);
 

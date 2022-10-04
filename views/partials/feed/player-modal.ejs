@@ -9,11 +9,12 @@
       <div class="modal-body">
         <form action="/players/createPlayer" enctype="multipart/form-data" method="POST">
           <div class="mb-3">
-            <label for="player" class="form-label">Player</label>
-            <input type="text" class="form-control form-control-sm" id="player" name="player" placeholder="Player">
+            <label for="player" class="form-label">Player Name</label>
+            <input type="text" class="form-control form-control-sm" id="player" name="player" placeholder="Player"
+              required>
           </div>
           <div class="mb-3">
-            <label for="team" class="form-label">Team</label>
+            <label for="team" class="form-label">Team Name</label>
             <input type="text" class="form-control form-control-sm" id="team" name="team" placeholder="Team">
           </div>
           <div class="mb-3">

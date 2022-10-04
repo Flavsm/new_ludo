@@ -55,20 +55,19 @@ module.exports = {
             let newLeague = await League.create({
                 league: req.body.league,
                 sport: req.body.sport,
+                allteams: req.body.allteams.split(',').map(el => el.toUpperCase()),
                 numberofteams: req.body.numberofteams,
                 notes: req.body.notes,
                 user: req.user.id,
             });
 
-            /* req.user.entries.push(newPost.id) */
-            // console.log(req.body)
-            console.log(newLeague.league)
             const addIdToUser = await User.findOneAndUpdate(
                 { _id: req.user.id },
                 {
                     $push: { leagues: { 'league': newLeague.league }, entries: newLeague.id, leagueEntries: newLeague.id },
                 }
             )
+
 
             console.log("League has been added!");
             res.redirect("/leagues"); //changed from profile to home
@@ -85,6 +84,7 @@ module.exports = {
                     "$set": {
                         'league': req.body.league.toUpperCase(),
                         "sport": req.body.sport.toUpperCase(),
+                        'allteams': req.body.allteams.split(',').map(el => el.toUpperCase()),
                         'numberofteams': req.body.numberofteams,
                         'notes': req.body.notes.toUpperCase()
                     }
@@ -104,6 +104,7 @@ module.exports = {
                     "$set": {
                         'league': req.body.league.toUpperCase(),
                         "sport": req.body.sport.toUpperCase(),
+                        'allteams': req.body.allteams.split(',').map(el => el.toUpperCase()),
                         'numberofteams': req.body.numberofteams,
                         'notes': req.body.notes.toUpperCase()
                     }

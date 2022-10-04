@@ -32,6 +32,7 @@ const LeagueSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    allteams: []
 })
 
 module.exports = mongoose.model("League", LeagueSchema);
