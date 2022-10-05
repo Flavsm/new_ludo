@@ -10,16 +10,15 @@
         <form action="/players/createPlayer" enctype="multipart/form-data" method="POST">
           <div class="mb-3">
             <label for="player" class="form-label">Player Name</label>
-            <input type="text" class="form-control form-control-sm" id="player" name="player" placeholder="Player"
-              required>
+            <input type="text" class="form-control form-control-sm" id="player" name="player" placeholder="" required>
           </div>
           <div class="mb-3">
             <label for="team" class="form-label">Team Name</label>
-            <input type="text" class="form-control form-control-sm" id="team" name="team" placeholder="Team">
+            <input type="text" class="form-control form-control-sm" id="team" name="team" placeholder="" required>
           </div>
           <div class="mb-3">
             <label for="sport" class="form-label">Sport</label>
-            <select class="form-select form-select-sm home-sport" id="sport" name="sport" autocomplete="off">
+            <select class="form-select form-select-sm home-sport" id="sport" name="sport" autocomplete="off" required>
               <option selected>Select</option>
               <option>Football</option>
               <option>Basketball</option>

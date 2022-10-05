@@ -1,5 +1,8 @@
 // $.fn.editable.defaults.mode = 'inline';
 
+
+
+//conditional for the model modal that has 3 options to add
 if (window.location.pathname.includes('home')) {
     let choiceSelector = document.querySelector('#type');
     let type = document.querySelector('#form-type');
@@ -34,7 +37,6 @@ if (window.location.pathname.includes('home')) {
     }
 }
 
-// console.log(teamEditModal.slice(0, 9))
 
 // get table headers
 const tableHeader = Array.from(document.querySelectorAll('.table-head th')).slice(0, 9).map(el => el.innerText);
@@ -57,36 +59,36 @@ const hockey = ['G', 'RD', 'LD', 'RW', 'LW', 'C'].sort()
 
 
 //get the select for sport and position
-const homeModalSport = document.querySelector('.home-sport')
-const homeModalPosition = document.querySelector('.home-position')
+const modalsSport = Array.from(document.querySelectorAll('.home-sport'))
+const modalsPosition = document.querySelector('.home-position')
 
 //add change event to sport select
-homeModalSport.addEventListener('change', getSport);
+modalsSport.forEach(el => el.addEventListener('change', getSport))
 
 //function on sport change, change the options of position select
 function getSport(e) {
-    homeModalPosition.innerHTML = '<option selected>Select</option>'
+    modalsPosition.innerHTML = '<option selected>Select</option>'
     e.target.value == 'Football' ?
         football.forEach(el => {
             let option = document.createElement('option');
             option.innerText = `${el}`
-            homeModalPosition.appendChild(option)
+            modalsPosition.appendChild(option)
         }) : e.target.value == 'Basketball' ? basketball.forEach(el => {
             let option = document.createElement('option');
             option.innerText = `${el}`
-            homeModalPosition.appendChild(option)
+            modalsPosition.appendChild(option)
         }) : e.target.value == 'Baseball' ? baseball.forEach(el => {
             let option = document.createElement('option');
             option.innerText = `${el}`
-            homeModalPosition.appendChild(option)
+            modalsPosition.appendChild(option)
         }) : e.target.value == 'Soccer' ? soccer.forEach(el => {
             let option = document.createElement('option');
             option.innerText = `${el}`
-            homeModalPosition.appendChild(option)
+            modalsPosition.appendChild(option)
         }) : hockey.forEach(el => {
             let option = document.createElement('option');
             option.innerText = `${el}`
-            homeModalPosition.appendChild(option)
+            modalsPosition.appendChild(option)
         })
 }
 
