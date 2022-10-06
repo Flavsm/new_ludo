@@ -111,7 +111,6 @@ module.exports = {
                         'numberofplayers': req.body.numberofplayers,
                         'win': req.body.win,
                         'loss': req.body.loss,
-                        'notes': req.body.notes.toUpperCase()
                     }
                 }]
             );

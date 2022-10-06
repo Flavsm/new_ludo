@@ -24,13 +24,13 @@ module.exports = {
     getLeague: async (req, res) => {
         try {
             const player = await Player.findById(req.params.id);
-            const team = await Team.findById(req.params.id);
+            // const team = await Team.findById(req.params.id);
             const teams = await Team.find().sort({ createdAt: "desc" }).lean();
             const league = await League.findById(req.params.id);
 
             const url = await req.originalUrl;
 
-            res.render("post-league.ejs", { user: req.user, player: player, team: team, teams: teams, league: league, url: url }); //changes req.user to req.email
+            res.render("post-league.ejs", { user: req.user, player: player, teams: teams, league: league, url: url }); //changes req.user to req.email
         } catch (err) {
             console.log(err);
         }
@@ -106,8 +106,6 @@ module.exports = {
                         'league': req.body.league.toUpperCase(),
                         "sport": req.body.sport.toUpperCase(),
                         'allteams': req.body.allteams.split(',').map(el => el.toUpperCase().trim()),
-                        'numberofteams': req.body.numberofteams,
-                        'notes': req.body.notes.toUpperCase()
                     }
                 }]
             );

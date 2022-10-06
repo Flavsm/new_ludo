@@ -5,8 +5,7 @@
       <%if(league.user==user.id || user.leagues.map(em=> em.league).includes(league.league)){ %>
         <section class="section-profile-post">
           <section class="nav-profile-post">
-            <img
-              src="https://res.cloudinary.com/dprkasf7b/image/upload/c_thumb,w_200,g_face/v1664241356/soccer_t6mqfe.jpg"
+            <img src="https://res.cloudinary.com/dprkasf7b/image/upload/c_pad,w_400,h_380/v1664241356/soccer_t6mqfe.jpg"
               class="post-img-top img-fluid" alt=" ...">
             <section class="section-column-post">
               <section class="section-row-post">
@@ -29,26 +28,27 @@
                   </section> -->
                 </section>
                 <section class="section-icons-post">
-                  <form action="/leagues/editLeague/<%= league.id %>?_method=PUT" method="POST">
-                    <button class="btn" type="submit">
-                      <i class="fa-regular fa-pen-to-square fa-xl post-btn hover-top"></i>
+                  <% if(league.user==user.id) { %>
+                    <button class="edit-post-btns" type="submit" data-bs-toggle="modal"
+                      data-bs-target="#edit-post-league">
+                      <i class="fa-regular fa-pen-to-square fa-xl post-btn"></i>
                     </button>
-                  </form>
-                  <form action="/leagues/pinLeague/<%= league.id %>?_method=PUT" method="POST">
-                    <button class="btn" type="submit" data-bs-toggle="tooltip" data-bs-placement="top"
-                      data-bs-title="Pin it">
-                      <% if (league.pinned==true ) { %>
-                        <i class="fa-solid fa-thumbtack fa-xl pinned-btn"></i>
-                        <% } else { %>
-                          <i class="fa-solid fa-thumbtack fa-xl unpinned-btn"></i>
-                          <% } %>
-                    </button>
-                  </form>
-                  <form action="/leagues/deleteLeagues/<%= league.id %>?_method=DELETE" method="POST">
-                    <button class="btn" type="submit">
-                      <i class="fa-regular fa-trash-can fa-xl post-btn hover-top"></i>
-                    </button>
-                  </form>
+                    <form action="/leagues/deleteLeagues/<%= league.id %>?_method=DELETE" method="POST">
+                      <button class="btn" type="submit">
+                        <i class="fa-regular fa-trash-can fa-xl post-btn hover-top"></i>
+                      </button>
+                    </form>
+                    <% } %>
+                      <form action="/leagues/pinLeague/<%= league.id %>?_method=PUT" method="POST">
+                        <button class="btn" type="submit" data-bs-toggle="tooltip" data-bs-placement="top"
+                          data-bs-title="Pin it">
+                          <% if (league.pinned==true ) { %>
+                            <i class="fa-solid fa-thumbtack fa-xl pinned-btn"></i>
+                            <% } else { %>
+                              <i class="fa-solid fa-thumbtack fa-xl unpinned-btn"></i>
+                              <% } %>
+                        </button>
+                      </form>
                 </section>
               </section>
               <section class="section-secondary-player-info">
@@ -84,8 +84,48 @@
               </section>
             </section>
           </section>
-
         </section>
+        <!-- BEGINNIG EDIT MODAL -->
+        <div class="modal fade" id="edit-post-league" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Edit League</h5>
+                <i class="fa-solid fa-square-xmark close" data-bs-dismiss="modal"></i>
+              </div>
+              <div class="modal-body">
+                <form action="/leagues/editLeague/<%= league._id%>?_method=PUT"
+                  enctype="application/x-www-form-urlencoded" method="POST">
+                  <div class="mb-3">
+                    <label for="league" class="form-label">League Name</label>
+                    <input type="text" class="form-control form-control-sm" id="league" name="league"
+                      value="<%= league.league%>" placeholder="" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="sport" class="form-label">Sport</label>
+                    <input type="text" class="form-control form-control-sm" id="sport" name="sport"
+                      value="<%= league.sport%>" placeholder="" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="allteams" class="form-label">Teams Names</label>
+                    <input type="text" class="form-control form-control-sm" id="allteams" name="allteams"
+                      value="<%= league.allteams%>" placeholder="" required>
+                  </div>
+                  <!-- <div class="mb-3">
+                     <label for="imgUpload" class="form-label">Image</label>
+                     <input type="file" class="form-control form-control-sm" id="imageUpload"
+                         name="file">
+                 </div> -->
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary submit" value="Upload">Submit</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- END EDIT MODAL -->
         <section class="section-table-post">
           <section class="section-team-stats">
             <h3 class="team-stats-header ">LEAGUE STATS</h3>
@@ -105,30 +145,30 @@
                 </tr>
               </thead>
               <tbody>
-                <% teams.sort((a,b)=> a.win-b.loss).forEach(el=> { %>
-                  <% if(league.allteams.includes(el.team)){ %>
-                    <tr class="table-light" onclick="window.location ='/teams/<%= el._id %>'">
+
+                <% teams.filter(el=> league.allteams.includes(el.team)).sort((a,b)=> (a.win)-b.win).forEach(el=> { %>
+                  <tr class="table-light" onclick="window.location ='/teams/<%= el._id %>'">
+                    <td>
+                      <%= el.team %>
+                    </td>
+                    <td>
+                      <%= el.win %>
+                    </td>
+                    <td>
+                      <%= el.loss %>
+                    </td>
+                    <td>
+                      <%= `.${(Number(el.win)/(Number(el.win)+Number(el.loss))).toFixed(3).toString().split('.')[1]}` %>
+                        %
+
+                    </td>
+                    <% if(league.sport=='SOCCER' ) { %>
                       <td>
-                        <%= el.team %>
+                        <%= el.ties %>
                       </td>
-                      <td>
-                        <%= el.win %>
-                      </td>
-                      <td>
-                        <%= el.loss %>
-                      </td>
-                      <td>
-                        <%= `.${(Number(el.win)/(Number(el.win)+Number(el.loss))).toFixed(3).toString().split('.')[1]}`
-                          %>
-                          %
-                      </td>
-                      <% if(league.sport=='SOCCER' ) { %>
-                        <td>
-                          <%= el.ties %>
-                        </td>
-                        <% } %>
-                    </tr>
-                    <% }}) %>
+                      <% } %>
+                  </tr>
+                  <% }) %>
               </tbody>
             </table>
           </section>

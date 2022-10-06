@@ -29,26 +29,27 @@
                   </section> -->
                 </section>
                 <section class="section-icons-post">
-                  <form action="/players/editPlayer/<%= player.id %>?_method=PUT" method="POST">
-                    <button class="btn" type="submit">
+                  <% if (player.user==user.id) { %>
+                    <button class="edit-post-btns" type="submit" data-bs-toggle="modal"
+                      data-bs-target="#edit-post-player">
                       <i class="fa-regular fa-pen-to-square fa-xl post-btn"></i>
                     </button>
-                  </form>
-                  <form action="/players/pinPlayer/<%= player.id %>?_method=PUT" method="POST">
-                    <button class="btn" type="submit" data-bs-toggle="tooltip" data-bs-placement="top"
-                      data-bs-title="Pin it">
-                      <% if (player.pinned==true ) { %>
-                        <i class="fa-solid fa-thumbtack fa-xl pinned-btn"></i>
-                        <% } else { %>
-                          <i class="fa-solid fa-thumbtack fa-xl unpinned-btn"></i>
-                          <% } %>
-                    </button>
-                  </form>
-                  <form action="/players/deletePlayer/<%= player.id %>?_method=DELETE" method="POST">
-                    <button class="btn" type="submit">
-                      <i class="fa-regular fa-trash-can fa-xl post-btn"></i>
-                    </button>
-                  </form>
+                    <form action="/players/deletePlayer/<%= player.id %>?_method=DELETE" method="POST">
+                      <button class="btn" type="submit">
+                        <i class="fa-regular fa-trash-can fa-xl post-btn"></i>
+                      </button>
+                    </form>
+                    <% } %>
+                      <form action="/players/pinPlayer/<%= player.id %>?_method=PUT" method="POST">
+                        <button class="btn" type="submit" data-bs-toggle="tooltip" data-bs-placement="top"
+                          data-bs-title="Pin it">
+                          <% if (player.pinned==true ) { %>
+                            <i class="fa-solid fa-thumbtack fa-xl pinned-btn"></i>
+                            <% } else { %>
+                              <i class="fa-solid fa-thumbtack fa-xl unpinned-btn"></i>
+                              <% } %>
+                        </button>
+                      </form>
                 </section>
               </section>
               <section class="section-secondary-player-info">
@@ -103,6 +104,84 @@
           </section>
       </section>
     </section>
+    <!-- BEGINNIG EDIT MODAL -->
+    <div class="modal fade" id="edit-post-player" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Edit Player
+            </h5>
+            <i class="fa-solid fa-square-xmark close" data-bs-dismiss="modal"></i>
+          </div>
+          <div class="modal-body">
+            <form action="/players/editPlayer/<%= player._id%>?_method=PUT" enctype="application/x-www-form-urlencoded"
+              method="POST">
+              <div class="mb-3">
+                <label for="player" class="form-label">Player Name</label>
+                <input type="text" class="form-control form-control-sm" id="player" name="player"
+                  value="<%= player.player%>" placeholder="" required>
+              </div>
+              <div class="mb-3">
+                <label for="team" class="form-label">Team Name</label>
+                <input type="text" class="form-control form-control-sm" id="team" name="team" value="<%= player.team %>"
+                  placeholder="" required>
+              </div>
+              <div class="mb-3">
+                <label for="sport" class="form-label">Sport</label>
+                <select class="form-select form-select-sm home-sport" id="sport" name="sport" value="<%= player.sport%>"
+                  autocomplete="off" required>
+                  <option selected>
+                    <%= player.sport%>
+                  </option>
+                  <option>Football</option>
+                  <option>Basketball</option>
+                  <option>Baseball</option>
+                  <option>Soccer</option>
+                  <option>Hockey</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="position" class="form-label">Position</label>
+                <select class="form-select form-select-sm" id="position" name="position" value="<%= player.position%>">
+                  <option selected>
+                    <%= player.position%>
+                  </option>
+                  <option>PG</option>
+                  <option>SG</option>
+                  <option>SF</option>
+                  <option>PF</option>
+                  <option>C</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <div class="row">
+                  <div class="col">
+                    <label for="win" class="form-label">Win</label>
+                    <input type="text" class="form-control win-loss-input" id="win" name="win" value="<%= player.win%>"
+                      placeholder="">
+                  </div>
+                  <div class="col">
+                    <label for="loss" class="form-label">Loss</label>
+                    <input type="text" class="form-control win-loss-input" id="loss" name="loss"
+                      value="<%= player.loss%>" placeholder="">
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="imgUpload" class="form-label">Image</label>
+                <input type="file" class="form-control form-control-sm" id="imageUpload" name="file">
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary submit" value="Upload">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- END EDIT PLAYER MODAL -->
     <section class="section-table-post">
       <section class="section-player-stats">
         <h3 class="player-stats-header ">PLAYER STATS</h3>
@@ -207,7 +286,6 @@
                   </td>
                 </tr>
 
-
                 <!-- EDIT ROW MODAL -->
 
                 <div class="modal fade" id="player-edit-row" tabindex="-1" role="dialog"
@@ -275,6 +353,7 @@
                       </div>
                     </div>
                   </div>
+                  <!-- END EDIT ROW MODAL -->
                   <% })} %>
           </tbody>
         </table>

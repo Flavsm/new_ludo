@@ -39,7 +39,7 @@ module.exports = {
                 .upload(req.file.path,
                     {
                         eager: [
-                            { width: 40, height: 300, crop: "pad" },
+                            { width: 400, height: 300, crop: "pad" },
                             { width: 300, height: 270, crop: "pad" },]
                     })
 
@@ -110,7 +110,6 @@ module.exports = {
                         'position': req.body.position,
                         'win': req.body.win,
                         'loss': req.body.loss,
-                        'notes': req.body.notes.toUpperCase()
                     }
                 }]
             );
@@ -177,8 +176,6 @@ module.exports = {
             let player = await Player.findOne({
                 'table._id': req.params.id
             });
-
-            console.log(team)
 
             let editRow = await Player.findOneAndUpdate(
                 { 'table._id': req.params.id },

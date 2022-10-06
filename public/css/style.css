@@ -84,7 +84,7 @@ body {
 
 .container-list-menu>li {
     width: 20%;
-    /*  border: 1px solid red; */
+    /* border: 1px solid red; */
 }
 
 .container-list-menu li .underline-menu {
@@ -760,7 +760,6 @@ body {
 }
 
 .card-link {
-    /* border: 1px solid red; */
     height: 90%;
 }
 
@@ -809,10 +808,10 @@ body {
 
 .card-body-btns {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     border-top: 1px solid #E1A750;
-    gap: 1rem;
+    /* gap: 1rem; */
     height: 10% !important;
 }
 
@@ -824,16 +823,13 @@ body {
     color: black
 }
 
-.feed-delete-form {
+.card-body-btns>* {
     /* border: 1px solid greenyellow; */
-    /* margin-top: 0.2rem; */
-    margin-right: -0.7rem;
+    width: 25%;
 }
 
 .feed-pin-form {
-    /* border: 1px solid greenyellow; */
     margin-top: 0.2rem;
-    margin-left: -0.7rem;
 }
 
 /* PROFILE ///////////////////////////*/
@@ -1124,8 +1120,8 @@ body {
     border: 1px dashed #E1A750;
 }
 
-.section-icons-post form:hover,
-.section-icons-post form:hover i {
+.section-icons-post>*:hover,
+.section-icons-post>*:hover i {
     background: #E1A750;
     color: #302f2d;
 }
@@ -1139,6 +1135,13 @@ body {
     color: #D9D9D9;
 }
 
+
+.edit-post-btns {
+    border: 1px dashed #E1A750;
+    height: 2.5rem;
+    width: 3rem;
+    background: #302f2d;
+}
 
 /* TABLE SECTION */
 
