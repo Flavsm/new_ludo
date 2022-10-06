@@ -21,13 +21,15 @@ module.exports = {
     },
     getTeam: async (req, res) => {
         try {
+            const players = await Player.find().sort({ createdAt: "desc" }).lean();
             const player = await Player.findById(req.params.id);
             const team = await Team.findById(req.params.id);
-            const league = await League.findById(req.params.id);
+            const league = await League.find({ allteams: team.team });
+            console.log(league)
             const url = await req.originalUrl;
 
             /* console.log(post) */
-            res.render("post-team.ejs", { player: player, user: req.user, team: team, league: league, url: url }); //changes req.user to req.email
+            res.render("post-team.ejs", { player: player, players: players, user: req.user, team: team, league: league, url: url }); //changes req.user to req.email
         } catch (err) {
             console.log(err);
         }

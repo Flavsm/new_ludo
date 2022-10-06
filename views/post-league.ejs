@@ -2,8 +2,8 @@
 
   <main class="container container-post">
     <section class="container-section-post">
-      <section class="section-profile-post">
-        <%if(league.user==user.id || user.leagues.map(em=> em.league).includes(league.league)){ %>
+      <%if(league.user==user.id || user.leagues.map(em=> em.league).includes(league.league)){ %>
+        <section class="section-profile-post">
           <section class="nav-profile-post">
             <img
               src="https://res.cloudinary.com/dprkasf7b/image/upload/c_thumb,w_200,g_face/v1664241356/soccer_t6mqfe.jpg"
@@ -11,10 +11,11 @@
             <section class="section-column-post">
               <section class="section-row-post">
                 <section class="section-main-player-info">
-                  <section class="section-each-extra-post">
+                  <section class="top-name-section league-trophy">
                     <h1>
                       <%= league.league%>
                     </h1>
+                    <i class="fa-solid fa-trophy"></i>
                   </section>
                   <section class="section-each-extra-post">
                     <h2>
@@ -76,7 +77,7 @@
                 </section>
                 <section class="section-each-extra-post">
                   <h2>
-                    <%= league.numberofteams %>
+                    <%= league.allteams.length %>
                   </h2>
                   <span># of teams</span>
                 </section>
@@ -84,13 +85,128 @@
             </section>
           </section>
 
-      </section>
-      <section class="section-table-post">
-      </section>
-      <%}%>
-        </div>
-        </div>
-    </section>
+        </section>
+        <section class="section-table-post">
+          <section class="section-team-stats">
+            <h3 class="team-stats-header ">LEAGUE STATS</h3>
+            <table class="team-table table table-bordered table-striped table-responsive-md text-center table-hover">
+              <thead>
+                <tr class="table-head">
+                  <th>TEAM</th>
+                  <th>WIN</th>
+                  <th>LOSS</th>
+                  <th>PCT</th>
+                  <% if(league.sport=='SOCCER' ) { %>
+                    <th>team ties</th>
+                    <% } %>
+
+                      <!-- <th id="add-row">
+                      </th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <% teams.sort((a,b)=> a.win-b.loss).forEach(el=> { %>
+                  <% if(league.allteams.includes(el.team)){ %>
+                    <tr class="table-light" onclick="window.location ='/teams/<%= el._id %>'">
+                      <td>
+                        <%= el.team %>
+                      </td>
+                      <td>
+                        <%= el.win %>
+                      </td>
+                      <td>
+                        <%= el.loss %>
+                      </td>
+                      <td>
+                        <%= `.${(Number(el.win)/(Number(el.win)+Number(el.loss))).toFixed(3).toString().split('.')[1]}`
+                          %>
+                          %
+                      </td>
+                      <% if(league.sport=='SOCCER' ) { %>
+                        <td>
+                          <%= el.ties %>
+                        </td>
+                        <% } %>
+                    </tr>
+                    <% }}) %>
+              </tbody>
+            </table>
+          </section>
+          <!-- <section class=" section-players-stats">
+                      <h3 class="team-stats-header">LEAGUE TEAMS</h3>
+                      <section class="team-post-section-feed">
+                        <section class="team-post-feed-section">
+                          <ul class="list-feed">
+                            <% teams.forEach(el=> { %>
+                              <% if(league.allteams.includes(el.team)){ %>
+                                <li class="item-list-feed">
+                                  <section class="card">
+                                    <img
+                                      src="https://img.favpng.com/14/2/16/logo-football-team-png-favpng-tzdASz0r6s1juSpCZVyq4VZJm.jpg"
+                                      class="card-img-top img-fluid" alt="...">
+                                    <ul class="list-group list-group-flush list-card-feed" data-id="el._id">
+                                      <li class="list-group-item item-list-card">
+                                        <%= el.team%>
+                                      </li>
+                                      <li class="list-group-item item-list-card">
+                                        <%= el.sport%>
+                                      </li>
+                                      <li class="list-group-item item-list-card">
+                                        <%= el.numberosplayers%>
+                                      </li>
+                                      <% if (el.win==='' || el.loss==='' ) {%>
+                                        <li class="list-group-item item-list-card">
+                                          0-0
+                                        </li>
+                                        <% } else { %>
+                                          <li class="list-group-item item-list-card">
+                                            <%= el.win %>-<%= el.loss%> | <%=
+                                                  `.${(Number(el.win)/(Number(el.win)+Number(el.loss))).toFixed(3).toString().split('.')[1]}`
+                                                  %>%
+                                                  <% } %>
+                                          </li>
+                                    </ul>
+                                    <section class="card-body-notes">
+                                      <p class="card-text">
+                                        <%= el.notes%>
+                                      </p>
+                                    </section>
+                                    <section class="card-body-btns">
+                                      <% if(el.user==user.id) { %>
+                                        <form action="/players/deletePlayer/<%= el._id %>?_method=DELETE" method="POST"
+                                          class="feed-delete-form">
+                                          <button class="btn feed-delete-btn" type="submit">
+                                            <i class="fa-regular fa-trash-can fa-lg colored-btn"></i>
+                                          </button>
+                                        </form>
+                                        <button class='btn' type="button" data-bs-toggle="modal"
+                                          data-bs-target="#edit-players" id="editBtn">
+                                          <i class="fa-regular fa-pen-to-square fa-lg colored-btn"></i>
+                                        </button>
+                                        <% } %>
+                                          <form action="/players/pinPlayers/<%= el._id %>?_method=PUT" method="POST"
+                                            class="feed-pin-form">
+                                            <button class="btn" type="submit">
+                                              <% if (el.pinned==true ) { %>
+                                                <i class="fa-solid fa-thumbtack fa-lg pinned-btn"></i>
+                                                <% } else { %>
+                                                  <i class="fa-solid fa-thumbtack fa-lg unpinned-btn"></i>
+                                                  <% } %>
+                                            </button>
+                                          </form>
+                                          <a href="/players/<%= el._id%>">
+                                            <i class="fa-solid fa-eye fa-lg colored-btn"></i>
+                                          </a>
+                                    </section>
+                                  </section>
+                                </li>
+                                <% }}) %>
+                          </ul>
+                        </section>
+                      </section>
+          </section> -->
+        </section>
+        <%}%>
     </section>
   </main>
 

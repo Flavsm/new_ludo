@@ -156,7 +156,7 @@ body {
     display: flex;
     min-height: 90vh;
     min-width: 98vw;
-    border: 1px solid green;
+    /* border: 1px solid green; */
 }
 
 /* LEFT CONTAINER ///////////////////////////*/
@@ -167,7 +167,7 @@ body {
     justify-content: space-evenly;
     width: 50%;
     padding-left: 4rem;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 /* TAG LINE */
@@ -733,6 +733,7 @@ body {
     justify-content: flex-start;
     align-content: stretch;
     gap: 1.5rem;
+    margin-bottom: 2rem;
     /* border: 1px solid greenyellow; */
 }
 
@@ -748,13 +749,40 @@ body {
     font-family: 'Jaldi', sans-serif;
     font-weight: bold;
     /* border: 1px solid fuchsia; */
-    border: 2px solid #E1A750;
     overflow: hidden;
+    text-align: center;
+    transition: all 150ms;
+    transition-property: all;
+    transition-duration: 150ms;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0s;
+    justify-content: space-evenly;
+}
+
+.card-link {
+    /* border: 1px solid red; */
+    height: 90%;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-border {
+    border: 6px solid #E1A750;
+}
+
+.list-group {
+    border: 1px solid #E1A750 !important;
 }
 
 .card .img-feed {
     background: #302f2d;
 
+}
+
+.first-info {
+    font-size: 1.2rem;
 }
 
 .card ul li,
@@ -769,7 +797,10 @@ body {
 .card-body-notes {
     /* border: 1px solid fuchsia; */
     overflow-y: scroll;
-    height: 85%;
+    height: 19%;
+    font-size: 1rem;
+    color: #000;
+
 }
 
 .card-text {
@@ -782,7 +813,7 @@ body {
     align-items: center;
     border-top: 1px solid #E1A750;
     gap: 1rem;
-    height: 50%;
+    height: 10% !important;
 }
 
 .colored-btn {
@@ -795,7 +826,7 @@ body {
 
 .feed-delete-form {
     /* border: 1px solid greenyellow; */
-    margin-top: 0.2rem;
+    /* margin-top: 0.2rem; */
     margin-right: -0.7rem;
 }
 
@@ -952,7 +983,7 @@ body {
     justify-content: center;
     align-items: center;
     width: 85%;
-    height: 100%;
+    height: 90%;
     /* border: 1px solid greenyellow; */
 }
 
@@ -981,10 +1012,11 @@ body {
     font-size: 3.5rem;
     text-transform: uppercase;
     text-align: left;
-
+    /* border: 1px solid greenyellow; */
 }
 
-.section-main-player-info h2 {
+.section-main-player-info h2,
+.section-main-player-info h2 a {
     font-size: 1.7rem;
     text-transform: uppercase;
     text-align: left;
@@ -994,7 +1026,7 @@ body {
 .section-secondary-player-info {
     display: flex;
     justify-content: flex-end;
-    align-items: center;
+    align-items: flex-end;
     font-family: 'Jaldi', sans-serif;
     color: #FFFFFF;
     /* border: 1px solid red; */
@@ -1024,6 +1056,22 @@ body {
     height: 85%;
     gap: 1rem;
 } */
+.top-name-section {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    text-align: center;
+    font-family: 'Jaldi', sans-serif;
+    color: #FFFFFF;
+    gap: 1.5rem
+        /* border: 1px solid red; */
+}
+
+.top-name-section i {
+    /* border: 1px solid red; */
+    align-self: center;
+    font-size: 1.8rem;
+}
 
 
 .section-each-extra-post {
@@ -1107,14 +1155,29 @@ body {
 
 }
 
+.section-player-stats {
+    padding-top: 2rem;
+}
+
+.section-team-stats {
+    padding-bottom: 2rem;
+}
+
 .table tr th,
 .table tr td {
     border: 1px solid black;
 }
 
-
 .table-head {
     background: #E1A750;
+}
+
+tbody tr {
+    cursor: pointer;
+}
+
+.section-team-stats {
+    margin-top: 2rem;
 }
 
 .section-team-stats,
@@ -1135,6 +1198,17 @@ body {
     line-height: 3rem;
     text-align: left;
     width: 100%;
+    /* border: 1px solid red; */
+}
+
+.team-table thead {
+    /* height: 5vh; */
+    font-size: 1.3rem;
+}
+
+.team-table tbody {
+    /* height: 5vh; */
+    font-size: 1.1rem;
 }
 
 #add-row:hover,
@@ -1151,6 +1225,35 @@ body {
     color: #302f2d;
 }
 
+.section-players-stats {
+    /* border: 1px solid #E1A750; */
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+    align-items: center;
+    margin-bottom: 2rem;
+    width: 80%;
+    gap: 0.5rem;
+    /* border: 1px solid greenyellow; */
+}
+
+.team-post-section-feed {
+    display: flex;
+    justify-content: center;
+    min-height: 75%;
+    min-width: 100%;
+    /* margin-top: 2vh; */
+    /* border: 1px solid magenta; */
+}
+
+.team-post-feed-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: center;
+    width: 100%;
+    /* border: 1px solid red; */
+}
 
 /*////////// FOOTER */
 

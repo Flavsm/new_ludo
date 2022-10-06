@@ -8,126 +8,127 @@
     <section class="section-list-feed">
         <ul class="list-feed">
             <% leagues.forEach(el=> { %>
-                <% if(el.user==user.id || user.leagues.map(el=> el.league).includes(el.league)) { %>
+                <% if(el.user==user.id || user.leagues.map(em=> em.league).includes(el.league)) { %>
                     <li class="item-list-feed">
-                        <section class="card">
-                            <img src="https://img.favpng.com/14/2/16/logo-football-team-png-favpng-tzdASz0r6s1juSpCZVyq4VZJm.jpg"
-                                class="card-img-top" alt="...">
-                            <ul class="list-group list-group-flush list-card-feed">
-                                <li class="list-group-item item-list-card">
-                                    <%= el.league%>
-                                </li>
-                                <li class="list-group-item item-list-card">
-                                    <%= el.sport%>
-                                </li>
-                                <li class="list-group-item item-list-card">
-                                    <% if (el.allteams.length>0) {%>
-                                        <% el.allteams.forEach(e=> { %>
-                                            <%= e %> |
-                                                <% })} %>
-
-                                </li>
-
-
-                                <!-- <li class="list-group-item item-list-card">
+                        <section class="card card-border">
+                            <a href="/leagues/<%= el._id%>" class="card-link">
+                                <img src="https://img.favpng.com/14/2/16/logo-football-team-png-favpng-tzdASz0r6s1juSpCZVyq4VZJm.jpg"
+                                    class="card-img-top" alt="...">
+                                <ul class="list-group list-group-flush list-card-feed">
+                                    <li class="list-group-item item-list-card first-info">
+                                        <%= el.league%>
+                                    </li>
+                                    <li class="list-group-item item-list-card">
+                                        <%= el.sport%>
+                                    </li>
+                                    <li class="list-group-item item-list-card">
+                                        <% if (el.allteams.length>0) {%>
+                                            <% el.allteams.forEach(e=> { %>
+                                                <%= e %> |
+                                                    <% })} %>
+                                    </li>
+                                    <!-- <li class="list-group-item item-list-card">
                                     <%= el.win %>-<%= el.loss%> | <%=
                                                 `.${(Number(el.win)/(Number(el.win)+Number(el.loss))).toFixed(3).toString().split('.')[1]}`
                                                 %>%
                                 </li> -->
-                            </ul>
-                            <section class="card-body-notes">
-                                <p class="card-text">
-                                    <%= el.notes%>
-                                </p>
-                            </section>
-                            <section class="card-body-btns">
-                                <% if(el.user==user.id) { %>
-                                    <form action="/leagues/deleteLeagues/<%= el._id %>?_method=DELETE" method="POST"
-                                        class="feed-delete-form">
-                                        <button class="btn feed-delete-btn" type="submit">
-                                            <i class="fa-regular fa-trash-can fa-lg colored-btn"></i>
-                                        </button>
-                                    </form>
-                                    <button class="btn" type="button" data-bs-toggle="modal"
-                                        data-bs-target="#edit-leagues">
-                                        <i class="fa-regular fa-pen-to-square fa-lg colored-btn"></i>
-                                    </button>
-                                    <% } %>
-                                        <form action="/leagues/pinLeagues/<%= el._id %>?_method=PUT" method="POST"
-                                            class="feed-pin-form">
-                                            <button class="btn" type="submit">
-                                                <% if (el.pinned==true ) { %>
-                                                    <i class="fa-solid fa-thumbtack fa-lg pinned-btn"></i>
-                                                    <% } else { %>
-                                                        <i class="fa-solid fa-thumbtack fa-lg unpinned-btn"></i>
-                                                        <% } %>
+                                </ul>
+                                <section class="card-body-notes">
+                                    <p class="card-text">
+                                        <%= el.notes%>
+                                    </p>
+                                </section>
+                                <section class="card-body-btns">
+                                    <% if(el.user==user.id) { %>
+                                        <form action="/leagues/deleteLeagues/<%= el._id %>?_method=DELETE" method="POST"
+                                            class="feed-delete-form">
+                                            <button class="btn feed-delete-btn" type="submit">
+                                                <i class="fa-regular fa-trash-can fa-lg colored-btn"></i>
                                             </button>
                                         </form>
-                                        <a href="/leagues/<%= el._id%>"> <i
-                                                class="fa-solid fa-eye fa-lg colored-btn"></i></a>
-                            </section>
+                                        <button class="btn" type="button" data-bs-toggle="modal"
+                                            data-bs-target="#<%= el.league%>">
+                                            <i class="fa-regular fa-pen-to-square fa-lg colored-btn"></i>
+                                        </button>
+                                        <% } %>
+                                            <form action="/leagues/pinLeagues/<%= el._id %>?_method=PUT" method="POST"
+                                                class="feed-pin-form">
+                                                <button class="btn" type="submit">
+                                                    <% if (el.pinned==true ) { %>
+                                                        <i class="fa-solid fa-thumbtack fa-lg pinned-btn"></i>
+                                                        <% } else { %>
+                                                            <i class="fa-solid fa-thumbtack fa-lg unpinned-btn"></i>
+                                                            <% } %>
+                                                </button>
+                                            </form>
+                                            <a href="/leagues/<%= el._id%>">
+                                                <i class="fa-solid fa-eye fa-lg colored-btn"></i>
+                                            </a>
+                                </section>
+                            </a>
                         </section>
-                    </li>
-                    <!-- BEGINNIG EDIT MODAL -->
-                    <div class="modal fade" id="edit-leagues" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Edit League</h5>
-                                    <i class="fa-solid fa-square-xmark close" data-bs-dismiss="modal"></i>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="/leagues/editLeagues/<%= el._id%>?_method=PUT"
-                                        enctype="application/x-www-form-urlencoded" method="POST">
-                                        <div class="mb-3">
-                                            <label for="league" class="form-label">League Name</label>
-                                            <input type="text" class="form-control form-control-sm" id="league"
-                                                name="league" value="<%= el.league%>" placeholder="" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="sport" class="form-label">Sport</label>
-                                            <input type="text" class="form-control form-control-sm" id="sport"
-                                                name="sport" value="<%= el.sport%>" placeholder="" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="allteams" class="form-label">Teams Names</label>
-                                            <input type="text" class="form-control form-control-sm" id="allteams"
-                                                name="allteams" value="<%= el.allteams%>" placeholder="" required>
-                                        </div>
-                                        <!-- <div class="mb-3">
-                                         <div class="row">
-                                             <div class="col">
-                                                 <label for="win" class="form-label">Win</label>
-                                                 <input type="text" class="form-control win-loss-input" id="win"
-                                                     name="win" value="<%= el.win%>" placeholder="">
-                                             </div>
-                                             <div class="col">
-                                                 <label for="loss" class="form-label">Loss</label>
-                                                 <input type="text" class="form-control win-loss-input" id="loss"
-                                                     name="loss" value="<%= el.loss%>" placeholder="">
-                                             </div>
+                        <!-- BEGINNIG EDIT MODAL -->
+                        <div class="modal fade" id="<%= el.league %>" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Edit League</h5>
+                                        <i class="fa-solid fa-square-xmark close" data-bs-dismiss="modal"></i>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="/leagues/editLeagues/<%= el._id%>?_method=PUT"
+                                            enctype="application/x-www-form-urlencoded" method="POST">
+                                            <div class="mb-3">
+                                                <label for="league" class="form-label">League Name</label>
+                                                <input type="text" class="form-control form-control-sm" id="league"
+                                                    name="league" value="<%= el.league%>" placeholder="" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="sport" class="form-label">Sport</label>
+                                                <input type="text" class="form-control form-control-sm" id="sport"
+                                                    name="sport" value="<%= el.sport%>" placeholder="" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="allteams" class="form-label">Teams Names</label>
+                                                <input type="text" class="form-control form-control-sm" id="allteams"
+                                                    name="allteams" value="<%= el.allteams%>" placeholder="" required>
+                                            </div>
+                                            <!-- <div class="mb-3">
+                                     <div class="row">
+                                         <div class="col">
+                                             <label for="win" class="form-label">Win</label>
+                                             <input type="text" class="form-control win-loss-input" id="win"
+                                                 name="win" value="<%= el.win%>" placeholder="">
                                          </div>
-                                     </div> -->
-                                        <!-- <div class="mb-3">
-                                         <label for="imgUpload" class="form-label">Image</label>
-                                         <input type="file" class="form-control form-control-sm" id="imageUpload"
-                                             name="file">
-                                     </div> -->
-                                        <div class="mb-3">
-                                            <label for="notes" class="form-label">Notes</label>
-                                            <textarea class="form-control form-label-sm" id="notes"
-                                                name="notes"><%= el.notes%></textarea>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary submit"
-                                                value="Upload">Submit</button>
-                                        </div>
-                                    </form>
+                                         <div class="col">
+                                             <label for="loss" class="form-label">Loss</label>
+                                             <input type="text" class="form-control win-loss-input" id="loss"
+                                                 name="loss" value="<%= el.loss%>" placeholder="">
+                                         </div>
+                                     </div>
+                                 </div> -->
+                                            <!-- <div class="mb-3">
+                                     <label for="imgUpload" class="form-label">Image</label>
+                                     <input type="file" class="form-control form-control-sm" id="imageUpload"
+                                         name="file">
+                                 </div> -->
+                                            <div class="mb-3">
+                                                <label for="notes" class="form-label">Notes</label>
+                                                <textarea class="form-control form-label-sm" id="notes"
+                                                    name="notes"><%= el.notes%></textarea>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary submit"
+                                                    value="Upload">Submit</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </li>
+
                     <% }}) %>
         </ul>
     </section>

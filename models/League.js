@@ -5,6 +5,7 @@ const LeagueSchema = new mongoose.Schema({
         type: String,
         required: false,
         uppercase: true,
+        unique: true
     },
     numberofteams: {
         type: String,

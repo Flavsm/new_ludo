@@ -21,9 +21,9 @@ module.exports = {
     getPlayer: async (req, res) => {
         try {
             const player = await Player.findById(req.params.id);
-            const team = await Team.findById(req.params.id);
+            const team = await Team.find({ team: player.team });
             const url = await req.originalUrl;
-            /* console.log(post) */
+
             res.render("post-player.ejs", { player: player, user: req.user, team: team, url: url });
         } catch (err) {
             console.log(err);
@@ -39,8 +39,8 @@ module.exports = {
                 .upload(req.file.path,
                     {
                         eager: [
-                            { width: 400, height: 300, crop: "pad" },
-                            { width: 220, height: 220, crop: "pad" },]
+                            { width: 40, height: 300, crop: "pad" },
+                            { width: 300, height: 270, crop: "pad" },]
                     })
 
             /* let img = cloudinary.image("LUDO/prof_dhezb9.jpg", {height: 300, width: 400, crop: "pad"}) */

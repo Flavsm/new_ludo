@@ -9,38 +9,40 @@
         <ul class="list-feed">
             <!-- user.leagues.map(em =>em.league).includes(...user.teams.map(em=> em.team)) -->
             <% teams.forEach(el=> { %>
-                <% if(el.user==user.id || user.teams.map(em=> em.team).includes) { %>
+                <% if(el.user==user.id || user.teams.map(em=> em.team).includes(teams.team)) { %>
                     <li class="item-list-feed">
-                        <section class="card">
-                            <img src="https://img.favpng.com/14/2/16/logo-football-team-png-favpng-tzdASz0r6s1juSpCZVyq4VZJm.jpg"
-                                class="card-img-top" alt="...">
-                            <ul class="list-group list-group-flush list-card-feed">
-                                <li class="list-group-item item-list-card">
-                                    <%= el.team%>
-                                </li>
-                                <li class="list-group-item item-list-card">
-                                    <%= el.sport%>
-                                </li>
-                                <li class="list-group-item item-list-card">
-                                    <%= el.numberofplayers%>
-                                </li>
-                                <% if (el.win==='' || el.loss==='' ) {%>
-                                    <li class="list-group-item item-list-card">
-                                        0-0
+                        <section class="card card-border">
+                            <a href="/teams/<%= el._id%>" class="card-link">
+                                <img src="https://img.favpng.com/14/2/16/logo-football-team-png-favpng-tzdASz0r6s1juSpCZVyq4VZJm.jpg"
+                                    class="card-img-top" alt="...">
+                                <ul class="list-group list-group-flush list-card-feed">
+                                    <li class="list-group-item item-list-card first-info">
+                                        <%= el.team%>
                                     </li>
-                                    <% } else { %>
+                                    <li class="list-group-item item-list-card">
+                                        <%= el.sport%>
+                                    </li>
+                                    <li class="list-group-item item-list-card">
+                                        <%= el.numberofplayers%>
+                                    </li>
+                                    <% if (el.win==='' || el.loss==='' ) {%>
                                         <li class="list-group-item item-list-card">
-                                            <%= el.win %>-<%= el.loss%> | <%=
-                                                        `.${(Number(el.win)/(Number(el.win)+Number(el.loss))).toFixed(3).toString().split('.')[1]}`
-                                                        %>%
-                                                        <% } %>
+                                            0-0
                                         </li>
-                            </ul>
-                            <section class="card-body-notes">
-                                <p class="card-text">
-                                    <%= el.notes%>
-                                </p>
-                            </section>
+                                        <% } else { %>
+                                            <li class="list-group-item item-list-card">
+                                                <%= el.win %>-<%= el.loss%> | <%=
+                                                            `.${(Number(el.win)/(Number(el.win)+Number(el.loss))).toFixed(3).toString().split('.')[1]}`
+                                                            %>%
+                                                            <% } %>
+                                            </li>
+                                </ul>
+                                <section class="card-body-notes">
+                                    <p class="card-text">
+                                        <%= el.notes%>
+                                    </p>
+                                </section>
+                            </a>
                             <section class="card-body-btns">
                                 <% if(el.user==user.id) { %>
                                     <form action="/teams/deleteTeam/<%= el._id %>?_method=DELETE" method="POST"
@@ -50,7 +52,7 @@
                                         </button>
                                     </form>
                                     <button class="btn" type="button" data-bs-toggle="modal"
-                                        data-bs-target="#edit-teams">
+                                        data-bs-target="#<%= el.team %>">
                                         <i class="fa-regular fa-pen-to-square fa-lg colored-btn"></i>
                                     </button>
                                     <% } %>
@@ -70,7 +72,7 @@
                         </section>
                     </li>
                     <!-- BEGINNIG EDIT MODAL -->
-                    <div class="modal fade" id="edit-teams" tabindex="-1" role="dialog"
+                    <div class="modal fade" id="<%= el.team %>" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">

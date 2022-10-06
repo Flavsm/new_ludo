@@ -25,11 +25,12 @@ module.exports = {
         try {
             const player = await Player.findById(req.params.id);
             const team = await Team.findById(req.params.id);
+            const teams = await Team.find().sort({ createdAt: "desc" }).lean();
             const league = await League.findById(req.params.id);
 
             const url = await req.originalUrl;
 
-            res.render("post-league.ejs", { user: req.user, player: player, team: team, league: league, url: url }); //changes req.user to req.email
+            res.render("post-league.ejs", { user: req.user, player: player, team: team, teams: teams, league: league, url: url }); //changes req.user to req.email
         } catch (err) {
             console.log(err);
         }
@@ -55,7 +56,7 @@ module.exports = {
             let newLeague = await League.create({
                 league: req.body.league,
                 sport: req.body.sport,
-                allteams: req.body.allteams.split(',').map(el => el.toUpperCase()),
+                allteams: req.body.allteams.split(',').map(el => el.toUpperCase().trim()),
                 numberofteams: req.body.numberofteams,
                 notes: req.body.notes,
                 user: req.user.id,
@@ -68,12 +69,12 @@ module.exports = {
                 }
             )
 
-
             console.log("League has been added!");
-            res.redirect("/leagues"); //changed from profile to home
+            res.redirect("/leagues");
 
         } catch (err) {
             console.log(err);
+            res.redirect("/leagues")
         }
     },
     editLeagues: async (req, res) => {
@@ -84,7 +85,7 @@ module.exports = {
                     "$set": {
                         'league': req.body.league.toUpperCase(),
                         "sport": req.body.sport.toUpperCase(),
-                        'allteams': req.body.allteams.split(',').map(el => el.toUpperCase()),
+                        'allteams': req.body.allteams.split(',').map(el => el.toUpperCase().trim()),
                         'numberofteams': req.body.numberofteams,
                         'notes': req.body.notes.toUpperCase()
                     }
@@ -104,7 +105,7 @@ module.exports = {
                     "$set": {
                         'league': req.body.league.toUpperCase(),
                         "sport": req.body.sport.toUpperCase(),
-                        'allteams': req.body.allteams.split(',').map(el => el.toUpperCase()),
+                        'allteams': req.body.allteams.split(',').map(el => el.toUpperCase().trim()),
                         'numberofteams': req.body.numberofteams,
                         'notes': req.body.notes.toUpperCase()
                     }

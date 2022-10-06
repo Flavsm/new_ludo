@@ -9,21 +9,24 @@
             <section class="section-column-post">
               <section class="section-row-post">
                 <section class="section-main-player-info">
-                  <section class="section-each-extra-post">
-                    <h1>
+                  <section class="top-name-section">
+                    <h1 class="player-shirt">
                       <%= player.player %>
                     </h1>
+                    <i class="fa-solid fa-shirt"></i>
                   </section>
                   <section class="section-each-extra-post">
                     <h2>
-                      <%= player.team %>
+                      <a href="/teams/<%= team.map(el=> el._id)[0]%>">
+                        <%= player.team %>
+                      </a>
                     </h2>
                   </section>
-                  <section class="section-each-extra-post">
+                  <!-- <section class="section-each-extra-post">
                     <h2>
-                      #17
+                      #
                     </h2>
-                  </section>
+                  </section> -->
                 </section>
                 <section class="section-icons-post">
                   <form action="/players/editPlayer/<%= player.id %>?_method=PUT" method="POST">
@@ -63,9 +66,9 @@
                 </section>
                 <section class="section-each-extra-post">
                   <h2>
-                    <%= player.position %>
+                    <%= player.sport %>
                   </h2>
-                  <span>position</span>
+                  <span>sport</span>
                 </section>
                 <section class="section-each-extra-post">
                   <h2>
