@@ -54,8 +54,9 @@ module.exports = {
                         {
                             eager: [
                                 { width: 400, height: 300, crop: "pad" },
-                                { width: 300, height: 270, crop: "pad" },]
-                        })
+                                { width: 300, height: 270, crop: "pad" },],
+                            folder: 'ludo'
+                        },)
 
                 await League.findOneAndUpdate({ league: req.body.league },
                     {

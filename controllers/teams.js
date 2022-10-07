@@ -23,13 +23,14 @@ module.exports = {
         try {
             const players = await Player.find().sort({ createdAt: "desc" }).lean();
             const player = await Player.findById(req.params.id);
+            const teams = await Team.find().sort({ createdAt: "desc" }).lean();
             const team = await Team.findById(req.params.id);
             const league = await League.find({ allteams: team.team });
-            console.log(league)
+
             const url = await req.originalUrl;
 
             /* console.log(post) */
-            res.render("post-team.ejs", { player: player, players: players, user: req.user, team: team, league: league, url: url }); //changes req.user to req.email
+            res.render("post-team.ejs", { player: player, players: players, user: req.user, team: team, teams: teams, league: league, url: url }); //changes req.user to req.email
         } catch (err) {
             console.log(err);
         }
@@ -54,8 +55,10 @@ module.exports = {
                         {
                             eager: [
                                 { width: 400, height: 300, crop: "pad" },
-                                { width: 300, height: 270, crop: "pad" },]
-                        })
+                                { width: 300, height: 270, crop: "pad" },
+                            ],
+                            folder: 'ludo'
+                        },)
 
                 await Team.findOneAndUpdate({ team: req.body.team },
                     {

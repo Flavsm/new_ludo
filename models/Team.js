@@ -31,12 +31,12 @@ const TeamSchema = new mongoose.Schema({
         feed: {
             type: String,
             required: true,
-            default: '/imgs/user_feed.jpg'
+            default: '/imgs/team_feed.png'
         },
         profile: {
             type: String,
             required: true,
-            default: '/imgs/user_profile.jpg'
+            default: '/imgs/team_profile.png'
         },
     },
     cloudinaryId: {

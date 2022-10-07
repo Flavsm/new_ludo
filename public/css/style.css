@@ -979,7 +979,7 @@ body {
     justify-content: center;
     align-items: center;
     width: 85%;
-    height: 90%;
+    height: 80%;
     /* border: 1px solid greenyellow; */
 }
 
@@ -1021,7 +1021,7 @@ body {
 
 .section-secondary-player-info {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: flex-end;
     font-family: 'Jaldi', sans-serif;
     color: #FFFFFF;
@@ -1159,10 +1159,6 @@ body {
     background: #E1A750;
 }
 
-tbody tr {
-    cursor: pointer;
-}
-
 .section-team-stats {
     margin-top: 2rem;
 }
@@ -1196,6 +1192,10 @@ tbody tr {
 .team-table tbody {
     /* height: 5vh; */
     font-size: 1.1rem;
+}
+
+.table-light {
+    cursor: pointer;
 }
 
 #add-row:hover,

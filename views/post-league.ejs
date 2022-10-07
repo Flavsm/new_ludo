@@ -134,17 +134,18 @@
                   <th>TEAM</th>
                   <th>WIN</th>
                   <th>LOSS</th>
-                  <th>PCT</th>
+
                   <% if(league.sport=='SOCCER' ) { %>
-                    <th>team ties</th>
+                    <th>TIE</th>
                     <% } %>
+                      <th>PCT</th>
 
                       <!-- <th id="add-row">
                       </th> -->
                 </tr>
               </thead>
               <tbody>
-                <!-- FIGURE OUT SORT -->
+
                 <% teams.filter(el=> league.allteams.includes(el.team)).sort((a,b)=>
                   (b.win/(b.win+b.loss))-(a.win/(a.win+a.loss))).forEach(el=> { %>
                   <tr class="table-light" onclick="window.location ='/teams/<%= el._id %>'">
@@ -157,16 +158,18 @@
                     <td>
                       <%= el.loss %>
                     </td>
-                    <td>
-                      <%= `.${(Number(el.win)/(Number(el.win)+Number(el.loss))).toFixed(3).toString().split('.')[1]}` %>
-                        %
-
-                    </td>
                     <% if(league.sport=='SOCCER' ) { %>
                       <td>
                         <%= el.ties %>
                       </td>
                       <% } %>
+                        <td>
+                          <%=
+                            `.${(Number(el.win)/(Number(el.win)+Number(el.loss))).toFixed(3).toString().split('.')[1]}`
+                            %>
+                            %
+
+                        </td>
                   </tr>
                   <% }) %>
               </tbody>

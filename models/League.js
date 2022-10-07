@@ -21,12 +21,12 @@ const LeagueSchema = new mongoose.Schema({
         feed: {
             type: String,
             required: true,
-            default: '/imgs/user_feed.jpg'
+            default: '/imgs/league_feed.png'
         },
         profile: {
             type: String,
             required: true,
-            default: '/imgs/user_profile.jpg'
+            default: '/imgs/league_profile.png'
         },
     },
     cloudinaryId: {
