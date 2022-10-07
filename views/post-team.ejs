@@ -5,8 +5,7 @@
       <section class="section-profile-post">
         <%if(team.user==user.id || user.teams.map(el=> el.team).includes(team.team)){ %>
           <section class="nav-profile-post">
-            <img src="https://res.cloudinary.com/dprkasf7b/image/upload/c_pad,w_400,h_380/v1664241356/soccer_t6mqfe.jpg"
-              class="post-img-top img-fluid" alt=" ...">
+            <img src="<%= team.image.profile || team.image.default %>" class="post-img-top img-fluid" alt=" ...">
             <section class="section-column-post">
               <section class="section-row-post">
                 <section class="section-main-player-info">
@@ -349,7 +348,8 @@
                     <li class="item-list-feed">
                       <section class="card card-border">
                         <a href="/players/<%= el._id%>" class="card-link">
-                          <img src="<%= el.image.feed%>" class="card-img-top img-fluid" alt="...">
+                          <img src="<%= el.image.profile || el.image.default %>" class="card-img-top img-fluid"
+                            alt="...">
                           <ul class="list-group list-group-flush list-card-feed" data-id="el._id">
                             <li class="list-group-item item-list-card first-info">
                               <%= el.player%>

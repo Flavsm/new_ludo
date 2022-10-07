@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-// const upload = require("../middleware/multer");
+const upload = require("../middleware/multer");
 const leagueController = require("../controllers/leagues");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
@@ -12,7 +12,7 @@ router.get("/", ensureAuth, leagueController.getLeagues);
 router.get("/:id", ensureAuth, leagueController.getLeague);
 
 //create new league from the leagues feed
-router.post("/createLeague", leagueController.createLeague);
+router.post("/createLeague", upload.single("file"), leagueController.createLeague);
 
 //edit a league from the leagues feed
 router.put('/editLeagues/:id', ensureAuth, leagueController.editLeagues)

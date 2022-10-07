@@ -31,20 +31,7 @@ module.exports = {
     },
     createPlayer: async (req, res) => {
         try {
-            // Upload image to cloudinary
 
-            /* const result = await cloudinary.uploader.upload(req.file.path); */
-
-            const pattern = await cloudinary.uploader
-                .upload(req.file.path,
-                    {
-                        eager: [
-                            { width: 400, height: 300, crop: "pad" },
-                            { width: 300, height: 270, crop: "pad" },]
-                    })
-
-            /* let img = cloudinary.image("LUDO/prof_dhezb9.jpg", {height: 300, width: 400, crop: "pad"}) */
-            /* let img_default = "https://res.cloudinary.com/dprkasf7b/image/upload/c_pad,h_300,w_400/v1663434846/LUDO/prof_dhezb9.jpg" */
 
             let newPlayer = await Player.create({
                 team: req.body.team,
@@ -55,12 +42,30 @@ module.exports = {
                 loss: req.body.loss,
                 notes: req.body.notes,
                 user: req.user.id,
-                image: {
-                    feed: pattern.eager[0].secure_url,
-                    profile: pattern.eager[1].secure_url
-                },
-                cloudinaryId: pattern.public_id
+
             });
+
+            // If user added image, upload image to cloudinary and to user db
+            if (req.file) {
+                const pattern = await cloudinary.uploader
+                    .upload(req.file.path,
+                        {
+                            eager: [
+                                { width: 400, height: 300, crop: "pad" },
+                                { width: 300, height: 270, crop: "pad" },]
+                        })
+
+                await Player.findOneAndUpdate({ player: req.body.player },
+                    {
+                        $set: {
+                            image: {
+                                feed: pattern.eager[0].secure_url,
+                                profile: pattern.eager[1].secure_url
+                            },
+                            cloudinaryId: pattern.public_id
+                        }
+                    })
+            }
 
             const addIdToUser = await User.findOneAndUpdate(
                 { _id: req.user.id },
@@ -202,9 +207,6 @@ module.exports = {
                 'table._id': req.params.id
             });
 
-            // Delete image from cloudinary
-            //   await cloudinary.uploader.destroy(post.cloudinaryId);
-
             // Delete row from DB array
             await Player.findOneAndUpdate({
                 'table._id': req.params.id
@@ -230,7 +232,10 @@ module.exports = {
             let player = await Player.findById({ _id: req.params.id });
 
             // Delete image from cloudinary
-            await cloudinary.uploader.destroy(player.cloudinaryId);
+            if (player.cloudinaryId) {
+                await cloudinary.uploader.destroy(player.cloudinaryId);
+            }
+
             // Delete post from db
             await Player.deleteOne({ _id: req.params.id });
 

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-// const upload = require("../middleware/multer");
+const upload = require("../middleware/multer");
 const teamController = require("../controllers/teams"); //changed from posts to original
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
@@ -11,7 +11,7 @@ router.get("/", ensureAuth, teamController.getTeams);
 router.get("/:id", ensureAuth, teamController.getTeam);
 
 //create new team from the teams feed
-router.post("/createTeam", teamController.createTeam);
+router.post("/createTeam", upload.single("file"), teamController.createTeam);
 
 //edit a team from the teams feed
 router.put('/editTeams/:id', teamController.editTeams)

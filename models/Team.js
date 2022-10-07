@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { url } = require("../middleware/cloudinary");
 
 const TeamSchema = new mongoose.Schema({
     team: {
@@ -25,6 +26,22 @@ const TeamSchema = new mongoose.Schema({
         type: String,
         required: false,
         default: 0,
+    },
+    image: {
+        feed: {
+            type: String,
+            required: true,
+            default: '/imgs/user_feed.jpg'
+        },
+        profile: {
+            type: String,
+            required: true,
+            default: '/imgs/user_profile.jpg'
+        },
+    },
+    cloudinaryId: {
+        type: String,
+        require: false,
     },
     notes: {
         type: String,

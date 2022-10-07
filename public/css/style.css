@@ -1032,26 +1032,6 @@ body {
 
 }
 
-/* .section-person-post-extra-one {
-    display: flex;
-    justify-content: flex-end;
-    font-family: 'Jaldi', sans-serif;
-    color: #FFFFFF;
-    width: 90%;
-    height: 85%;
-    gap: 1rem;
-} */
-
-
-/* .section-person-post-extra-two {
-    display: flex;
-    justify-content: flex-end;
-    font-family: 'Jaldi', sans-serif;
-    color: #FFFFFF;
-    width: 90%;
-    height: 85%;
-    gap: 1rem;
-} */
 .top-name-section {
     display: flex;
     justify-content: space-between;
@@ -1061,6 +1041,10 @@ body {
     color: #FFFFFF;
     gap: 1.5rem
         /* border: 1px solid red; */
+}
+
+.top-name-section h1 {
+    font-size: 2.8vw;
 }
 
 .top-name-section i {

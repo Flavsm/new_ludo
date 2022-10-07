@@ -5,12 +5,12 @@
       <section class="section-profile-post">
         <%if(player.user==user.id || user.teams.map(em=> em.team).includes(player.team)){ %>
           <section class="nav-profile-post">
-            <img class="img-fluid post-img-top" src="<%= player.image.profile %>" />
+            <img src="<%= player.image.profile || player.image.default %>" class="img-fluid post-img-top" />
             <section class="section-column-post">
               <section class="section-row-post">
                 <section class="section-main-player-info">
-                  <section class="top-name-section">
-                    <h1 class="player-shirt">
+                  <section class="top-name-section player-shirt">
+                    <h1>
                       <%= player.player %>
                     </h1>
                     <i class="fa-solid fa-shirt"></i>

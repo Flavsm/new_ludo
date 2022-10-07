@@ -36,21 +36,6 @@ module.exports = {
     },
     createTeam: async (req, res) => {
         try {
-            // Upload image to cloudinary
-
-            /* const result = await cloudinary.uploader.upload(req.file.path); */
-
-
-            // const pattern = await cloudinary.uploader
-            //   .upload(req.file.path,
-            //     {
-            //       eager: [
-            //         { width: 400, height: 300, crop: "pad" },
-            //         { width: 220, height: 220, crop: "pad" },]
-            //     })
-
-            /* let img = cloudinary.image("LUDO/prof_dhezb9.jpg", {height: 300, width: 400, crop: "pad"}) */
-            /* let img_default = "https://res.cloudinary.com/dprkasf7b/image/upload/c_pad,h_300,w_400/v1663434846/LUDO/prof_dhezb9.jpg" */
 
             let newTeam = await Team.create({
                 team: req.body.team,
@@ -62,8 +47,28 @@ module.exports = {
                 user: req.user.id,
             });
 
-            /* req.user.entries.push(newPost.id) */
-            // console.log(req.body)
+            // If user added image, upload image to cloudinary and to user db
+            if (req.file) {
+                const pattern = await cloudinary.uploader
+                    .upload(req.file.path,
+                        {
+                            eager: [
+                                { width: 400, height: 300, crop: "pad" },
+                                { width: 300, height: 270, crop: "pad" },]
+                        })
+
+                await Team.findOneAndUpdate({ team: req.body.team },
+                    {
+                        $set: {
+                            image: {
+                                feed: pattern.eager[0].secure_url,
+                                profile: pattern.eager[1].secure_url
+                            },
+                            cloudinaryId: pattern.public_id
+                        }
+                    })
+            }
+
 
             const addIdToUser = await User.findOneAndUpdate(
                 { _id: req.user.id },
@@ -173,10 +178,6 @@ module.exports = {
                 }]
             );
 
-
-            console.log(obj)
-            console.log(user)
-
             console.log("Add pinned");
             res.redirect(`/teams/${req.params.id}`);
         } catch (err) {
@@ -238,9 +239,6 @@ module.exports = {
                 'table._id': req.params.id
             });
 
-            // Delete image from cloudinary
-            //   await cloudinary.uploader.destroy(post.cloudinaryId);
-
             // Delete row from DB array
             await Team.findOneAndUpdate({
                 'table._id': req.params.id
@@ -264,8 +262,11 @@ module.exports = {
 
             // Find post by id
             let team = await Team.findById({ _id: req.params.id });
+
             // Delete image from cloudinary
-            //   await cloudinary.uploader.destroy(post.cloudinaryId);
+            if (team.cloudinaryId) {
+                await cloudinary.uploader.destroy(team.cloudinaryId);
+            }
             // Delete post from db
             await Team.deleteOne({ _id: req.params.id });
 

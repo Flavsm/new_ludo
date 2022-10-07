@@ -1,21 +1,21 @@
 const mongoose = require("mongoose");
-//const { url } = require("../middleware/cloudinary"); prob deleted it
+const { url } = require("../middleware/cloudinary");
 
 const PlayerSchema = new mongoose.Schema({
   player: {
     type: String,
     required: true,
     uppercase: true,
-    unique: true
   },
   team: {
     type: String,
-    required: false,
+    required: true,
     uppercase: true,
+    unique: true
   },
   sport: {
     type: String,
-    required: false,
+    required: true,
     uppercase: true,
   },
   position: {
@@ -36,17 +36,18 @@ const PlayerSchema = new mongoose.Schema({
   image: {
     feed: {
       type: String,
-      required: false,
+      required: true,
+      default: '/imgs/user_feed.jpg'
     },
     profile: {
       type: String,
-      required: false,
+      required: true,
+      default: '/imgs/user_profile.jpg'
     },
-    required: false
   },
   cloudinaryId: {
     type: String,
-    require: true,
+    require: false,
   },
   notes: {
     type: String,

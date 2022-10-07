@@ -29,21 +29,6 @@ module.exports = {
     },
     createPlayer: async (req, res) => {
         try {
-            // Upload image to cloudinary
-
-            /* const result = await cloudinary.uploader.upload(req.file.path); */
-
-
-            const pattern = await cloudinary.uploader
-                .upload(req.file.path,
-                    {
-                        eager: [
-                            { width: 400, height: 300, crop: "pad" },
-                            { width: 220, height: 220, crop: "pad" },]
-                    })
-
-            /* let img = cloudinary.image("LUDO/prof_dhezb9.jpg", {height: 300, width: 400, crop: "pad"}) */
-            /* let img_default = "https://res.cloudinary.com/dprkasf7b/image/upload/c_pad,h_300,w_400/v1663434846/LUDO/prof_dhezb9.jpg" */
 
             let newPlayer = await Player.create({
                 team: req.body.team,
@@ -54,14 +39,31 @@ module.exports = {
                 loss: req.body.loss,
                 notes: req.body.notes,
                 user: req.user.id,
-                image: {
-                    feed: pattern.eager[0].secure_url,
-                    profile: pattern.eager[1].secure_url
-                },
-                cloudinaryId: pattern.public_id
+
             });
 
-            /* req.user.entries.push(newPost.id) */
+            // If user added image, upload image to cloudinary and to user db
+            if (req.file) {
+                const pattern = await cloudinary.uploader
+                    .upload(req.file.path,
+                        {
+                            eager: [
+                                { width: 400, height: 300, crop: "pad" },
+                                { width: 300, height: 270, crop: "pad" },]
+                        })
+
+                await Player.findOneAndUpdate({ player: req.body.player },
+                    {
+                        $set: {
+                            image: {
+                                feed: pattern.eager[0].secure_url,
+                                profile: pattern.eager[1].secure_url
+                            },
+                            cloudinaryId: pattern.public_id
+                        }
+                    })
+            }
+
 
             const addIdToUser = await User.findOneAndUpdate(
                 { _id: req.user.id },
@@ -69,9 +71,6 @@ module.exports = {
                     $push: { entries: newPlayer.id },
                 }
             )
-            /* console.log(req.user) */ //gets the user model
-            /* console.log(newPost) */ //get the new post info
-            //  console.log(req.body)
 
             console.log("Player has been added!");
             res.redirect("/home"); //changed from profile to home
@@ -82,21 +81,6 @@ module.exports = {
     },
     createTeam: async (req, res) => {
         try {
-            // Upload image to cloudinary
-
-            /* const result = await cloudinary.uploader.upload(req.file.path); */
-
-
-            // const pattern = await cloudinary.uploader
-            //   .upload(req.file.path,
-            //     {
-            //       eager: [
-            //         { width: 400, height: 300, crop: "pad" },
-            //         { width: 220, height: 220, crop: "pad" },]
-            //     })
-
-            /* let img = cloudinary.image("LUDO/prof_dhezb9.jpg", {height: 300, width: 400, crop: "pad"}) */
-            /* let img_default = "https://res.cloudinary.com/dprkasf7b/image/upload/c_pad,h_300,w_400/v1663434846/LUDO/prof_dhezb9.jpg" */
 
             let newTeam = await Team.create({
                 team: req.body.team,
@@ -108,8 +92,28 @@ module.exports = {
                 user: req.user.id,
             });
 
-            /* req.user.entries.push(newPost.id) */
-            // console.log(req.body)
+            // If user added image, upload image to cloudinary and to user db
+            if (req.file) {
+                const pattern = await cloudinary.uploader
+                    .upload(req.file.path,
+                        {
+                            eager: [
+                                { width: 400, height: 300, crop: "pad" },
+                                { width: 300, height: 270, crop: "pad" },]
+                        })
+
+                await Team.findOneAndUpdate({ team: req.body.team },
+                    {
+                        $set: {
+                            image: {
+                                feed: pattern.eager[0].secure_url,
+                                profile: pattern.eager[1].secure_url
+                            },
+                            cloudinaryId: pattern.public_id
+                        }
+                    })
+            }
+
 
             const addIdToUser = await User.findOneAndUpdate(
                 { _id: req.user.id },
@@ -127,37 +131,37 @@ module.exports = {
     },
     createLeague: async (req, res) => {
         try {
-            // Upload image to cloudinary
-
-            /* const result = await cloudinary.uploader.upload(req.file.path); */
-
-
-            // const pattern = await cloudinary.uploader
-            //     .upload(req.file.path,
-            //         {
-            //             eager: [
-            //                 { width: 400, height: 300, crop: "pad" },
-            //                 { width: 220, height: 220, crop: "pad" },]
-            //         })
-
-            /* let img = cloudinary.image("LUDO/prof_dhezb9.jpg", {height: 300, width: 400, crop: "pad"}) */
-            /* let img_default = "https://res.cloudinary.com/dprkasf7b/image/upload/c_pad,h_300,w_400/v1663434846/LUDO/prof_dhezb9.jpg" */
-
             let newLeague = await League.create({
                 league: req.body.league,
                 sport: req.body.sport,
-                allteams: req.body.allteams.split(',').map(el => el.toUpperCase()),
+                allteams: req.body.allteams.split(',').map(el => el.toUpperCase().trim()),
                 numberofteams: req.body.numberofteams,
                 notes: req.body.notes,
                 user: req.user.id,
-                // image: {
-                //     feed: pattern.eager[0].secure_url,
-                //     profile: pattern.eager[1].secure_url
-                // },
-                // cloudinaryId: pattern.public_id
             });
 
-            /* req.user.entries.push(newPost.id) */
+            // If user added image, upload image to cloudinary and to user db
+            if (req.file) {
+                const pattern = await cloudinary.uploader
+                    .upload(req.file.path,
+                        {
+                            eager: [
+                                { width: 400, height: 300, crop: "pad" },
+                                { width: 300, height: 270, crop: "pad" },]
+                        })
+
+                await League.findOneAndUpdate({ league: req.body.league },
+                    {
+                        $set: {
+                            image: {
+                                feed: pattern.eager[0].secure_url,
+                                profile: pattern.eager[1].secure_url
+                            },
+                            cloudinaryId: pattern.public_id
+                        }
+                    })
+            }
+
 
             const addIdToUser = await User.findOneAndUpdate(
                 { _id: req.user.id },
@@ -165,8 +169,6 @@ module.exports = {
                     $push: { leagues: { 'league': newLeague.league }, entries: newLeague.id, leagueEntries: newLeague.id },
                 }
             )
-            /* console.log(req.user) */ //gets the user model
-            /* console.log(newPost) */ //get the new post info
 
             console.log("League has been added!");
             res.redirect("/home"); //changed from profile to home

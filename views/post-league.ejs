@@ -5,8 +5,7 @@
       <%if(league.user==user.id || user.leagues.map(em=> em.league).includes(league.league)){ %>
         <section class="section-profile-post">
           <section class="nav-profile-post">
-            <img src="https://res.cloudinary.com/dprkasf7b/image/upload/c_pad,w_400,h_380/v1664241356/soccer_t6mqfe.jpg"
-              class="post-img-top img-fluid" alt=" ...">
+            <img src="<%= league.image.profile || league.image.default %>" class="post-img-top img-fluid" alt=" ...">
             <section class="section-column-post">
               <section class="section-row-post">
                 <section class="section-main-player-info">
@@ -145,8 +144,9 @@
                 </tr>
               </thead>
               <tbody>
-
-                <% teams.filter(el=> league.allteams.includes(el.team)).sort((a,b)=> (a.win)-b.win).forEach(el=> { %>
+                <!-- FIGURE OUT SORT -->
+                <% teams.filter(el=> league.allteams.includes(el.team)).sort((a,b)=>
+                  (b.win/(b.win+b.loss))-(a.win/(a.win+a.loss))).forEach(el=> { %>
                   <tr class="table-light" onclick="window.location ='/teams/<%= el._id %>'">
                     <td>
                       <%= el.team %>
