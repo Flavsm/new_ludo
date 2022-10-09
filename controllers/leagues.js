@@ -70,10 +70,10 @@ module.exports = {
                     })
             }
 
-            const addIdToUser = await User.findOneAndUpdate(
+            const addLeagueToUser = await User.findOneAndUpdate(
                 { _id: req.user.id },
                 {
-                    $push: { leagues: { 'league': newLeague.league }, entries: newLeague.id, leagueEntries: newLeague.id },
+                    $push: { leagues: { 'league': newLeague.league } },
                 }
             )
 
@@ -100,6 +100,29 @@ module.exports = {
                 }]
             );
 
+            // If user added image, upload image to cloudinary and to user db
+            if (req.file) {
+                const pattern = await cloudinary.uploader
+                    .upload(req.file.path,
+                        {
+                            eager: [
+                                { width: 400, height: 300, crop: "pad" },
+                                { width: 300, height: 270, crop: "pad" },],
+                            folder: 'ludo'
+                        },)
+
+                await League.findOneAndUpdate({ league: req.body.league },
+                    {
+                        $set: {
+                            image: {
+                                feed: pattern.eager[0].secure_url,
+                                profile: pattern.eager[1].secure_url
+                            },
+                            cloudinaryId: pattern.public_id
+                        }
+                    })
+            }
+
             res.redirect("/leagues");
         } catch (err) {
             console.log(err);
@@ -118,34 +141,99 @@ module.exports = {
                 }]
             );
 
+            // If user added image, upload image to cloudinary and to user db
+            if (req.file) {
+                const pattern = await cloudinary.uploader
+                    .upload(req.file.path,
+                        {
+                            eager: [
+                                { width: 400, height: 300, crop: "pad" },
+                                { width: 300, height: 270, crop: "pad" },],
+                            folder: 'ludo'
+                        },)
+
+                await League.findOneAndUpdate({ league: req.body.league },
+                    {
+                        $set: {
+                            image: {
+                                feed: pattern.eager[0].secure_url,
+                                profile: pattern.eager[1].secure_url
+                            },
+                            cloudinaryId: pattern.public_id
+                        }
+                    })
+            }
+
             res.redirect(`/leagues/${req.params.id}`);
         } catch (err) {
             console.log(err);
         }
     },
-    pinLeagues: async (req, res) => {
+    togglePinnedFeed: async (req, res) => {
         try {
-            await League.findOneAndUpdate(
-                { _id: req.params.id },
-                [{
-                    "$set": { "pinned": { "$eq": [false, "$pinned"] } }
-                }]
-            );
 
-            console.log("Toggle pinned");
+            let obj = await League.findById(req.params.id).lean()
+            let user = await User.findById(req.user)
+
+
+            if (user.pinned.find(el => el._id == req.params.id)) {
+                await User.updateOne(
+                    { _id: req.user.id },
+                    {
+                        $pull: { pinned: obj },
+                    },
+                    {
+                        new: true
+                    }
+                )
+            } else {
+                await User.updateOne(
+                    { _id: req.user.id },
+                    {
+                        $push: { pinned: obj },
+
+                    },
+                    {
+                        new: true
+                    }
+                )
+            }
+
+            console.log("Toggle pinned feed");
             res.redirect("/leagues");
         } catch (err) {
             console.log(err);
         }
     },
-    pinLeague: async (req, res) => {
+    togglePinned: async (req, res) => {
         try {
-            await League.findOneAndUpdate(
-                { _id: req.params.id },
-                [{
-                    "$set": { "pinned": { "$eq": [false, "$pinned"] } }
-                }]
-            );
+
+            let obj = await League.findById(req.params.id).lean()
+            let user = await User.findById(req.user)
+
+
+            if (user.pinned.find(el => el._id == req.params.id)) {
+                await User.updateOne(
+                    { _id: req.user.id },
+                    {
+                        $pull: { pinned: obj },
+                    },
+                    {
+                        new: true
+                    }
+                )
+            } else {
+                await User.updateOne(
+                    { _id: req.user.id },
+                    {
+                        $push: { pinned: obj },
+
+                    },
+                    {
+                        new: true
+                    }
+                )
+            }
 
             console.log("Toggle pinned");
             res.redirect(`/leagues/${req.params.id}`);
@@ -157,22 +245,38 @@ module.exports = {
         try {
 
             // Find post by id
-            let league = await League.findById({ _id: req.params.id });
+            let league = await League.findById(req.params.id).lean()
+            let user = await User.findById(req.user)
 
             // Delete image from cloudinary
             if (league.cloudinaryId) {
                 await cloudinary.uploader.destroy(league.cloudinaryId);
             }
+
+            // Delete league from pinned array
+            if (user.pinned.find(el => el._id == req.params.id)) {
+                await User.updateOne(
+                    { _id: req.user.id },
+                    {
+                        $pull: { pinned: league },
+                    },
+                    {
+                        new: true
+                    }
+                )
+            }
+            //Delete league from leagues array
+            await User.updateOne(
+                { _id: req.user.id },
+                {
+                    $pull: { leagues: { 'league': league.league } }
+                }
+            )
+
             // Delete post from db
             await League.deleteOne({ _id: req.params.id });
 
-            // Delete post from DB array
-            const deleteIdFromUser = await User.updateOne(
-                { _id: req.user.id },
-                {
-                    $pull: { leagues: { 'league': league.league }, entries: league.id, league: league.id },
-                }
-            )
+
 
             console.log("Deleted League");
             res.redirect("/leagues");

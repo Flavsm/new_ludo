@@ -8,7 +8,6 @@ module.exports = {
 
         try {
             const players = await Player.find().sort({ createdAt: "desc" }).lean();
-            /* const userPosts = await Post.find(req.user) */
             const player = await Player.findById(req.params.id);
             const url = await req.originalUrl;
 
@@ -70,7 +69,7 @@ module.exports = {
                     })
             }
 
-            const addIdToUser = await User.findOneAndUpdate(
+            await User.findOneAndUpdate(
                 { _id: req.user.id },
                 {
                     $push: { entries: newPlayer.id },
@@ -101,6 +100,31 @@ module.exports = {
                 }]
             );
 
+            // If user added image, upload image to cloudinary and to user db
+            if (req.file) {
+                const pattern = await cloudinary.uploader
+                    .upload(req.file.path,
+                        {
+                            eager: [
+                                { width: 400, height: 300, crop: "pad" },
+                                { width: 300, height: 270, crop: "pad" },
+                            ],
+                            folder: 'ludo'
+                        },
+                    )
+
+                await Player.findOneAndUpdate({ player: req.body.player },
+                    {
+                        $set: {
+                            image: {
+                                feed: pattern.eager[0].secure_url,
+                                profile: pattern.eager[1].secure_url
+                            },
+                            cloudinaryId: pattern.public_id
+                        }
+                    })
+            }
+
             res.redirect("/players");
         } catch (err) {
             console.log(err);
@@ -122,34 +146,101 @@ module.exports = {
                 }]
             );
 
+            // If user added image, upload image to cloudinary and to user db
+            if (req.file) {
+                const pattern = await cloudinary.uploader
+                    .upload(req.file.path,
+                        {
+                            eager: [
+                                { width: 400, height: 300, crop: "pad" },
+                                { width: 300, height: 270, crop: "pad" },
+                            ],
+                            folder: 'ludo'
+                        },
+                    )
+
+                await Player.findOneAndUpdate({ player: req.body.player },
+                    {
+                        $set: {
+                            image: {
+                                feed: pattern.eager[0].secure_url,
+                                profile: pattern.eager[1].secure_url
+                            },
+                            cloudinaryId: pattern.public_id
+                        }
+                    })
+            }
+
             res.redirect(`/players/${req.params.id}`);
         } catch (err) {
             console.log(err);
         }
     },
-    pinPlayers: async (req, res) => {
+    togglePinnedFeed: async (req, res) => {
         try {
-            await Player.findOneAndUpdate(
-                { _id: req.params.id },
-                [{
-                    "$set": { "pinned": { "$eq": [false, "$pinned"] } }
-                }]
-            );
 
-            console.log("Toggle pinned");
+            const obj = await Player.findById(req.params.id).lean()
+            const user = await User.findById(req.user)
+
+
+            if (user.pinned.find(el => el._id == req.params.id)) {
+                await User.updateOne(
+                    { _id: req.user.id },
+                    {
+                        $pull: { pinned: obj },
+                    },
+                    {
+                        new: true
+                    }
+                )
+            } else {
+                await User.updateOne(
+                    { _id: req.user.id },
+                    {
+                        $push: { pinned: obj },
+
+                    },
+                    {
+                        new: true
+                    }
+                )
+            }
+
+            console.log("Toggle pinned feed");
             res.redirect("/players");
         } catch (err) {
             console.log(err);
         }
     },
-    pinPlayer: async (req, res) => {
+    togglePinned: async (req, res) => {
         try {
-            await Player.findOneAndUpdate(
-                { _id: req.params.id },
-                [{
-                    "$set": { "pinned": { "$eq": [false, "$pinned"] } }
-                }]
-            );
+
+            const obj = await Player.findById(req.params.id).lean()
+            const user = await User.findById(req.user)
+
+
+            if (user.pinned.find(el => el._id == req.params.id)) {
+                await User.updateOne(
+                    { _id: req.user.id },
+                    {
+                        $pull: { pinned: obj },
+                    },
+                    {
+                        new: true
+                    }
+                )
+            } else {
+                await User.updateOne(
+                    { _id: req.user.id },
+                    {
+                        $push: { pinned: obj },
+
+                    },
+                    {
+                        new: true
+                    }
+                )
+            }
 
             console.log("Toggle pinned");
             res.redirect(`/players/${req.params.id}`);
@@ -159,7 +250,7 @@ module.exports = {
     },
     createRow: async (req, res) => {
         try {
-            let newRow = await Player.findOneAndUpdate(
+            await Player.findOneAndUpdate(
                 { _id: req.params.id },
                 {
                     '$push': { 'table': { 'row': { 'cell1': req.body.cell1, 'cell2': req.body.cell2, 'cell3': req.body.cell3, 'cell4': req.body.cell4, 'cell5': req.body.cell5, 'cell6': req.body.cell6, 'cell7': req.body.cell7, 'cell8': req.body.cell8, 'cell9': req.body.cell9 } } }
@@ -181,11 +272,11 @@ module.exports = {
         try {
 
             // Find post by id
-            let player = await Player.findOne({
-                'table._id': req.params.id
-            });
+            // let player = await Player.findOne({
+            //     'table._id': req.params.id
+            // });
 
-            let editRow = await Player.findOneAndUpdate(
+            await Player.findOneAndUpdate(
                 { 'table._id': req.params.id },
                 [{
                     '$set': { 'table': { 'row': { 'cell1': req.body.cell1, 'cell2': req.body.cell2, 'cell3': req.body.cell3, 'cell4': req.body.cell4, 'cell5': req.body.cell5, 'cell6': req.body.cell6, 'cell7': req.body.cell7, 'cell8': req.body.cell8, 'cell9': req.body.cell9 } } }
@@ -206,7 +297,7 @@ module.exports = {
         try {
 
             // Find post by id
-            let player = await Player.findOne({
+            const player = await Player.findOne({
                 'table._id': req.params.id
             });
 
@@ -232,23 +323,31 @@ module.exports = {
         try {
 
             // Find post by id
-            let player = await Player.findById({ _id: req.params.id });
+            const player = await Player.findById(req.params.id).lean()
+            const user = await User.findById(req.user)
 
             // Delete image from cloudinary
             if (player.cloudinaryId) {
                 await cloudinary.uploader.destroy(player.cloudinaryId);
             }
 
+            // Delete player from pinned array
+            if (user.pinned.find(el => el._id == req.params.id)) {
+                await User.updateOne(
+                    { _id: req.user.id },
+                    {
+                        $pull: { pinned: player },
+                    },
+                    {
+                        new: true
+                    }
+                )
+            }
+
+
             // Delete post from db
             await Player.deleteOne({ _id: req.params.id });
 
-            // Delete post from DB array
-            const deleteIdFromUser = await User.updateOne(
-                { _id: req.user.id },
-                {
-                    $pull: { entries: player.id }
-                }
-            )
 
             console.log("Deleted Player");
             res.redirect("/players");

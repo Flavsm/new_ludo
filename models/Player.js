@@ -6,16 +6,16 @@ const PlayerSchema = new mongoose.Schema({
     type: String,
     required: true,
     uppercase: true,
+    unique: true
   },
   team: {
     type: String,
-    required: true,
+    required: false,
     uppercase: true,
-    unique: true
   },
   sport: {
     type: String,
-    required: true,
+    required: false,
     uppercase: true,
   },
   position: {
@@ -61,10 +61,6 @@ const PlayerSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now,
-  },
-  pinned: {
-    type: Boolean,
-    default: false,
   },
   table: [
     {

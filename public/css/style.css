@@ -575,8 +575,9 @@ body {
     align-items: center;
     border-right: 1px solid #E1A750;
     height: 120%;
-    width: 7%;
+    width: 5%;
     padding-right: 0.5rem;
+    margin-right: 0.5rem;
     text-align: right;
 }
 
@@ -757,10 +758,12 @@ body {
     transition-timing-function: ease-in-out;
     transition-delay: 0s;
     justify-content: space-evenly;
+    align-items: center;
 }
 
 .card-link {
     height: 90%;
+    border-bottom: 1px solid #E1A750;
 }
 
 .card:hover {
@@ -810,9 +813,10 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border-top: 1px solid #E1A750;
+    /* border-top: 1px solid #E1A750; */
     /* gap: 1rem; */
     height: 10% !important;
+    width: 85%;
 }
 
 .colored-btn {

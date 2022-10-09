@@ -51,10 +51,10 @@
                                         <i class="fa-regular fa-pen-to-square fa-lg colored-btn"></i>
                                     </button>
                                     <% } %>
-                                        <form action="/leagues/pinLeagues/<%= el._id %>?_method=PUT" method="POST"
+                                        <form action="/leagues/togglePinnedFeed/<%= el._id %>?_method=PUT" method="POST"
                                             class="feed-pin-form">
                                             <button class="btn" type="submit">
-                                                <% if (el.pinned==true ) { %>
+                                                <% if (user.pinned.find(em=> em._id==(el._id).toString())) { %>
                                                     <i class="fa-solid fa-thumbtack fa-lg pinned-btn"></i>
                                                     <% } else { %>
                                                         <i class="fa-solid fa-thumbtack fa-lg unpinned-btn"></i>
@@ -78,7 +78,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <form action="/leagues/editLeagues/<%= el._id%>?_method=PUT"
-                                            enctype="application/x-www-form-urlencoded" method="POST">
+                                            enctype="multipart/form-data" method="POST">
                                             <div class="mb-3">
                                                 <label for="league" class="form-label">League Name</label>
                                                 <input type="text" class="form-control form-control-sm" id="league"
@@ -109,11 +109,11 @@
                                          </div>
                                      </div>
                                  </div> -->
-                                            <!-- <div class="mb-3">
-                                     <label for="imgUpload" class="form-label">Image</label>
-                                     <input type="file" class="form-control form-control-sm" id="imageUpload"
-                                         name="file">
-                                 </div> -->
+                                            <div class="mb-3">
+                                                <label for="imgUpload" class="form-label">Image</label>
+                                                <input type="file" class="form-control form-control-sm" id="imageUpload"
+                                                    name="file">
+                                            </div>
                                             <div class="mb-3">
                                                 <label for="notes" class="form-label">Notes</label>
                                                 <textarea class="form-control form-label-sm" id="notes"

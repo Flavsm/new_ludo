@@ -24,7 +24,7 @@ module.exports = {
             const players = await Player.find().sort({ createdAt: "desc" }).lean();
             const player = await Player.findById(req.params.id);
             const teams = await Team.find().sort({ createdAt: "desc" }).lean();
-            const team = await Team.findById(req.params.id);
+            const team = await Team.findById(req.params.id).lean();
             const league = await League.find({ allteams: team.team });
 
             const url = await req.originalUrl;
@@ -72,11 +72,10 @@ module.exports = {
                     })
             }
 
-
-            const addIdToUser = await User.findOneAndUpdate(
+            await User.findOneAndUpdate(
                 { _id: req.user.id },
                 {
-                    $push: { teams: { 'team': newTeam.team }, entries: newTeam.id, teamEntries: newTeam.id },
+                    $push: { teams: { 'team': newTeam.team } },
                 }
             )
 
@@ -103,6 +102,30 @@ module.exports = {
                 }]
             );
 
+            // If user added image, upload image to cloudinary and to user db
+            if (req.file) {
+                const pattern = await cloudinary.uploader
+                    .upload(req.file.path,
+                        {
+                            eager: [
+                                { width: 400, height: 300, crop: "pad" },
+                                { width: 300, height: 270, crop: "pad" },
+                            ],
+                            folder: 'ludo'
+                        },)
+
+                await Team.findOneAndUpdate({ team: req.body.team },
+                    {
+                        $set: {
+                            image: {
+                                feed: pattern.eager[0].secure_url,
+                                profile: pattern.eager[1].secure_url
+                            },
+                            cloudinaryId: pattern.public_id
+                        }
+                    })
+            }
+
             res.redirect("/teams");
         } catch (err) {
             console.log(err);
@@ -123,65 +146,101 @@ module.exports = {
                 }]
             );
 
+            // If user added image, upload image to cloudinary and to user db
+            if (req.file) {
+                const pattern = await cloudinary.uploader
+                    .upload(req.file.path,
+                        {
+                            eager: [
+                                { width: 400, height: 300, crop: "pad" },
+                                { width: 300, height: 270, crop: "pad" },
+                            ],
+                            folder: 'ludo'
+                        },)
+
+                await Team.findOneAndUpdate({ team: req.body.team },
+                    {
+                        $set: {
+                            image: {
+                                feed: pattern.eager[0].secure_url,
+                                profile: pattern.eager[1].secure_url
+                            },
+                            cloudinaryId: pattern.public_id
+                        }
+                    })
+            }
+
             res.redirect(`/teams/${req.params.id}`);
         } catch (err) {
             console.log(err);
         }
     },
-    pinTeams: async (req, res) => {
+    togglePinnedFeed: async (req, res) => {
         try {
-            await Team.findOneAndUpdate(
-                { _id: req.params.id },
-                [{
-                    "$set": { "pinned": { "$eq": [false, "$pinned"] } }
-                }]
-            );
 
-            console.log("Toggle pinned");
+            let obj = await Team.findById(req.params.id).lean()
+            let user = await User.findById(req.user)
+
+            if (user.pinned.find(el => el._id == req.params.id)) {
+                await User.updateOne(
+                    { _id: req.user.id },
+                    {
+                        $pull: { pinned: obj },
+                    },
+                    {
+                        new: true
+                    }
+                )
+            } else {
+                await User.updateOne(
+                    { _id: req.user.id },
+                    {
+                        $push: { pinned: obj },
+
+                    },
+                    {
+                        new: true
+                    }
+                )
+            }
+
+            console.log("Toggle pinned feed");
             res.redirect("/teams");
         } catch (err) {
             console.log(err);
         }
     },
-    pinTeam: async (req, res) => {
-        try {
-            await Team.findOneAndUpdate(
-                { _id: req.params.id },
-                [{
-                    "$set": { "pinned": { "$eq": [false, "$pinned"] } }
-                }]
-            );
-
-            console.log("Toggle pinned");
-            res.redirect(`/teams/${req.params.id}`);
-        } catch (err) {
-            console.log(err);
-        }
-    },
-    addToPinned: async (req, res) => {
+    togglePinned: async (req, res) => {
         try {
 
-            let obj = await Team.findById(req.params.id)
+            let obj = await Team.findById(req.params.id).lean()
             let user = await User.findById(req.user)
 
 
-            const addPinnedToUser = await User.updateOne(
-                { _id: req.user.id },
-                {
-                    $push: { pinned: obj },
-                }, {
-                new: true
+            if (user.pinned.find(el => el._id == req.params.id)) {
+                await User.findOneAndUpdate(
+                    { _id: req.user.id },
+                    {
+                        $pull: { pinned: obj },
+                    },
+                    {
+                        new: true
+                    }
+                )
+            } else {
+                await User.findOneAndUpdate(
+                    { _id: req.user.id },
+                    {
+                        $push: { pinned: obj },
+
+                    },
+                    {
+                        new: true
+                    }
+                )
             }
-            )
 
-            await User.findOneAndUpdate(
-                { _id: req.user.id },
-                [{
-                    "$set": { pinned: { "pinned": { "$eq": [false, "$pinned"] } } }
-                }]
-            );
-
-            console.log("Add pinned");
+            console.log("Toggle pinned");
             res.redirect(`/teams/${req.params.id}`);
         } catch (err) {
             console.log(err);
@@ -189,7 +248,7 @@ module.exports = {
     },
     createRow: async (req, res) => {
         try {
-            let newRow = await Team.findOneAndUpdate(
+            await Team.findOneAndUpdate(
                 { _id: req.params.id },
                 {
                     '$push': { 'table': { 'row': { 'cell1': req.body.cell1, 'cell2': req.body.cell2, 'cell3': req.body.cell3, 'cell4': req.body.cell4, 'cell5': req.body.cell5, 'cell6': req.body.cell6, 'cell7': req.body.cell7, 'cell8': req.body.cell8, 'cell9': req.body.cell9 } } }
@@ -215,9 +274,7 @@ module.exports = {
                 'table._id': req.params.id
             });
 
-            console.log(team)
-
-            let editRow = await Team.findOneAndUpdate(
+            await Team.findOneAndUpdate(
                 { 'table._id': req.params.id },
                 [{
                     '$set': { 'table': { 'row': { 'cell1': req.body.cell1, 'cell2': req.body.cell2, 'cell3': req.body.cell3, 'cell4': req.body.cell4, 'cell5': req.body.cell5, 'cell6': req.body.cell6, 'cell7': req.body.cell7, 'cell8': req.body.cell8, 'cell9': req.body.cell9 } } }
@@ -264,24 +321,42 @@ module.exports = {
         try {
 
             // Find post by id
-            let team = await Team.findById({ _id: req.params.id });
+            let team = await Team.findById(req.params.id).lean();
+            let user = await User.findById(req.user)
 
             // Delete image from cloudinary
             if (team.cloudinaryId) {
                 await cloudinary.uploader.destroy(team.cloudinaryId);
             }
-            // Delete post from db
-            await Team.deleteOne({ _id: req.params.id });
+
+            // Delete post from pinned array
+            if (user.pinned.find(el => el._id == req.params.id)) {
+                await User.findOneAndUpdate(
+                    { _id: req.user.id },
+                    {
+                        $pull: { pinned: team },
+                    },
+                    {
+                        new: true
+                    }
+                )
+            }
 
             // Delete post from DB array
-            const deleteIdFromUser = await User.updateOne(
+            await User.findOneAndUpdate(
                 { _id: req.user.id },
                 {
-                    $pull: { teams: { 'team': team.team }, entries: team.id, teamEntries: team.id },
+                    $pull: { teams: { 'team': team.team } },
+                },
+                {
+                    new: true
                 }
             )
 
-            console.log("Deleted Post");
+            // Delete post from db
+            await Team.deleteOne({ _id: req.params.id });
+
+            console.log("Deleted Team");
             res.redirect("/teams");
         } catch (err) {
             res.redirect("/teams");

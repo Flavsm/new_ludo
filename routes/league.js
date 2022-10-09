@@ -15,16 +15,16 @@ router.get("/:id", ensureAuth, leagueController.getLeague);
 router.post("/createLeague", upload.single("file"), leagueController.createLeague);
 
 //edit a league from the leagues feed
-router.put('/editLeagues/:id', ensureAuth, leagueController.editLeagues)
+router.put('/editLeagues/:id', ensureAuth, upload.single("file"), leagueController.editLeagues)
 
 //edit a league from the league profile
-router.put('/editLeague/:id', ensureAuth, leagueController.editLeague)
+router.put('/editLeague/:id', ensureAuth, upload.single("file"), leagueController.editLeague)
 
-//pin a league from the leagues feed
-router.put("/pinLeagues/:id", leagueController.pinLeagues);
+//pin a team from the teams feed
+router.put('/togglePinnedFeed/:id', leagueController.togglePinnedFeed);
 
-//pin a league from the league profile
-router.put("/pinLeague/:id", leagueController.pinLeague);
+//pin a team from the team profile
+router.put('/togglePinned/:id', leagueController.togglePinned);
 
 //delete leagues
 router.delete("/deleteLeagues/:id", ensureAuth, leagueController.deleteLeagues);

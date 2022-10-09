@@ -17,5 +17,4 @@ router.delete('/deleteTeam/:id', ensureAuth, userController.deleteTeam);
 
 /* router.delete('/deleteSomething/:id', ensureAuth, userController.deleteSomething); */ //delete something on user's profile
 
-
 module.exports = router;

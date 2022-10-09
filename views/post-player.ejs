@@ -40,13 +40,13 @@
                       </button>
                     </form>
                     <% } %>
-                      <form action="/players/pinPlayer/<%= player.id %>?_method=PUT" method="POST">
+                      <form action="/players/togglePinned/<%= player.id %>?_method=PUT" method="POST">
                         <button class="btn" type="submit" data-bs-toggle="tooltip" data-bs-placement="top"
                           data-bs-title="Pin it">
-                          <% if (player.pinned==true ) { %>
-                            <i class="fa-solid fa-thumbtack fa-xl pinned-btn"></i>
+                          <% if (user.pinned.find(em=> em._id==(player._id).toString())) { %>
+                            <i class="fa-solid fa-thumbtack fa-lg pinned-btn"></i>
                             <% } else { %>
-                              <i class="fa-solid fa-thumbtack fa-xl unpinned-btn"></i>
+                              <i class="fa-solid fa-thumbtack fa-lg unpinned-btn"></i>
                               <% } %>
                         </button>
                       </form>
@@ -115,8 +115,7 @@
             <i class="fa-solid fa-square-xmark close" data-bs-dismiss="modal"></i>
           </div>
           <div class="modal-body">
-            <form action="/players/editPlayer/<%= player._id%>?_method=PUT" enctype="application/x-www-form-urlencoded"
-              method="POST">
+            <form action="/players/editPlayer/<%= player._id%>?_method=PUT" enctype="multipart/form-data" method="POST">
               <div class="mb-3">
                 <label for="player" class="form-label">Player Name</label>
                 <input type="text" class="form-control form-control-sm" id="player" name="player"
@@ -180,8 +179,8 @@
         </div>
       </div>
     </div>
-
     <!-- END EDIT PLAYER MODAL -->
+
     <section class="section-table-post">
       <section class="section-player-stats">
         <h3 class="player-stats-header ">PLAYER STATS</h3>

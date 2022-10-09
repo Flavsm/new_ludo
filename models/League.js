@@ -4,7 +4,7 @@ const { url } = require("../middleware/cloudinary");
 const LeagueSchema = new mongoose.Schema({
     league: {
         type: String,
-        required: false,
+        required: true,
         uppercase: true,
         unique: true
     },
@@ -45,10 +45,6 @@ const LeagueSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now,
-    },
-    pinned: {
-        type: Boolean,
-        default: false,
     },
     allteams: []
 })

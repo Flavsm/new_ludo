@@ -14,17 +14,17 @@ router.get("/:id", ensureAuth, playersController.getPlayer);
 //create a player from the players feed
 router.post('/createPlayer', upload.single("file"), playersController.createPlayer);
 
-//pin a player from the player feed
-router.put("/pinPlayers/:id", playersController.pinPlayers);
-
-//pin a player from the player profile
-router.put("/pinPlayer/:id", playersController.pinPlayer);
-
 //edit a player from the players feed
-router.put('/editPlayers/:id', playersController.editPlayers)
+router.put('/editPlayers/:id', ensureAuth, upload.single("file"), playersController.editPlayers)
 
 //edit a player from the player profile
-router.put('/editPlayer/:id', playersController.editPlayer)
+router.put('/editPlayer/:id', ensureAuth, upload.single("file"), playersController.editPlayer)
+
+//pin a team from the teams feed
+router.put('/togglePinnedFeed/:id', playersController.togglePinnedFeed);
+
+//pin a team from the team profile
+router.put('/togglePinned/:id', playersController.togglePinned);
 
 //create new row on table
 router.post('/createRow/:id', playersController.createRow);

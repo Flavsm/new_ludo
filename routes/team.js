@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const upload = require("../middleware/multer");
-const teamController = require("../controllers/teams"); //changed from posts to original
+const teamController = require("../controllers/teams");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 //get the feed of all teams
@@ -14,31 +14,27 @@ router.get("/:id", ensureAuth, teamController.getTeam);
 router.post("/createTeam", upload.single("file"), teamController.createTeam);
 
 //edit a team from the teams feed
-router.put('/editTeams/:id', teamController.editTeams)
+router.put('/editTeams/:id', ensureAuth, upload.single("file"), teamController.editTeams)
 
 //edit a team from the team profile
-router.put('/editTeam/:id', teamController.editTeam)
+router.put('/editTeam/:id', ensureAuth, upload.single("file"), teamController.editTeam)
 
 //pin a team from the teams feed
-router.put("/pinTeams/:id", teamController.pinTeams);
+router.put('/togglePinnedFeed/:id', teamController.togglePinnedFeed);
 
 //pin a team from the team profile
-router.put("/pinTeam/:id", teamController.pinTeam);
-
-//pin a team from the team profile
-router.put("/addToPinned/:id", teamController.addToPinned);
+router.put('/togglePinned/:id', teamController.togglePinned);
 
 //create new row on table
-router.post('/createRow/:id', teamController.createRow);
+router.post('/createRow/:id', ensureAuth, teamController.createRow);
 
 //edit row on table
-router.put("/editRow/:id", teamController.editRow);
+router.put("/editRow/:id", ensureAuth, teamController.editRow);
 
 //delete row on table
-router.delete("/deleteRow/:id", teamController.deleteRow);
+router.delete("/deleteRow/:id", ensureAuth, teamController.deleteRow);
 
 // router.put("/createTable/:id", teamController.createTable);
-router.delete("/deleteTeam/:id", teamController.deleteTeam);
-
+router.delete("/deleteTeam/:id", ensureAuth, teamController.deleteTeam);
 
 module.exports = router;
