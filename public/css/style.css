@@ -280,33 +280,89 @@ body {
 
 .container-about {
     display: flex;
-    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
     min-height: 95vh;
     min-width: 98vw;
     /* border: 1px solid #E1A750; */
 }
 
+.about-left,
+.about-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 45%;
+    height: 90vh;
+    /* border: 1px solid fuchsia; */
+}
 
 .tag-line-text {
     font-family: 'Abel', sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 40px;
+    font-size: 50px;
     line-height: 60px;
     color: #E1A750;
 }
 
-.container-about p {
+.container-about h4 {
     font-family: 'Jaldi', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 25px;
-    line-height: 25px;
+    line-height: 28px;
     color: white;
+    text-align: center;
+}
+
+.about-list {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    background: #FFFFFF;
+    height: 40%;
+    font-family: 'Jaldi', sans-serif;
+    /* border: 2px dashed #E1A750; */
+    border: 2px solid #E1A750;
+}
+
+.about-list-item {
+    display: flex;
+    color: black;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    /* border: 2px dashed #E1A750; */
+    width: 100%;
+    height: 50%;
+    border-bottom: 2px solid #E1A750;
+}
+
+.list-four {
+    border-bottom: none;
+}
+
+.number-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000;
+    border-radius: 50px;
+    width: 5%;
+    height: 40%;
+    background: #E1A750;
+    margin-left: 2rem;
 }
 
 
+
+.about-list-item p {
+    width: 70%;
+    text-align: left;
+    font-size: 25px;
+}
 
 /* LOGIN AND SIGN UP PAGE ///////////////////////////*/
 
