@@ -94,6 +94,7 @@ function getSport(e) {
 
 
 
+
 //////// TABLE /////
 
 // if (window.location.pathname.match(/[\d]/g)) {
