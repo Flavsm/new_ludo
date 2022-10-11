@@ -11,27 +11,28 @@ module.exports = {
         try {
             //get all players with user's id, get all players, concat both arrays and filter the pinned ones
             const players = await Player.find({ user: req.user.id }).lean();
-            const allPlayers = await Player.find().lean()
-            // const myPlayers = allPlayers.filter(el => req.user.teams.includes(el.team));
-            // console.log(myPlayers)
+            const allPlayers = await Player.find()
 
 
             //get all teams with user's id, get all teams, concat both arrays and filter the pinned ones
             const teams = await Team.find({ user: req.user.id }).lean();
-            const allTeams = await Team.find({}).lean();
-            // const myTeams = [... new Set(allTeams.filter(el => req.user.teams.includes(el.team)).concat(teams))];
+            const allTeams = await Team.find()
 
             //get all leagues with user's id, get all leagues, concat both arrays and filter the pinned ones
             const leagues = await League.find({ user: req.user.id }).lean();
-            const allLeagues = await League.find().lean()
-            // const myLeagues = [... new Set(allLeagues.filter(el => req.user.leagues.includes(el.league)).concat(leagues))]
+            const allLeagues = await League.find()
 
-            //  <% let pinnedArray = myPlayers.filter(el => user.pinned.includes(el.player)).concat(myTeams.filter(el =>
-            //     user.pinned.includes(el.team)), myLeagues.filter(el => user.pinned.includes(el.league))).sort((a, b) =>
-            //         a.createdAt - b.createdAt) %> 
+            let pinnedArr = []
 
-            const filterPinned = req.user.pinned.map(el => allPlayers.find(em => em.player == el) || allTeams.find(em => em.team == el) || allLeagues.find(em => em.league == el))
-
+            req.user.pinned.forEach(el => {
+                if (allPlayers.find(e => e.player == el)) {
+                    pinnedArr.push(allPlayers.find(em => em.player == el))
+                } else if (allTeams.find(e => e.team == el)) {
+                    pinnedArr.push(allTeams.find(em => em.team == el))
+                } else {
+                    pinnedArr.push(allLeagues.find(em => em.league == el))
+                }
+            })
 
             // get the player from params
             const player = await Player.findById(req.params.id);
@@ -40,7 +41,7 @@ module.exports = {
             //get url
             const url = await req.originalUrl;
 
-            res.render("home.ejs", { players: players, users: users, player: player, teams: teams, leagues: leagues, user: req.user, url: url, filterPinned: filterPinned });
+            res.render("home.ejs", { players: players, users: users, player: player, teams: teams, leagues: leagues, user: req.user, url: url, pinnedArr: pinnedArr });
 
         } catch (err) {
             console.log(err);

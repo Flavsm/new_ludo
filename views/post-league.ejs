@@ -2,9 +2,7 @@
 
   <main class="container container-post">
     <section class="container-section-post">
-      <%if(league.user==user.id || user.leagues.includes(league.league) || league.allteams.some(el=>
-        user.teams.includes(el)) ){
-        %>
+      <%if(league.user==user.id || user.leagues.includes(league.league)){ %>
         <section class="section-profile-post">
           <section class="nav-profile-post">
             <img src="<%= league.image.profile || league.image.default %>" class="post-img-top img-fluid" alt=" ...">

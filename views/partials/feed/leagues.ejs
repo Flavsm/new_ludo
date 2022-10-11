@@ -8,7 +8,7 @@
     <section class="section-list-feed">
         <ul class="list-feed">
             <% leagues.forEach(el=> { %>
-                <% if(el.user==user.id || user.leagues.includes(el.league) ) { %>
+                <% if(el.user==user.id || user.leagues.includes(el.league)) { %>
                     <li class="item-list-feed">
                         <section class="card card-border">
                             <a href="/leagues/<%= el._id%>" class="card-link">
