@@ -21,7 +21,7 @@ module.exports = {
             //get url
             const url = await req.originalUrl;
 
-            res.render("home.ejs", { players: players, users: users, player: player, teams: teams, leagues: leagues, user: req.user, url: url }); //changed from profile.ejs to home.ejs //changes req.user to req.email
+            res.render("home.ejs", { players: players, users: users, player: player, teams: teams, leagues: leagues, user: req.user, url: url });
 
         } catch (err) {
             console.log(err);
@@ -73,7 +73,7 @@ module.exports = {
             )
 
             console.log("Player has been added!");
-            res.redirect("/home"); //changed from profile to home
+            res.redirect("/home");
 
         } catch (err) {
             console.log(err);
@@ -118,12 +118,12 @@ module.exports = {
             const addIdToUser = await User.findOneAndUpdate(
                 { _id: req.user.id },
                 {
-                    $push: { teams: { 'team': newTeam.team }, entries: newTeam.id, teamEntries: newTeam.id },
+                    $push: { teams: { 'team': newTeam.team } },
                 }
             )
 
             console.log("Team has been added!");
-            res.redirect("/home"); //changed from profile to home
+            res.redirect("/home");
 
         } catch (err) {
             console.log(err);
@@ -166,12 +166,12 @@ module.exports = {
             const addIdToUser = await User.findOneAndUpdate(
                 { _id: req.user.id },
                 {
-                    $push: { leagues: { 'league': newLeague.league }, entries: newLeague.id, leagueEntries: newLeague.id },
+                    $push: { leagues: { 'league': newLeague.league } },
                 }
             )
 
             console.log("League has been added!");
-            res.redirect("/home"); //changed from profile to home
+            res.redirect("/home");
 
         } catch (err) {
             console.log(err);

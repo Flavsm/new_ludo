@@ -57,7 +57,7 @@
                                         <form action="/players/togglePinnedFeed/<%= el._id %>?_method=PUT" method="POST"
                                             class="feed-pin-form">
                                             <button class="btn" type="submit">
-                                                <% if (user.pinned.find(em=> em._id==(el._id).toString())) { %>
+                                                <% if (user.pinned.includes(el.player)) { %>
                                                     <i class="fa-solid fa-thumbtack fa-lg pinned-btn"></i>
                                                     <% } else { %>
                                                         <i class="fa-solid fa-thumbtack fa-lg unpinned-btn"></i>

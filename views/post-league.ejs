@@ -40,7 +40,7 @@
                     <% } %>
                       <form action="/leagues/togglePinned/<%= league.id %>?_method=PUT" method="POST">
                         <button class="btn" type="submit">
-                          <% if (user.pinned.find(em=> em._id==(league._id).toString())) { %>
+                          <% if (user.pinned.includes(league.league)) { %>
                             <i class="fa-solid fa-thumbtack fa-lg pinned-btn"></i>
                             <% } else { %>
                               <i class="fa-solid fa-thumbtack fa-lg unpinned-btn"></i>
@@ -50,23 +50,6 @@
                 </section>
               </section>
               <section class="section-secondary-player-info">
-                <!-- <section class="section-person-post-extra-one">
-                  <section class="section-each-extra-post">
-                    <h2>
-                      <%= %>
-                    </h2>
-                    <span>height</span>
-                  </section>
-                  <section class="section-each-extra-post">
-                    <h2>
-                      <%= %>
-                    </h2>
-                    <span>weight</span>
-                  </section>
-                </section> -->
-                <!-- <section class="section-person-post-extra-two">
-                 
-                </section> -->
                 <section class="section-each-extra-post">
                   <h2>
                     <%= league.sport %>
@@ -106,9 +89,9 @@
                       value="<%= league.sport%>" placeholder="" required>
                   </div>
                   <div class="mb-3">
-                    <label for="allteams" class="form-label">Teams Names</label>
+                    <label for="allteams" class="form-label">Teams Names (comma separated) </label>
                     <input type="text" class="form-control form-control-sm" id="allteams" name="allteams"
-                      value="<%= league.allteams%>" placeholder="" required>
+                      value="<%= league.allteams%>" placeholder="">
                   </div>
                   <div class="mb-3">
                     <label for="imgUpload" class="form-label">Image</label>

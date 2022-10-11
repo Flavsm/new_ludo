@@ -4,7 +4,7 @@ const User = require("../models/User");
 
 exports.getLogin = (req, res) => {
   if (req.user) {
-    return res.redirect("/home"); //changed profile to home
+    return res.redirect("/home");
   }
   res.render("login", {
     title: "Login",
@@ -39,7 +39,7 @@ exports.postLogin = (req, res, next) => {
         return next(err);
       }
       req.flash("success", { msg: "Success! You are logged in." });
-      res.redirect(req.session.returnTo || "/home"); //changed from profile to home
+      res.redirect(req.session.returnTo || "/home");
     });
   })(req, res, next);
 };
@@ -58,7 +58,7 @@ exports.logout = (req, res) => {
 
 exports.getSignup = (req, res) => {
   if (req.user) {
-    return res.redirect("/home");//changed from profile to home
+    return res.redirect("/home");
   }
   res.render("signup", {
     title: "Create Account",
@@ -84,13 +84,13 @@ exports.postSignup = (req, res, next) => {
   let username = req.body.email.split('').filter((el, i, a) => i < a.indexOf('@')).join('');
 
   const user = new User({
-    userName: username, //changed red.body.user to email
+    userName: username,
     email: req.body.email,
     password: req.body.password,
   });
 
   User.findOne(
-    { $or: [{ email: req.body.email }, { userName: username }] }, //changes red.body.user to email
+    { $or: [{ email: req.body.email }, { userName: username }] },
     (err, existingUser) => {
       if (err) {
         return next(err);
@@ -110,7 +110,7 @@ exports.postSignup = (req, res, next) => {
           if (err) {
             return next(err);
           }
-          res.redirect("/home"); //changed from profile to hone
+          res.redirect("/home");
         });
       });
     }

@@ -1147,8 +1147,13 @@ body {
     font-size: 1.1rem;
 }
 
-.table-light {
+#firstCell {
     cursor: pointer;
+}
+
+#firstCell:hover {
+    color: #E1A750;
+    background: #302f2d !important;
 }
 
 #add-row:hover,

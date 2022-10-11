@@ -29,8 +29,7 @@ module.exports = {
 
             const url = await req.originalUrl;
 
-            /* console.log(post) */
-            res.render("post-team.ejs", { player: player, players: players, user: req.user, team: team, teams: teams, league: league, url: url }); //changes req.user to req.email
+            res.render("post-team.ejs", { player: player, players: players, user: req.user, team: team, teams: teams, league: league, url: url });
         } catch (err) {
             console.log(err);
         }
@@ -72,15 +71,19 @@ module.exports = {
                     })
             }
 
+            const teams = await Team.find({ user: req.user.id }).lean()
+            const names = teams.map(el => el.team)
+
+            //Add new team to user's team
             await User.findOneAndUpdate(
                 { _id: req.user.id },
                 {
-                    $push: { teams: { 'team': newTeam.team } },
+                    $addToSet: { teams: { $each: names } },
                 }
             )
 
             console.log("Team has been added!");
-            res.redirect("/teams"); //changed from profile to home
+            res.redirect("/teams");
 
         } catch (err) {
             console.log(err);
@@ -126,6 +129,49 @@ module.exports = {
                     })
             }
 
+
+            const teams = await Team.find({ user: req.user.id }).lean()
+            const names = teams.map(el => el.team)
+
+            const user = await User.findById({ _id: req.user.id }).lean();
+
+
+            //Remove old league from pinned and add new one if edited one was pinned
+            user.pinned.forEach(async el => {
+                if (!names.includes(el)) {
+                    await User.findOneAndUpdate({ _id: req.user.id },
+                        {
+                            $pull: { pinned: el },
+                        })
+                    await User.findOneAndUpdate({ _id: req.user.id },
+                        {
+
+                            $addToSet: { pinned: req.body.team.toUpperCase() }
+                        })
+
+                }
+            })
+
+            //Remove edited team from user's teams
+            user.teams.forEach(async (e) => {
+                if (!teams.map(el => el.team).includes(e)) {
+                    await User.findOneAndUpdate(
+                        { _id: req.user.id },
+                        {
+                            $pull: { teams: e },
+                        }
+                    )
+                }
+            })
+
+            //Add edited teams from user's teams
+            await User.findOneAndUpdate(
+                { _id: req.user.id },
+                {
+                    $addToSet: { teams: { $each: names } },
+                }
+            )
+
             res.redirect("/teams");
         } catch (err) {
             console.log(err);
@@ -170,6 +216,49 @@ module.exports = {
                     })
             }
 
+            const teams = await Team.find({ user: req.user.id }).lean()
+            const names = teams.map(el => el.team)
+
+            const user = await User.findById({ _id: req.user.id }).lean();
+
+            //Remove old team from pinned and add new one if edited one was pinned
+            user.pinned.forEach(async el => {
+                if (!names.includes(el)) {
+                    await User.findOneAndUpdate({ _id: req.user.id },
+                        {
+                            $pull: { pinned: el },
+                        })
+                    await User.findOneAndUpdate({ _id: req.user.id },
+                        {
+
+                            $addToSet: { pinned: req.body.team.toUpperCase() }
+                        })
+
+                }
+            })
+
+
+
+            //Delete edited team from user's teams
+            user.teams.forEach(async (e) => {
+                if (!teams.map(el => el.team).includes(e)) {
+                    await User.findOneAndUpdate(
+                        { _id: req.user.id },
+                        {
+                            $pull: { teams: e },
+                        }
+                    )
+                }
+            })
+
+            //Add edited team from user's teams
+            await User.findOneAndUpdate(
+                { _id: req.user.id },
+                {
+                    $addToSet: { teams: { $each: names } },
+                }
+            )
+
             res.redirect(`/teams/${req.params.id}`);
         } catch (err) {
             console.log(err);
@@ -178,14 +267,15 @@ module.exports = {
     togglePinnedFeed: async (req, res) => {
         try {
 
-            let obj = await Team.findById(req.params.id).lean()
-            let user = await User.findById(req.user)
+            const obj = await Team.findById(req.params.id).lean()
+            const user = await User.findById(req.user)
 
-            if (user.pinned.find(el => el._id == req.params.id)) {
+            // Add or Remove leagues from pinned
+            if (user.pinned.includes(obj.team)) {
                 await User.updateOne(
                     { _id: req.user.id },
                     {
-                        $pull: { pinned: obj },
+                        $pull: { pinned: obj.team },
                     },
                     {
                         new: true
@@ -195,7 +285,7 @@ module.exports = {
                 await User.updateOne(
                     { _id: req.user.id },
                     {
-                        $push: { pinned: obj },
+                        $push: { pinned: obj.team },
 
                     },
                     {
@@ -213,25 +303,25 @@ module.exports = {
     togglePinned: async (req, res) => {
         try {
 
-            let obj = await Team.findById(req.params.id).lean()
-            let user = await User.findById(req.user)
+            const obj = await Team.findById(req.params.id).lean()
+            const user = await User.findById(req.user)
 
 
-            if (user.pinned.find(el => el._id == req.params.id)) {
-                await User.findOneAndUpdate(
+            if (user.pinned.includes(obj.team)) {
+                await User.updateOne(
                     { _id: req.user.id },
                     {
-                        $pull: { pinned: obj },
+                        $pull: { pinned: obj.team },
                     },
                     {
                         new: true
                     }
                 )
             } else {
-                await User.findOneAndUpdate(
+                await User.updateOne(
                     { _id: req.user.id },
                     {
-                        $push: { pinned: obj },
+                        $push: { pinned: obj.team },
 
                     },
                     {
@@ -321,8 +411,10 @@ module.exports = {
         try {
 
             // Find post by id
-            let team = await Team.findById(req.params.id).lean();
-            let user = await User.findById(req.user)
+            const team = await Team.findById(req.params.id).lean();
+            const user = await User.findById(req.user.id).lean()
+            // Filter the post to be deleted from the pinned array
+            const userFiltered = user.pinned.filter(el => el._id == (team._id).toString())
 
             // Delete image from cloudinary
             if (team.cloudinaryId) {
@@ -334,7 +426,7 @@ module.exports = {
                 await User.findOneAndUpdate(
                     { _id: req.user.id },
                     {
-                        $pull: { pinned: team },
+                        $pull: { pinned: userFiltered[0] },
                     },
                     {
                         new: true
@@ -342,11 +434,11 @@ module.exports = {
                 )
             }
 
-            // Delete post from DB array
+            // Delete team from teams array
             await User.findOneAndUpdate(
                 { _id: req.user.id },
                 {
-                    $pull: { teams: { 'team': team.team } },
+                    $pull: { teams: team.team },
                 },
                 {
                     new: true

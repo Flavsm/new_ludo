@@ -30,7 +30,7 @@ module.exports = {
 
             const url = await req.originalUrl;
 
-            res.render("post-league.ejs", { user: req.user, player: player, teams: teams, league: league, url: url }); //changes req.user to req.email
+            res.render("post-league.ejs", { user: req.user, player: player, teams: teams, league: league, url: url });
         } catch (err) {
             console.log(err);
         }
@@ -47,7 +47,7 @@ module.exports = {
                 user: req.user.id,
             });
 
-            // If user added image, upload image to cloudinary and to user db
+            // If user added image, upload image to cloudinary and to DB
             if (req.file) {
                 const pattern = await cloudinary.uploader
                     .upload(req.file.path,
@@ -70,10 +70,14 @@ module.exports = {
                     })
             }
 
-            const addLeagueToUser = await User.findOneAndUpdate(
+            const leagues = await League.find({ user: req.user.id }).lean()
+            const names = leagues.map(el => el.league)
+
+            //Add new league to user's leagues
+            await User.findOneAndUpdate(
                 { _id: req.user.id },
                 {
-                    $push: { leagues: { 'league': newLeague.league } },
+                    $addToSet: { leagues: { $each: names } },
                 }
             )
 
@@ -87,6 +91,8 @@ module.exports = {
     },
     editLeagues: async (req, res) => {
         try {
+
+            //Edit leagues from feed
             await League.findOneAndUpdate(
                 { _id: req.params.id },
                 [{
@@ -100,7 +106,7 @@ module.exports = {
                 }]
             );
 
-            // If user added image, upload image to cloudinary and to user db
+            // If user added image, upload image to cloudinary and to DB
             if (req.file) {
                 const pattern = await cloudinary.uploader
                     .upload(req.file.path,
@@ -123,6 +129,50 @@ module.exports = {
                     })
             }
 
+
+
+            const leagues = await League.find({ user: req.user.id }).lean()
+            const names = leagues.map(el => el.league)
+
+            const user = await User.findById({ _id: req.user.id }).lean();
+
+            //Remove old league from pinned and add new one if edited one was pinned
+            user.pinned.forEach(async el => {
+                if (!names.includes(el)) {
+                    await User.findOneAndUpdate({ _id: req.user.id },
+                        {
+                            $pull: { pinned: el },
+                        })
+                    await User.findOneAndUpdate({ _id: req.user.id },
+                        {
+
+                            $addToSet: { pinned: req.body.league.toUpperCase() }
+                        })
+
+                }
+            })
+
+            //Remove edited league from user's leagues
+            user.leagues.forEach(async (e) => {
+                if (!leagues.map(el => el.league).includes(e)) {
+                    await User.findOneAndUpdate(
+                        { _id: req.user.id },
+                        {
+                            $pull: { leagues: e },
+                        }
+                    )
+                }
+            })
+
+
+            //Add edited leagues from user's leagues
+            await User.findOneAndUpdate(
+                { _id: req.user.id },
+                {
+                    $addToSet: { leagues: { $each: names } },
+                }
+            )
+
             res.redirect("/leagues");
         } catch (err) {
             console.log(err);
@@ -130,6 +180,8 @@ module.exports = {
     },
     editLeague: async (req, res) => {
         try {
+
+            //Edit league from league post
             await League.findOneAndUpdate(
                 { _id: req.params.id },
                 [{
@@ -164,6 +216,48 @@ module.exports = {
                     })
             }
 
+            const leagues = await League.find({ user: req.user.id }).lean()
+            const names = leagues.map(el => el.league)
+
+            const user = await User.findById({ _id: req.user.id }).lean();
+
+            //Remove old league from pinned and add new one if edited one was pinned
+            user.pinned.forEach(async el => {
+                if (!names.includes(el)) {
+                    await User.findOneAndUpdate({ _id: req.user.id },
+                        {
+                            $pull: { pinned: el },
+                        })
+                    await User.findOneAndUpdate({ _id: req.user.id },
+                        {
+
+                            $addToSet: { pinned: req.body.league.toUpperCase() }
+                        })
+
+                }
+            })
+
+            //Delete edited league from user's leagues
+            user.leagues.forEach(async (e) => {
+                if (!leagues.map(el => el.league).includes(e)) {
+                    await User.findOneAndUpdate(
+                        { _id: req.user.id },
+                        {
+                            $pull: { leagues: e },
+                        }
+                    )
+                }
+            })
+
+
+            //Add edited league from user's leagues
+            await User.findOneAndUpdate(
+                { _id: req.user.id },
+                {
+                    $addToSet: { leagues: { $each: names } },
+                }
+            )
+
             res.redirect(`/leagues/${req.params.id}`);
         } catch (err) {
             console.log(err);
@@ -172,15 +266,16 @@ module.exports = {
     togglePinnedFeed: async (req, res) => {
         try {
 
-            let obj = await League.findById(req.params.id).lean()
-            let user = await User.findById(req.user)
+            const obj = await League.findById(req.params.id).lean()
+            const user = await User.findById(req.user)
 
 
-            if (user.pinned.find(el => el._id == req.params.id)) {
+            // Add or Remove leagues from pinned
+            if (user.pinned.includes(obj.league)) {
                 await User.updateOne(
                     { _id: req.user.id },
                     {
-                        $pull: { pinned: obj },
+                        $pull: { pinned: obj.league },
                     },
                     {
                         new: true
@@ -190,7 +285,7 @@ module.exports = {
                 await User.updateOne(
                     { _id: req.user.id },
                     {
-                        $push: { pinned: obj },
+                        $push: { pinned: obj.league },
 
                     },
                     {
@@ -208,15 +303,15 @@ module.exports = {
     togglePinned: async (req, res) => {
         try {
 
-            let obj = await League.findById(req.params.id).lean()
-            let user = await User.findById(req.user)
+            const obj = await League.findById(req.params.id).lean()
+            const user = await User.findById(req.user)
 
-
-            if (user.pinned.find(el => el._id == req.params.id)) {
+            // Add or Remove leagues from pinned
+            if (user.pinned.includes(obj.league)) {
                 await User.updateOne(
                     { _id: req.user.id },
                     {
-                        $pull: { pinned: obj },
+                        $pull: { pinned: obj.league },
                     },
                     {
                         new: true
@@ -226,7 +321,7 @@ module.exports = {
                 await User.updateOne(
                     { _id: req.user.id },
                     {
-                        $push: { pinned: obj },
+                        $push: { pinned: obj.league },
 
                     },
                     {
@@ -245,8 +340,11 @@ module.exports = {
         try {
 
             // Find post by id
-            let league = await League.findById(req.params.id).lean()
-            let user = await User.findById(req.user)
+            const league = await League.findById(req.params.id).lean()
+            // Find user by id
+            const user = await User.findById(req.user.id).lean()
+            // Filter the post to be deleted from the pinned array
+            const userFiltered = user.pinned.filter(el => el._id == (league._id).toString())
 
             // Delete image from cloudinary
             if (league.cloudinaryId) {
@@ -255,10 +353,10 @@ module.exports = {
 
             // Delete league from pinned array
             if (user.pinned.find(el => el._id == req.params.id)) {
-                await User.updateOne(
+                await User.findByIdAndUpdate(
                     { _id: req.user.id },
                     {
-                        $pull: { pinned: league },
+                        $pull: { pinned: userFiltered[0] },
                     },
                     {
                         new: true
@@ -269,9 +367,10 @@ module.exports = {
             await User.updateOne(
                 { _id: req.user.id },
                 {
-                    $pull: { leagues: { 'league': league.league } }
+                    $pull: { leagues: league.league }
                 }
             )
+
 
             // Delete post from db
             await League.deleteOne({ _id: req.params.id });

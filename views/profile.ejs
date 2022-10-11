@@ -23,8 +23,8 @@
               <% if (user.teams.length> 0) { %>
                 <% user.teams.forEach(el=> { %>
                   <form class="" action="/profile/deleteTeam/<%= user.id %>?_method=DELETE" method="POST">
-                    <button class="btn  profile-delete-btns" type="submit" name="team" value="<%= el.team%>">
-                      <%= el.team %>
+                    <button class="btn  profile-delete-btns" type="submit" name="team" value="<%= el%>">
+                      <%= el %>
                         <i class="fa-solid fa-circle-xmark"></i>
                     </button>
                   </form>
@@ -48,8 +48,8 @@
               <% if (user.leagues.length> 0) { %>
                 <% user.leagues.forEach(el=> { %>
                   <form class="" action="/profile/deleteLeague/<%= user.id %>?_method=DELETE" method="POST">
-                    <button class="btn  profile-delete-btns" type="submit" name="league" value="<%= el.league%>">
-                      <%= el.league %>
+                    <button class="btn  profile-delete-btns" type="submit" name="league" value="<%= el%>">
+                      <%= el %>
                         <i class="fa-solid fa-circle-xmark"></i>
                     </button>
 

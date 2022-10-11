@@ -39,7 +39,7 @@
                       <form action="/teams/togglePinned/<%= team._id %>?_method=PUT" method="POST">
                         <button class="btn" type="submit" data-bs-toggle="tooltip" data-bs-placement="top"
                           data-bs-title="Pin it">
-                          <% if (user.pinned.find(el=> el._id==(team._id).toString())) { %>
+                          <% if (user.pinned.includes(team.team)) { %>
                             <i class="fa-solid fa-thumbtack fa-xl pinned-btn"></i>
                             <% } else { %>
                               <i class="fa-solid fa-thumbtack fa-xl unpinned-btn"></i>
@@ -50,23 +50,6 @@
                 </section>
               </section>
               <section class="section-secondary-player-info">
-                <!-- <section class="section-person-post-extra-one">
-                  <section class="section-each-extra-post">
-                    <h2>
-                      <%= %>
-                    </h2>
-                    <span>height</span>
-                  </section>
-                  <section class="section-each-extra-post">
-                    <h2>
-                      <%= %>
-                    </h2>
-                    <span>weight</span>
-                  </section>
-                </section> -->
-                <!-- <section class="section-person-post-extra-two">
-                  
-                </section> -->
                 <section class="section-each-extra-post">
                   <h2>
                     <% if (team.win==='' || team.loss==='' ) {%>
@@ -209,9 +192,12 @@
             <tbody>
               <% if (team.table.length> 0) { %>
                 <% team.table.sort((a, b)=> b.row.cell1-a.row.cell1).forEach(el=> { %>
-                  <% let opponent=teams.filter(em=> em.team == el.row.cell1)[0] %>
-                    <tr class="table-light" onclick="window.location ='/teams/<%= opponent._id %>'">
-                      <td>
+                  <% let opponent; if (teams.filter(em=> em.team == el.row.cell1)[0]) {
+                    opponent = teams.filter(em=> em.team == el.row.cell1)[0]} else {
+                    opponent = '';
+                    } %>
+                    <tr class="table-light">
+                      <td id="firstCell" onclick="window.location ='/teams/<%= opponent._id %>'">
                         <%= el.row.cell1 %>
                       </td>
                       <td>
@@ -238,6 +224,7 @@
                       <td>
                         <%= el.row.cell9 %>
                       </td>
+
                       <td class="btns-table">
                         <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#team-edit-row">
                           <i class="fa-regular fa-pen-to-square fa-lg post-btn"></i>
