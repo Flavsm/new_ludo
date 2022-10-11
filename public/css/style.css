@@ -495,7 +495,7 @@ body {
 
 .home-main-container {
     margin-top: 12vh;
-    height: 99vh;
+    height: 90vh;
 }
 
 .home-section-container {
@@ -506,7 +506,8 @@ body {
     min-width: 99vw;
     height: 70%;
     font-family: 'Jaldi', sans-serif;
-    overflow: auto;
+    /* overflow: auto; */
+    padding-bottom: 2rem;
 }
 
 .section-column {

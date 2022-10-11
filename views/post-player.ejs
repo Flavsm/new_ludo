@@ -3,7 +3,9 @@
   <main class="container container-post">
     <section class="container-section-post">
       <section class="section-profile-post">
-        <%if(player.user==user.id || user.teams.map(em=> em.team).includes(player.team)){ %>
+        <%if(player.user==user.id || user.teams.includes(player.team) || leagues.filter(el=> user.leagues.includes(el)))
+          {
+          %>
           <section class="nav-profile-post">
             <img src="<%= player.image.profile || player.image.default %>" class="img-fluid post-img-top" />
             <section class="section-column-post">

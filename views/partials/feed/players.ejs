@@ -8,7 +8,8 @@
     <section class="section-list-feed">
         <ul class="list-feed">
             <% players.forEach(el=> { %>
-                <% if(el.user==user.id || user.teams.map(em=> em.team).includes(el.team)){ %>
+                <% if(el.user==user.id || user.teams.includes(el.team) || leagues.filter(em=>
+                    em.allteams.includes(el.team)) ){ %>
                     <li class="item-list-feed">
                         <section class="card card-border">
                             <a href="/players/<%= el._id%>" class="card-link">

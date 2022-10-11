@@ -12,6 +12,7 @@ const PlayerSchema = new mongoose.Schema({
     type: String,
     required: false,
     uppercase: true,
+    unique: false,
   },
   sport: {
     type: String,

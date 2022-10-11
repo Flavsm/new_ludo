@@ -3,7 +3,7 @@
   <main class="container container-post">
     <section class="container-section-post">
       <section class="section-profile-post">
-        <%if(team.user==user.id || user.teams.map(el=> el.team).includes(team.team)){ %>
+        <%if(team.user==user.id || user.teams.includes(team.team) || user.leagues.includes(team.league) ){ %>
           <section class="nav-profile-post">
             <img src="<%= team.image.profile || team.image.default %>" class="post-img-top img-fluid" alt=" ...">
             <section class="section-column-post">
@@ -353,8 +353,8 @@
                           </section>
                         </a>
                         <section class="card-body-btns">
-                          <% if(el.user==user.id) { %>
-                            <!-- <form action="/players/deletePlayer/<%= el._id %>?_method=DELETE" method="POST"
+                          <!-- <% if(el.user==user.id) { %> -->
+                          <!-- <form action="/players/deletePlayer/<%= el._id %>?_method=DELETE" method="POST"
                               class="feed-delete-form">
                               <button class="btn feed-delete-btn" type="submit">
                                 <i class="fa-regular fa-trash-can fa-lg colored-btn"></i>
@@ -375,9 +375,9 @@
                                       <% } %>
                                 </button>
                               </form> -->
-                            <a href="/players/<%= el._id%>">
-                              <i class="fa-solid fa-eye fa-lg colored-btn"></i>
-                            </a>
+                          <a href="/players/<%= el._id%>">
+                            <i class="fa-solid fa-eye fa-lg colored-btn"></i>
+                          </a>
                         </section>
                       </section>
                     </li>

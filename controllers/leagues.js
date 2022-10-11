@@ -132,13 +132,17 @@ module.exports = {
 
 
             const leagues = await League.find({ user: req.user.id }).lean()
+            const allLeagues = await League.find().lean()
+            const allTeams = await Team.find().lean()
+            const allPlayers = await Player.find().lean()
+            const pinned = allLeagues.map(el => el.league).concat(allTeams.map(el => el.team), allPlayers.map(el => el.player))
             const names = leagues.map(el => el.league)
 
             const user = await User.findById({ _id: req.user.id }).lean();
 
             //Remove old league from pinned and add new one if edited one was pinned
             user.pinned.forEach(async el => {
-                if (!names.includes(el)) {
+                if (!pinned.includes(el)) {
                     await User.findOneAndUpdate({ _id: req.user.id },
                         {
                             $pull: { pinned: el },
@@ -154,7 +158,7 @@ module.exports = {
 
             //Remove edited league from user's leagues
             user.leagues.forEach(async (e) => {
-                if (!leagues.map(el => el.league).includes(e)) {
+                if (!allLeagues.map(el => el.league).includes(e)) {
                     await User.findOneAndUpdate(
                         { _id: req.user.id },
                         {
@@ -217,13 +221,17 @@ module.exports = {
             }
 
             const leagues = await League.find({ user: req.user.id }).lean()
-            const names = leagues.map(el => el.league)
+            const allLeagues = await League.find().lean()
+            const allTeams = await Team.find().lean()
+            const allPlayers = await Player.find().lean()
+            const pinned = allLeagues.map(el => el.league).concat(allTeams.map(el => el.team), allPlayers.map(el => el.player))
+            const names = allLeagues.map(el => el.league)
 
             const user = await User.findById({ _id: req.user.id }).lean();
 
             //Remove old league from pinned and add new one if edited one was pinned
             user.pinned.forEach(async el => {
-                if (!names.includes(el)) {
+                if (!pinned.includes(el)) {
                     await User.findOneAndUpdate({ _id: req.user.id },
                         {
                             $pull: { pinned: el },
@@ -239,7 +247,7 @@ module.exports = {
 
             //Delete edited league from user's leagues
             user.leagues.forEach(async (e) => {
-                if (!leagues.map(el => el.league).includes(e)) {
+                if (!allLeagues.map(el => el.league).includes(e)) {
                     await User.findOneAndUpdate(
                         { _id: req.user.id },
                         {

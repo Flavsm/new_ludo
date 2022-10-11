@@ -45,39 +45,41 @@
       </section>
       <section class="section-bottom section-column">
         <h2 class="home-heading pinned-heading">pinned</h2>
+
+
         <ul class="list-pinned list-row">
 
-          <% let pinnedArray=players.filter(el=> user.pinned.includes(el.player)).concat(teams.filter(el =>
-            user.pinned.includes(el.team)), leagues.filter(el => user.pinned.includes(el.league))) %>
-            <% pinnedArray.forEach(em=> { %>
-              <% if (em.player) { %>
-                <a href="/players/<%= em._id%>" class="each-item pinned-item">
+
+          <% filterPinned.forEach(em=> { %>
+            <% if (em.player) { %>
+              <a href="/players/<%= em._id%>" class="each-item pinned-item">
+                <li class="item-link">
+                  <%= em.player %>
+                    <h2 class="home-heading">player</h2>
+                </li>
+              </a>
+
+              <% } else if (em.team) { %>
+                <a href="/teams/<%= em._id%>" class="each-item pinned-item">
                   <li class="item-link">
-                    <%= em.player %>
-                      <h2 class="home-heading">player</h2>
+                    <%= em.team %>
+                      <h2 class="home-heading">team</h2>
                   </li>
                 </a>
-
-                <% } else if (em.team) { %>
-                  <a href="/teams/<%= em._id%>" class="each-item pinned-item">
+                <% } else { %>
+                  <a href="/leagues/<%= em._id%>" class="each-item pinned-item">
                     <li class="item-link">
-                      <%= em.team %>
-                        <h2 class="home-heading">team</h2>
+                      <%= em.league %>
+                        <h2 class="home-heading">league</h2>
                     </li>
                   </a>
-                  <% } else { %>
-                    <a href="/leagues/<%= em._id%>" class="each-item pinned-item">
-                      <li class="item-link">
-                        <%= em.league %>
-                          <h2 class="home-heading">league</h2>
-                      </li>
-                    </a>
-                    <% }}) %>
+                  <% }}) %>
 
         </ul>
+
       </section>
     </section>
-
+    <section class="get-space"></section>
   </main>
 
   <%- include('partials/home-modal') -%>

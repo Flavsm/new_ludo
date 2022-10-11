@@ -2,26 +2,45 @@ const cloudinary = require("../middleware/cloudinary");
 const Player = require("../models/Player");
 const User = require('../models/User');
 const Team = require('../models/Team');
-const League = require('../models/League')
+const League = require('../models/League');
+const user = require("./user");
 
 
 module.exports = {
     getHome: async (req, res) => {
         try {
-            //get all posts users id
-            const players = await Player.find({ user: req.user.id });
-            //get all posts users id
-            const teams = await Team.find({ user: req.user.id });
-            //get all posts users id
-            const leagues = await League.find({ user: req.user.id });
-            // get all posts ids
+            //get all players with user's id, get all players, concat both arrays and filter the pinned ones
+            const players = await Player.find({ user: req.user.id }).lean();
+            const allPlayers = await Player.find().lean()
+            // const myPlayers = allPlayers.filter(el => req.user.teams.includes(el.team));
+            // console.log(myPlayers)
+
+
+            //get all teams with user's id, get all teams, concat both arrays and filter the pinned ones
+            const teams = await Team.find({ user: req.user.id }).lean();
+            const allTeams = await Team.find({}).lean();
+            // const myTeams = [... new Set(allTeams.filter(el => req.user.teams.includes(el.team)).concat(teams))];
+
+            //get all leagues with user's id, get all leagues, concat both arrays and filter the pinned ones
+            const leagues = await League.find({ user: req.user.id }).lean();
+            const allLeagues = await League.find().lean()
+            // const myLeagues = [... new Set(allLeagues.filter(el => req.user.leagues.includes(el.league)).concat(leagues))]
+
+            //  <% let pinnedArray = myPlayers.filter(el => user.pinned.includes(el.player)).concat(myTeams.filter(el =>
+            //     user.pinned.includes(el.team)), myLeagues.filter(el => user.pinned.includes(el.league))).sort((a, b) =>
+            //         a.createdAt - b.createdAt) %> 
+
+            const filterPinned = req.user.pinned.map(el => allPlayers.find(em => em.player == el) || allTeams.find(em => em.team == el) || allLeagues.find(em => em.league == el))
+
+
+            // get the player from params
             const player = await Player.findById(req.params.id);
             //get users by id
             const users = await User.findById(req.params.id)
             //get url
             const url = await req.originalUrl;
 
-            res.render("home.ejs", { players: players, users: users, player: player, teams: teams, leagues: leagues, user: req.user, url: url });
+            res.render("home.ejs", { players: players, users: users, player: player, teams: teams, leagues: leagues, user: req.user, url: url, filterPinned: filterPinned });
 
         } catch (err) {
             console.log(err);
@@ -114,11 +133,13 @@ module.exports = {
                     })
             }
 
+            // const teams = await Team.find({ user: req.user.id }).lean()
+            // const names = teams.map(el => el.team)
 
             const addIdToUser = await User.findOneAndUpdate(
                 { _id: req.user.id },
                 {
-                    $push: { teams: { 'team': newTeam.team } },
+                    $push: { teams: req.body.team },
                 }
             )
 
@@ -162,11 +183,13 @@ module.exports = {
                     })
             }
 
+            // const leagues = await League.find({ user: req.user.id }).lean()
+            // const names = leagues.map(el => el.league)
 
             const addIdToUser = await User.findOneAndUpdate(
                 { _id: req.user.id },
                 {
-                    $push: { leagues: { 'league': newLeague.league } },
+                    $push: { leagues: req.body.league },
                 }
             )
 

@@ -134,7 +134,8 @@ module.exports = {
             }
 
             const players = await Player.find({ user: req.user.id }).lean()
-            const names = players.map(el => el.player)
+            const allPlayers = await Player.find().lean()
+            const names = allPlayers.map(el => el.player)
 
             const user = await User.findById({ _id: req.user.id }).lean();
 
