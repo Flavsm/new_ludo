@@ -19,21 +19,21 @@
             <% if (arr.length> 0) { %>
               <% arr.forEach(e=> { %>
                 <% if(e.player) { %>
-                  <a href="players/<%= e.id%>" class="each-item recent-item">
+                  <a href="players/<%= e._id%>" class="each-item recent-item">
                     <li class="item-link">
                       <%= e.player %>
                         <h2 class="home-heading">player</h2>
                     </li>
                   </a>
                   <% } else if(e.team){ %>
-                    <a href="teams/<%= e.id%>" class="each-item recent-item">
+                    <a href="teams/<%= e._id%>" class="each-item recent-item">
                       <li class="item-link">
                         <%= e.team %>
                           <h2 class="home-heading">team</h2>
                       </li>
                     </a>
                     <% } else { %>
-                      <a href="leagues/<%= e.id%>" class="each-item recent-item">
+                      <a href="leagues/<%= e._id%>" class="each-item recent-item">
                         <li class="item-link">
                           <%= e.league %>
                             <h2 class="home-heading">league</h2>
