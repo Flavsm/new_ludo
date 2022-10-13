@@ -21,7 +21,7 @@ const jsdom = require('jsdom');
 
 
 //Use .env file in config folder
-require("dotenv").config({ path: ".env" });
+require("dotenv").config({});
 
 // Passport config
 require("./config/passport")(passport);
