@@ -68,9 +68,10 @@ module.exports = {
       await User.updateOne(
         { _id: req.user.id },
         {
-          $pull: { 'leagues': user.leagues.filter(el => el === req.body.league)[0] }
+          $pull: { 'leagues': user.leagues.filter(el => el === req.body.league)[0], 'pinned': user.leagues.filter(el => el === req.body.league)[0] }
         }
       )
+
 
       console.log("Deleted league");
       res.redirect(`/profile/${req.params.id}`);
@@ -87,7 +88,7 @@ module.exports = {
       await User.updateOne(
         { _id: req.user.id },
         {
-          $pull: { 'teams': user.teams.filter(el => el === req.body.team)[0] }
+          $pull: { 'teams': user.teams.filter(el => el === req.body.team)[0], 'pinned': user.teams.filter(el => el === req.body.team)[0] }
         }
       )
 
