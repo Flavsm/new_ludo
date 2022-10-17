@@ -5,10 +5,16 @@
 Platform that allows users to keep track of their amature leagues, teams and players stats. Sign up to the app, create as many profiles as you want and add stats. Other users from the same team or league can access your entries as well, so everybody knows who the MVP is.
 
 Live: https://ludo.up.railway.app/ 
+
 Live: https://ludo.cyclic.app/
 
 ## TECHS: 
-<img alt="Javascript" src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E"><img alt="NodeJS" src="https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white"><img alt="Express.js" src="https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB"><img alt="MongoDB" src="https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white"><img alt="Mongoose" src="https://img.shields.io/badge/Mongoose-%234ea94b.svg?style=for-the-badge&logo=mongoose&logoColor=white"><img alt="CSS3" src="https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white"><img alt="SASS" src="https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white"><img alt="Bootstrap" src="https://img.shields.io/badge/bootstrap-%2338B2AC.svg?style=for-the-badge&logo=bootstrap&logoColor=white">
+<img alt="Javascript" src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E"><img alt="NodeJS" src="https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white"><img alt="Express.js" src="https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB"><img alt="MongoDB" src="https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white"><img alt="Mongoose" src="https://img.shields.io/badge/Mongoose-%234ea94b.svg?style=for-the-badge&logo=mongoose&logoColor=white"><img alt="EJS" src="https://img.shields.io/badge/EJS-%234ea94b.svg?style=for-the-badge&logo=ejs&logoColor=white"><img alt="CSS3" src="https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white"><img alt="SASS" src="https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white"><img alt="Bootstrap" src="https://img.shields.io/badge/bootstrap-%2338B2AC.svg?style=for-the-badge&logo=bootstrap&logoColor=white">
+
+
+## How It Works
+
+Built using the MVC pattern, the client is able to create their account with Passport OAuth, make CRUD requests through forms and save their data in MongoDB. The server side uses Mongoose Schemas, Express to build the server and Cloudinary/Multer to handle uploading files.
 
 ## Optimizations
 
