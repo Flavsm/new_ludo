@@ -1,7 +1,7 @@
 # LUDO
 
 
-![Demo gif](public/imgs/demo.gif)
+![Demo gif](public/imgs/demo.mp4)
 
 ## Overview
 
