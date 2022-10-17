@@ -7,7 +7,8 @@ Platform that allows users to keep track of their amature leagues, teams and pla
 Live: https://ludo.up.railway.app/ 
 Live: https://ludo.cyclic.app/
 
-## TECHS: JAVASCRIPT, NODE, EXPRESS, MONGODB, MONGOOSE, EJS, BOOTSTRAP, CSS, SCSS
+## TECHS: 
+JAVASCRIPT, NODE, EXPRESS, MONGODB, MONGOOSE, EJS, BOOTSTRAP, CSS, SCSS
 
 ## Optimizations
 
