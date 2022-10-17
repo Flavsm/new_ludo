@@ -1,7 +1,7 @@
 # LUDO
 
 
-![Demo](/imgs/demo.gif)
+![Demo gif](public/imgs/demo.gif)
 
 ## Overview
 
