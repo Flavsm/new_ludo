@@ -250,7 +250,6 @@ body {
 
 .container-about {
     display: flex;
-    flex-direction: column;
     justify-content: space-around;
     align-items: center;
     min-height: 95vh;
