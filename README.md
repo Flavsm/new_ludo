@@ -24,7 +24,7 @@ Built using the MVC pattern, the client is able to create their account with Pas
 * To have a more dynamic experience, I would like the users to have the option of editing the stats table header.
 * Mobile version is in the works.
 
-## Challenges
+## Lessons
 
 Working with Cloudinary and Multer to upload images was a new experience. As I wanted users to have the opportunity to upload profile pics, but not have it mandatory, I needed a system to have a default image and avoid a crash. By checking if a file was added before setting an upload function, I was able to add the default option.
 
