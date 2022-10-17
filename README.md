@@ -1,8 +1,11 @@
 # LUDO
 
+
+![Demo](/imgs/demo.gif)
+
 ## Overview
 
-Platform that allows users to keep track of their amature leagues, teams and players stats. Sign up to the app, create as many profiles as you want and add stats. Other users from the same team or league can access your entries as well, so everybody knows who the MVP is.
+Platform that allows users to keep track of their amature sports leagues, teams or players stats. Sign up to the app, create as many profiles as you want and add stats. Other users from the same team or league can access your entries as well, so everybody knows who the MVP is.
 
 Live: https://ludo.up.railway.app/ 
 
