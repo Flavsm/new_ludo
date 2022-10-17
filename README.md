@@ -5,14 +5,14 @@
 
 ## Overview
 
-Platform that allows users to keep track of their amature sports leagues, teams or players stats. Sign up to the app, create as many profiles as you want and add stats. Other users from the same team or league can access your entries as well, so everybody knows who the MVP is.
+Platform that allows users to keep track of their amature sports leagues, teams or players stats. Sign up to the app, create as many profiles as you want and add stats. Other users from the same team or league can access your entries as well, so everybody knows who is the MVP.
 
 Live: https://ludo.up.railway.app/ 
 
 Live: https://ludo.cyclic.app/
 
-## TECHS: 
-<img alt="Javascript" src="https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E"><img alt="NodeJS" src="https://img.shields.io/badge/node.js-6DA55F?style=flat&logo=node.js&logoColor=white"><img alt="Express.js" src="https://img.shields.io/badge/express.js-%23404d59.svg?style=flat&logo=express&logoColor=%2361DAFB"><img alt="MongoDB" src="https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=flat&logo=mongodb&logoColor=white"><img alt="Mongoose" src="https://img.shields.io/badge/-mongoose-green"><img alt="EJS" src="https://img.shields.io/badge/-ejs-blue"><img alt="CSS3" src="https://img.shields.io/badge/css3-%231572B6.svg?style=flat&logo=css3&logoColor=white"><img alt="SASS" src="https://img.shields.io/badge/SASS-hotpink.svg?style=flat&logo=SASS&logoColor=white"><img alt="Bootstrap" src="https://img.shields.io/badge/bootstrap-%2338B2AC.svg?style=flat&logo=bootstrap&logoColor=white">
+## STACKS: 
+<img alt="Javascript" src="https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E"><img alt="NodeJS" src="https://img.shields.io/badge/node.js-6DA55F?style=flat&logo=node.js&logoColor=white"><img alt="Express.js" src="https://img.shields.io/badge/express.js-%23404d59.svg?style=flat&logo=express&logoColor=%2361DAFB"><img alt="MongoDB" src="https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=flat&logo=mongodb&logoColor=white"><img alt="Mongoose" src="https://img.shields.io/badge/-mongoose-green"><img alt="CSS3" src="https://img.shields.io/badge/CSS3-%231572B6.svg?style=flat&logo=CSS3&logoColor=white"><img alt="SASS" src="https://img.shields.io/badge/SASS-hotpink.svg?style=flat&logo=SASS&logoColor=white"><img alt="Bootstrap" src="https://img.shields.io/badge/bootstrap-%2338B2AC.svg?style=flat&logo=bootstrap&logoColor=white"><img alt="EJS" src="https://img.shields.io/badge/-EJS-blue">
 
 
 ## How It Works
