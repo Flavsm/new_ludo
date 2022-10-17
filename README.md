@@ -1,7 +1,7 @@
 # LUDO
 
 
-![Demo gif](public/imgs/demo.mp4?raw=true)
+![Demo gif](public/imgs/demo.gif?raw=true)
 
 ## Overview
 
